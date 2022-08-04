@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>92424595254-vqmsjpphu4agb3il1sncej25d221nd1r.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.92424595254-vqmsjpphu4agb3il1sncej25d221nd1r</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCjf0zodLrk3eJySLWsOX30gTNaUK8y4gg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>92424595254</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.commune.campestreapp</string>
+	<key>PROJECT_ID</key>
+	<string>commune-cf48f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>commune-cf48f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:92424595254:ios:710facab85c7e9201f7597</string>
+	<key>DATABASE_URL</key>
+	<string>https://commune-cf48f-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
