@@ -1,8 +1,8 @@
 import 'dart:convert';
 
+import 'package:campestre/bloc/usuario_bloc.dart';
 import 'package:http/http.dart' as http;
 
-import '../bloc/usuario_bloc.dart';
 import '../models/usuarioModel.dart';
 import 'connection.dart';
 

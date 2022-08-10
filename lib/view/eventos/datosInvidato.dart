@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:campestre/view/eventos/visitasEventosPage.dart';
+import 'package:campestre/view/eventos/vistaQrInvitado.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -18,8 +20,6 @@ import '../../widgets/textfielborder.dart';
 import 'package:intl/intl.dart';
 
 import '../../widgets/ui_helper.dart';
-import 'visitasEventosPage.dart';
-import 'vistaQrInvitado.dart';
 
 class DatosInvitado extends StatefulWidget {
   //int position;
@@ -60,7 +60,7 @@ class _DatosInvitadoState extends State<DatosInvitado> {
   bool? onCharge;
   bool typePhoto = false;
   bool typePhotoPlaca = false;
-
+  
   late List<Invitado> lista;
 
   @override
@@ -74,6 +74,7 @@ class _DatosInvitadoState extends State<DatosInvitado> {
     idEvento = this.widget.idEvento;
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -916,7 +917,7 @@ class _DatosInvitadoState extends State<DatosInvitado> {
         false;*/
   }
 
-  Future<String> lprExtract(File file) async {
+  Future<String> lprExtract(File file) async {   
     //var fileBytes = await file.readAsBytesSync();
     //String encoded = base64.encode(fileBytes);
 

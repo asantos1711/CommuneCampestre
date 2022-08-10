@@ -1,13 +1,16 @@
 import 'dart:convert';
 
-import '../../bloc/usuario_bloc.dart';
-import '../../models/NoticiasModel.dart';
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/models/NoticiasModel.dart';
+import 'package:campestre/models/responseLote.dart';
+
 import '../../models/modeloRegistro.dart';
-import '../../models/responseLote.dart';
 import '../../models/usuarioModel.dart';
 import '../jwt.dart';
 
 import 'package:http/http.dart' as http;
+
+import '../push_notifications_services.dart';
 
 class RegistroUsuarioConnect {
   UsuarioBloc _usuarioBloc = new UsuarioBloc();
@@ -27,14 +30,17 @@ class RegistroUsuarioConnect {
       "Content-type": "application/json",
       "Authorization": token
     };
-
+    print(url);
+    PushNotificationsService service = PushNotificationsService();
+    print(service.getToken());
     final body = {
       "email": usuario.email,
       "id": null,
       "lote": (usuario.lote != null) ? {"id": usuario.lote} : null,
       "name": usuario.nombre,
       "phone": usuario.telefono,
-      "status": (usuario.lote != null) ? "verificada" : "pendiente"
+      "status": (usuario.lote != null) ? "verificada" : "pendiente",
+      "token": service.getToken()
     };
 
     print(json.encode(body));
@@ -54,6 +60,56 @@ class RegistroUsuarioConnect {
     }
 
     return model;
+  }
+
+  Future<void> actualizarToken(Usuario usuario, String status) async {
+    String urlApi = _usuarioBloc.miFraccionamiento.urlApi.toString();
+    print("Pagados*****");
+    JWTProvider jwtProvider = JWTProvider();
+    ResponseRegistro model = new ResponseRegistro();
+
+    String url = urlApi + "api/v1/userapp/save";
+    String tk = await jwtProvider.getJWT();
+
+    String token = "Bearer $tk"; //await _jwt.getJWT();
+
+    final headers = {
+      "Content-type": "application/json",
+      "Authorization": token
+    };
+    print(url);
+    PushNotificationsService service = PushNotificationsService();
+    print(service.getToken());
+    final body = {
+      "email": usuario.email,
+      "id": usuario.idRegistro,
+      "lote": {"id": usuario.lote},
+      "name": usuario.nombre,
+      "phone": usuario.telefono,
+      "status": status,
+      "token": service.getToken()
+    };
+
+    print(body);
+
+    print(json.encode(body));
+    final response = await http.post(Uri.parse(url),
+        headers: headers, body: json.encode(body));
+
+    try {
+      if (response.statusCode == 200) {
+        final decodeData = json.decode(utf8.decode(response.bodyBytes));
+        print(decodeData);
+        model = ResponseRegistro.fromJson(decodeData);
+        print(model.toJson());
+      } else {
+        print("actualizar token service status code: ${response.body}");
+      }
+    } catch (e) {
+      print("Error en actualizar token $e");
+    }
+
+    return;
   }
 
   Future<ResponseRegistro> getRegistro(int id) async {

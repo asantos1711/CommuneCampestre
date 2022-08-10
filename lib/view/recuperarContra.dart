@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/view/login.dart';
+import 'package:campestre/widgets/cuadroLoginShape.dart';
+import 'package:campestre/widgets/textfielborder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
-import '../bloc/usuario_bloc.dart';
-import '../widgets/cuadroLoginShape.dart';
-import '../widgets/textfielborder.dart';
-import 'login.dart';
 
 class RecuperarContra extends StatefulWidget {
   //const RecuperarContra({ Key? key }) : super(key: key);

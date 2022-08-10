@@ -1,30 +1,30 @@
-import 'package:campestreapp/view/login.dart';
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/controls/connection.dart';
+import 'package:campestre/models/modeloRegistro.dart';
+import 'package:campestre/models/preferenciasUsuario.dart';
+import 'package:campestre/models/usuarioModel.dart';
+import 'package:campestre/provider/splashProvider.dart';
+import 'package:campestre/services/apiResidencial/registroUsuarios.dart';
+import 'package:campestre/view/amenidades/menuAmenidades.dart';
+import 'package:campestre/view/cuentasAsociadas.dart';
+import 'package:campestre/view/infoFraccionamiento/info.dart';
+import 'package:campestre/view/login.dart';
+import 'package:campestre/view/misVisitas/visitasActivas.dart';
+import 'package:campestre/view/pagos/pagosHome.dart';
+import 'package:campestre/view/perfil.dart';
+import 'package:campestre/view/preguntasView.dart';
+import 'package:campestre/view/reportes/reportes.dart';
+import 'package:campestre/view/tipoAcceso.dart';
+import 'package:campestre/widgets/autenticacion.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../bloc/usuario_bloc.dart';
-import '../controls/connection.dart';
 import '../controls/notificaciones.dart';
 import '../models/estadoCuenta/detailEstadoCuenta.dart';
-import '../models/modeloRegistro.dart';
-import '../models/preferenciasUsuario.dart';
-import '../models/usuarioModel.dart';
-import '../provider/splashProvider.dart';
 import '../services/apiResidencial/estadoCuentaProvider.dart';
-import '../services/apiResidencial/registroUsuarios.dart';
-import '../widgets/autenticacion.dart';
-import 'amenidades/menuAmenidades.dart';
-import 'cuentasAsociadas.dart';
-import 'infoFraccionamiento/info.dart';
-import 'misVisitas/visitasActivas.dart';
-import 'pagos/pagosHome.dart';
-import 'perfil.dart';
-import 'preguntasView.dart';
-import 'reportes/reportes.dart';
-import 'tipoAcceso.dart';
 
 class MenuInicio extends StatefulWidget {
   @override
@@ -107,8 +107,9 @@ class _MenuInicioState extends State<MenuInicio> {
       //Provider.of<LoadingProvider>(context, listen: false).setLoad(true);
       UserCredential user = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: pwd);
-      bool plazoVencido = false; //Si hay alguna mantenimiento mayor a 62 días
-      //print("additionalUserInfo " + user.user.toString());
+      bool plazoVencidoMantenimientos =
+          false; //Si hay alguna mantenimiento mayor a 62 días
+      bool plazoVencidoSancion = false; //Si hay alguna sancion mayor a 15 días
 
       Usuario _usuario = await db.getUsuario(email);
       _usuarioBloc.perfil = _usuario;
@@ -123,29 +124,53 @@ class _MenuInicioState extends State<MenuInicio> {
          * El usuario puede accesar
          */
       } else {
+        List<Datum>? sanciones = details.data!
+            .where((element) => (element.tipo!.contains("sancion") &&
+                element.estado!.contains("vigente")))
+            .toList();
+
         List<Datum>? matenimientos = details.data!
             .where((element) => (element.tipo!.contains("mantenimiento") &&
                 element.estado!.contains("vigente")))
             .toList();
 
+        /**VALIDACION Matenimientos*/
         int dias = 0, maxDia = 0;
         for (var item in matenimientos) {
           print(item.fechaCreado);
           dias = DateTime.now().difference(item.fechaCreado!).inDays;
           maxDia = maxDia > dias ? maxDia : dias;
           print(dias);
-          plazoVencido = dias <= 61 ? plazoVencido : true;
+          plazoVencidoMantenimientos =
+              dias <= 61 ? plazoVencidoMantenimientos : true;
         }
         print(maxDia);
 
         if ((maxDia == 62 || maxDia == 63) &&
             (DateTime.now().weekday == DateTime.saturday ||
                 DateTime.now().weekday == DateTime.sunday)) {
-          plazoVencido = false;
+          plazoVencidoMantenimientos = false;
+        }
+
+        /**VALIDACION SANCONES */
+        int diasS = 0, maxDiaS = 0;
+        for (var item in sanciones) {
+          print(item.fechaCreado);
+          diasS = DateTime.now().difference(item.fechaCreado!).inDays;
+          maxDiaS = maxDiaS > diasS ? maxDiaS : diasS;
+          print(dias);
+          plazoVencidoSancion = diasS <= 14 ? plazoVencidoSancion : true;
+        }
+        print(maxDiaS);
+
+        if ((maxDiaS == 16 || maxDiaS == 17) &&
+            (DateTime.now().weekday == DateTime.saturday ||
+                DateTime.now().weekday == DateTime.sunday)) {
+          plazoVencidoSancion = false;
         }
       }
 
-      /*if (plazoVencido) {
+      /*if (plazoVencidoMantenimientos || plazoVencidoSancion) {
         Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
         AuthenticationServices.getInstance().signOut();
         Navigator.pushReplacement(

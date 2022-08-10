@@ -1,7 +1,6 @@
+import 'package:campestre/controls/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../controls/payment.dart';
 
 class StrippePage extends StatefulWidget {
   const StrippePage({Key? key}) : super(key: key);

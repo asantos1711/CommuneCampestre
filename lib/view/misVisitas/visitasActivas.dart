@@ -1,14 +1,13 @@
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/controls/connection.dart';
+import 'package:campestre/models/invitadoModel.dart';
+import 'package:campestre/view/menuInicio.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
-
-import '../../bloc/usuario_bloc.dart';
-import '../../controls/connection.dart';
-import '../../models/invitadoModel.dart';
-import '../menuInicio.dart';
 
 class VisitasActivas extends StatefulWidget {
   const VisitasActivas({Key? key}) : super(key: key);

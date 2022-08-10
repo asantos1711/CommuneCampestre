@@ -1,6 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/controls/connection.dart';
+import 'package:campestre/models/eventoModel.dart';
+import 'package:campestre/models/eventoModel.dart' as Evento;
+import 'package:campestre/models/invitadoModel.dart';
+import 'package:campestre/view/eventos/datosInvidato.dart';
+import 'package:campestre/widgets/columnBuilder.dart';
+import 'package:campestre/widgets/textfielborder.dart';
+import 'package:campestre/widgets/ui_helper.dart';
 import 'package:crypto/crypto.dart';
 import 'package:expandable/expandable.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -12,16 +21,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../../bloc/usuario_bloc.dart';
-import '../../controls/connection.dart';
-import '../../models/eventoModel.dart';
-import '../../models/eventoModel.dart' as Evento;
-import '../../models/invitadoModel.dart';
 import '../../provider/splashProvider.dart';
-import '../../widgets/columnBuilder.dart';
-import '../../widgets/textfielborder.dart';
-import '../../widgets/ui_helper.dart';
-import 'datosInvidato.dart';
 
 class VisitasEventosPage extends StatefulWidget {
   String? id;

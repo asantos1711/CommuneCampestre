@@ -1,21 +1,20 @@
 import 'dart:convert';
 
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/models/mantenimiento/Mantenimiento.dart';
+import 'package:campestre/services/jwt.dart';
 import 'package:http/http.dart' as http;
-
-import '../../bloc/usuario_bloc.dart';
-import '../../models/mantenimiento/Mantenimiento.dart';
-import '../jwt.dart';
 
 class MantenimientoProvider {
   UsuarioBloc _usuarioBloc = new UsuarioBloc();
-
+  
   Future<Mantenimientos> getAllMantemientos() async {
     String urlApi = _usuarioBloc.miFraccionamiento.urlApi.toString();
     //print("Mantenimientos*****");
     Mantenimientos model = new Mantenimientos();
 
     JWTProvider jwtProvider = JWTProvider();
-    String url = urlApi + "api/v1/lote/get-for-mantenimiento/2282";
+    String url =urlApi+"api/v1/lote/get-for-mantenimiento/2282";
     String tk = await jwtProvider.getJWT();
 
     String token = "Bearer $tk"; //await _jwt.getJWT();

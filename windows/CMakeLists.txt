@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(campestreapp LANGUAGES CXX)
+project(campestre LANGUAGES CXX)
 
-set(BINARY_NAME "campestreapp")
+set(BINARY_NAME "campestre")
 
 cmake_policy(SET CMP0063 NEW)
 

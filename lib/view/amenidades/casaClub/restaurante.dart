@@ -1,3 +1,6 @@
+import 'package:campestre/provider/splashProvider.dart';
+import 'package:campestre/services/serviciosAyB.dart';
+import 'package:campestre/view/amenidades/casaClub/categorias.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -5,9 +8,6 @@ import 'package:provider/provider.dart';
 
 import '../../../bloc/usuario_bloc.dart';
 import '../../../models/restaurante/responseMenuJson.dart';
-import '../../../provider/splashProvider.dart';
-import '../../../services/serviciosAyB.dart';
-import 'categorias.dart';
 
 class RestauranteView extends StatefulWidget {
   String qr;
@@ -31,7 +31,7 @@ class _RestauranteViewState extends State<RestauranteView> {
     alert = this.widget.alerta;
 
     if (alert) {
-      WidgetsBinding.instance!.addPostFrameCallback((_) => _alert());
+      WidgetsBinding.instance?.addPostFrameCallback((_) => _alert());
     }
 
     _validarMenu();

@@ -1,6 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:campestre/controls/connection.dart';
+import 'package:campestre/models/EstadoCuentaDireccion.dart';
+import 'package:campestre/models/usuarioModel.dart';
+import 'package:campestre/services/apiResidencial/registroUsuarios.dart';
+import 'package:campestre/view/login.dart';
+import 'package:campestre/view/terminos.dart';
+import 'package:campestre/widgets/textfielborder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,16 +16,9 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../bloc/usuario_bloc.dart';
-import '../controls/connection.dart';
-import '../models/EstadoCuentaDireccion.dart';
 import '../models/modeloRegistro.dart';
-import '../models/usuarioModel.dart';
 import '../provider/splashProvider.dart';
-import '../services/apiResidencial/registroUsuarios.dart';
 import '../services/push_notifications_services.dart';
-import '../widgets/textfielborder.dart';
-import 'login.dart';
-import 'terminos.dart';
 
 //import 'package:toast/toast.dart';
 

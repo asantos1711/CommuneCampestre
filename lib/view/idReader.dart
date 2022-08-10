@@ -4,6 +4,8 @@ import 'dart:io' as io;
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/view/trabajadores/visitasTrabajadoresPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'
     show EventChannel, PlatformException, rootBundle;
@@ -12,9 +14,7 @@ import 'package:flutter_document_reader_core_full/flutter_document_reader_core_f
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
-import '../bloc/usuario_bloc.dart';
 import '../provider/splashProvider.dart';
-import 'trabajadores/visitasTrabajadoresPage.dart';
 
 class IdReaderView extends StatefulWidget {
   const IdReaderView({Key? key}) : super(key: key);

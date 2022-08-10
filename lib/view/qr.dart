@@ -1,7 +1,6 @@
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/widgets/ui_helper.dart';
 import 'package:flutter/material.dart';
-
-import '../bloc/usuario_bloc.dart';
-import '../widgets/ui_helper.dart';
 
 class QrPage extends StatefulWidget {
   @override

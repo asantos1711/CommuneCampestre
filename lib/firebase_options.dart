@@ -59,7 +59,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyA-oROZ9NFqD4hteCnMUxOZLtSTcQhfMiw',
-    appId: '1:92424595254:android:dd41b46d424307da1f7597',
+    appId: '1:92424595254:android:72bdee289363995b1f7597',
     messagingSenderId: '92424595254',
     projectId: 'commune-cf48f',
     databaseURL: 'https://commune-cf48f-default-rtdb.firebaseio.com',
@@ -68,12 +68,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCjf0zodLrk3eJySLWsOX30gTNaUK8y4gg',
-    appId: '1:92424595254:ios:710facab85c7e9201f7597',
+    appId: '1:92424595254:ios:461167094b7682ea1f7597',
     messagingSenderId: '92424595254',
     projectId: 'commune-cf48f',
     databaseURL: 'https://commune-cf48f-default-rtdb.firebaseio.com',
     storageBucket: 'commune-cf48f.appspot.com',
-    iosClientId: '92424595254-vqmsjpphu4agb3il1sncej25d221nd1r.apps.googleusercontent.com',
-    iosBundleId: 'com.commune.campestreapp',
+    iosClientId: '92424595254-i3eqadu5hu1duluooadu57qrmncle6rm.apps.googleusercontent.com',
+    iosBundleId: 'com.commune.campestre',
   );
 }

@@ -1,9 +1,9 @@
+import 'package:campestre/bloc/carritoBloc.dart';
+import 'package:campestre/models/restaurante/responseMenuJson.dart';
 import 'package:flutter/material.dart';
 
-import '../../../bloc/carritoBloc.dart';
 import '../../../bloc/usuario_bloc.dart';
 import '../../../models/restaurante/platillosPedidos.dart';
-import '../../../models/restaurante/responseMenuJson.dart';
 
 class PlatilloCard extends StatefulWidget {
   Platillo platillo;

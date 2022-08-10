@@ -1,21 +1,21 @@
 import 'dart:convert';
 
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/models/estadoCuenta/detailEstadoCuenta.dart';
+import 'package:campestre/services/jwt.dart';
 import 'package:http/http.dart' as http;
-
-import '../../bloc/usuario_bloc.dart';
-import '../../models/estadoCuenta/detailEstadoCuenta.dart';
-import '../jwt.dart';
 
 class EstadoCuentaProvider {
   final _jwt = new JWTProvider();
   UsuarioBloc _usuarioBloc = new UsuarioBloc();
+  
 
   Future<DetailEstadoCuenta> getDetail() async {
     String urlApi = _usuarioBloc.miFraccionamiento.urlApi.toString();
     //print("EstadoCuenta*****");
     JWTProvider jwtProvider = JWTProvider();
     DetailEstadoCuenta model = new DetailEstadoCuenta();
-    String url = urlApi + "api/v1/residente/get/estadocuenta/detail";
+    String url =urlApi+"api/v1/residente/get/estadocuenta/detail";
     String tk = await jwtProvider.getJWT();
     int deuda = 0;
     String token = "Bearer $tk"; //await _jwt.getJWT();
@@ -54,19 +54,19 @@ class EstadoCuentaProvider {
 
         model = DetailEstadoCuenta.fromJson(decodeData);
 
-        if (model.data != null) {
-          model.data?.forEach((element) {
-            if (element.estado != "pagado" &&
-                element.tipo!.contains("mantenimiento")) {
+        if(model.data != null){
+          model.data?.forEach((element) {            
+            if(element.estado != "pagado" &&  element.tipo!.contains("mantenimiento")){
               deuda++;
               //print(deuda);
             }
-          });
-          if (deuda > 2) {
+           }
+          );
+          if(deuda > 2){
             _usuarioBloc.deudor = true;
           }
         }
-
+        
         //print("Datos cargados");
       } else {
         print("availabilityHotels service status code: ${response.body}");
@@ -79,6 +79,7 @@ class EstadoCuentaProvider {
     return model;
   }
 
+
   Future<DetailEstadoCuenta> getDetailPagados() async {
     //print("Pagados*****");
     JWTProvider jwtProvider = JWTProvider();
@@ -86,7 +87,7 @@ class EstadoCuentaProvider {
     DetailEstadoCuenta modelPagados = new DetailEstadoCuenta();
     String urlApi = _usuarioBloc.miFraccionamiento.urlApi.toString();
 
-    String url = urlApi + "api/v1/residente/get/estadocuenta/detail";
+    String url = urlApi+"api/v1/residente/get/estadocuenta/detail";
     String tk = await jwtProvider.getJWT();
 
     String token = "Bearer $tk"; //await _jwt.getJWT();
@@ -103,6 +104,7 @@ class EstadoCuentaProvider {
       "variante": 0,
       "email": false
     };
+
 
     final response = await http.post(Uri.parse(url),
         headers: headers, body: json.encode(body));
@@ -117,18 +119,19 @@ class EstadoCuentaProvider {
         modelPagados.message = "ok";
         modelPagados.data = <Datum>[];
 
-        if (model.data != null) {
+        if(model.data != null){
           model.data?.forEach((element) {
-            if (element.estado!.contains("pagado")) {
+            if(element.estado!.contains("pagado")){
               modelPagados.data?.add(element);
-            }
-          });
+            }}
+          );
         }
       } else {
         print("availabilityHotels service status code: ${response.body}");
       }
     } catch (e) {
-      print("Error en pagados $e");
+      print(
+          "Error en pagados $e");
     }
 
     return modelPagados;
@@ -140,7 +143,7 @@ class EstadoCuentaProvider {
     DetailEstadoCuenta model = new DetailEstadoCuenta();
     DetailEstadoCuenta modelPorPagar = new DetailEstadoCuenta();
     String urlApi = _usuarioBloc.miFraccionamiento.urlApi.toString();
-    String url = urlApi + "api/v1/residente/get/estadocuenta/detail";
+    String url = urlApi+"api/v1/residente/get/estadocuenta/detail";
     String tk = await jwtProvider.getJWT();
     String token = "Bearer $tk"; //await _jwt.getJWT();
     final headers = {
@@ -154,10 +157,15 @@ class EstadoCuentaProvider {
       "variante": 0,
       "email": false
     };
+
+    
     //print( json.encode(body));
     final response = await http.post(Uri.parse(url),
         headers: headers, body: json.encode(body));
 
+
+    print(response.request);
+    
     try {
       if (response.statusCode == 200) {
         final decodeData = json.decode(utf8.decode(response.bodyBytes));
@@ -169,21 +177,21 @@ class EstadoCuentaProvider {
 
         //print(model);
 
-        if (model.data != null) {
+        if(model.data != null){
           model.data?.forEach((element) {
-            if (!element.estado!.contains("pagado") &&
-                !element.estado!.contains("cancelado")) {
+            if(!element.estado!.contains("pagado")  && !element.estado!.contains("cancelado") ){
               modelPorPagar.data?.add(element);
-            }
-          });
-        } else {
+            }}
+          );
+        }else{
           modelPorPagar.success = false;
         }
       } else {
         print("availabilityHotels service status code: ${response.body}");
       }
     } catch (e) {
-      print("Error en pagados $e");
+      print(
+          "Error en pagados $e");
     }
     /*if(modelPorPagar.data.toString() == "[]"){
       modelPorPagar.success = false;

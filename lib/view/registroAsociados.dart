@@ -1,16 +1,15 @@
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/controls/connection.dart';
+import 'package:campestre/models/usuarioModel.dart';
+import 'package:campestre/provider/splashProvider.dart';
+import 'package:campestre/view/menuInicio.dart';
+import 'package:campestre/view/registroSucess.dart';
+import 'package:campestre/widgets/textfielborder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-
-import '../bloc/usuario_bloc.dart';
-import '../controls/connection.dart';
-import '../models/usuarioModel.dart';
-import '../provider/splashProvider.dart';
-import '../widgets/textfielborder.dart';
-import 'menuInicio.dart';
-import 'registroSucess.dart';
 
 class RegistroAsociados extends StatefulWidget {
   const RegistroAsociados({Key? key}) : super(key: key);

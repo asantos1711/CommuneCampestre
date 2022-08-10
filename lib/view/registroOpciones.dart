@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:barcode_scan2/platform_wrapper.dart';
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/view/registro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../bloc/usuario_bloc.dart';
 import '../provider/splashProvider.dart';
-import 'registro.dart';
 
 class RegistroOpciones extends StatefulWidget {
   const RegistroOpciones({Key? key}) : super(key: key);

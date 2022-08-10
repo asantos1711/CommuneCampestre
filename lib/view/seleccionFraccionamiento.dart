@@ -1,14 +1,14 @@
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/controls/connection.dart';
+import 'package:campestre/models/fraccionamientos.dart';
+import 'package:campestre/view/splash.dart';
 import 'package:direct_select_flutter/direct_select_container.dart';
 import 'package:direct_select_flutter/direct_select_item.dart';
 import 'package:direct_select_flutter/direct_select_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
-import '../bloc/usuario_bloc.dart';
-import '../controls/connection.dart';
-import '../models/fraccionamientos.dart';
 import '../models/preferenciasUsuario.dart';
-import 'splash.dart';
 
 class FraccionamientoView extends StatefulWidget {
   const FraccionamientoView({Key? key}) : super(key: key);

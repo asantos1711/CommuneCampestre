@@ -1,13 +1,12 @@
 import 'package:barcode_scan2/barcode_scan2.dart';
-
+import 'package:campestre/provider/splashProvider.dart';
+import 'package:campestre/view/amenidades/casaClub/restaurante.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
 
 import '../../../bloc/carritoBloc.dart';
 import '../../../bloc/usuario_bloc.dart';
-import '../../../provider/splashProvider.dart';
-import 'restaurante.dart';
 
 class QrRestaurant extends StatefulWidget {
   const QrRestaurant({Key? key}) : super(key: key);
@@ -70,7 +69,7 @@ class _QrRestaurantState extends State<QrRestaurant> {
   }
 
   _opcionDelivery() {
-    return _opcion("Ordenar a domicilio", FontAwesome.motorcycle, () async {
+    return _opcion("Ordenar a domicilio", FontAwesome.motorcycle, () async {     
       try {
         Navigator.push(
           context,

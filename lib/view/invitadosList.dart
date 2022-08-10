@@ -1,10 +1,9 @@
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/controls/connection.dart';
+import 'package:campestre/models/invitadoModel.dart';
+import 'package:campestre/view/invitados.dart';
+import 'package:campestre/widgets/ui_helper.dart';
 import 'package:flutter/material.dart';
-
-import '../bloc/usuario_bloc.dart';
-import '../controls/connection.dart';
-import '../models/invitadoModel.dart';
-import '../widgets/ui_helper.dart';
-import 'invitados.dart';
 
 class InvitadosList extends StatefulWidget {
   @override

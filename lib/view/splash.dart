@@ -1,9 +1,9 @@
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/view/splashDos.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../bloc/usuario_bloc.dart';
 import '../models/preferenciasUsuario.dart';
-import 'splashDos.dart';
 
 class Splash extends StatefulWidget {
   //const Splash({ Key? key }) : super(key: key);

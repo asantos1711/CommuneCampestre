@@ -1,10 +1,10 @@
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/view/rentaVacacional/rentaVacacional.dart';
 import 'package:flutter/material.dart';
 
-import '../bloc/usuario_bloc.dart';
 import 'mudanza/visitasMudanzaPage..dart';
 import 'paqueteria/visitasPaqueteriaPage.dart';
 import 'regular/visitasRegularPage.dart';
-import 'rentaVacacional/rentaVacacional.dart';
 import 'trabajadores/visitasTrabajadoresPage.dart';
 
 class TipoAcceso extends StatefulWidget {

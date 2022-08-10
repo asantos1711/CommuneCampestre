@@ -1,6 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/controls/connection.dart';
+import 'package:campestre/models/invitadoModel.dart';
+import 'package:campestre/provider/splashProvider.dart';
+import 'package:campestre/view/confirmacionVisita.dart';
+import 'package:campestre/widgets/textfielborder.dart';
+import 'package:campestre/widgets/ui_helper.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -9,14 +16,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
-import '../../bloc/usuario_bloc.dart';
-import '../../controls/connection.dart';
-import '../../models/invitadoModel.dart';
-import '../../provider/splashProvider.dart';
-import '../../widgets/textfielborder.dart';
-import '../../widgets/ui_helper.dart';
-import '../confirmacionVisita.dart';
 
 class VisitasMudanzaPage extends StatefulWidget {
   const VisitasMudanzaPage({Key? key}) : super(key: key);
@@ -31,7 +30,7 @@ class _VisitasMudanzaPageState extends State<VisitasMudanzaPage> {
   TextEditingController _nombre = new TextEditingController();
   TextEditingController _placas = new TextEditingController();
   TextEditingController _fecha = new TextEditingController();
-  TextEditingController _hora = new TextEditingController();
+  TextEditingController _hora = new TextEditingController();  
   TextEditingController _fotoIdUrl = new TextEditingController();
   DatabaseServices db = new DatabaseServices();
   DateTime selectedDate = new DateTime.now();
@@ -279,7 +278,7 @@ class _VisitasMudanzaPageState extends State<VisitasMudanzaPage> {
           _invitado.activo = true;
 
           _invitado.acompanantes = "";
-          _invitado.tiempos = Tiempos();
+          _invitado.tiempos = new Tiempos();
           _invitado.tiempos?.fechaEntrada = selectedDate;
           _invitado.tiempos?.fechaSalida =
               selectedDate.add(Duration(hours: 23, minutes: 59));

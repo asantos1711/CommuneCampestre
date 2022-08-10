@@ -1,3 +1,7 @@
+import 'package:campestre/models/restaurante/responseMenuJson.dart';
+import 'package:campestre/provider/carritoRestaurantProvider.dart';
+import 'package:campestre/view/amenidades/casaClub/platilloCard.dart';
+import 'package:campestre/widgets/columnBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -6,11 +10,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 import '../../../bloc/carritoBloc.dart';
 import '../../../bloc/usuario_bloc.dart';
 import '../../../models/restaurante/platillosPedidos.dart';
-import '../../../models/restaurante/responseMenuJson.dart';
-import '../../../provider/carritoRestaurantProvider.dart';
-import '../../../widgets/columnBuilder.dart';
 import 'orden.dart';
-import 'platilloCard.dart';
 
 class PlatillosView extends StatefulWidget {
   Familia idFamilia;

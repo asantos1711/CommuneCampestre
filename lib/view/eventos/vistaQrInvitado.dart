@@ -4,6 +4,8 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:clipboard/clipboard.dart';
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/view/eventos/visitasEventosPage.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -15,9 +17,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share_files_and_screenshot_widgets/share_files_and_screenshot_widgets.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../../bloc/usuario_bloc.dart';
 import '../../provider/splashProvider.dart';
-import 'visitasEventosPage.dart';
 
 class VistaQRInvitado extends StatefulWidget {
   //const VistaQRInvitado({ Key? key }) : super(key: key);

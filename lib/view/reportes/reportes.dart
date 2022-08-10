@@ -1,18 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:campestreapp/view/reportes/reporteSucess.dart';
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/controls/connection.dart';
+import 'package:campestre/models/reporteModel.dart';
+import 'package:campestre/provider/splashProvider.dart';
+import 'package:campestre/view/reportes/reporteSucess.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
-import '../../bloc/usuario_bloc.dart';
-import '../../controls/connection.dart';
-import '../../models/reporteModel.dart';
-import '../../provider/splashProvider.dart';
 
 class ReportesView extends StatefulWidget {
   const ReportesView({Key? key}) : super(key: key);

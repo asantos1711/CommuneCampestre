@@ -1,8 +1,7 @@
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/view/confirmacionVisita.dart';
+import 'package:campestre/widgets/textfielborder.dart';
 import 'package:flutter/material.dart';
-
-import '../bloc/usuario_bloc.dart';
-import '../widgets/textfielborder.dart';
-import 'confirmacionVisita.dart';
 
 class AccesoVisitas extends StatefulWidget {
   //const AccesoVisitas({ Key? key }) : super(key: key);

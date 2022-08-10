@@ -1,17 +1,17 @@
+import 'package:campestre/models/restaurante/crearCuentaMovil.dart';
+import 'package:campestre/models/restaurante/platillosPedidos.dart';
+import 'package:campestre/services/serviciosAyB.dart';
+import 'package:campestre/view/amenidades/casaClub/restaurante.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 import '../../../bloc/carritoBloc.dart';
 import '../../../bloc/usuario_bloc.dart';
-import '../../../models/restaurante/crearCuentaMovil.dart';
-import '../../../models/restaurante/platillosPedidos.dart';
 import '../../../models/restaurante/responseMenuJson.dart';
 import '../../../provider/splashProvider.dart';
-import '../../../services/serviciosAyB.dart';
 import '../../../widgets/columnBuilder.dart';
 import 'direccionContacto.dart';
-import 'restaurante.dart';
 
 class OrdenView extends StatefulWidget {
   List<PlatillosPedidos> platillos;

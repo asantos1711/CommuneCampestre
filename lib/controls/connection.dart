@@ -1,6 +1,12 @@
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:campestre/models/eventoModel.dart';
+import 'package:campestre/models/fraccionamientos.dart';
+import 'package:campestre/models/invitadoModel.dart';
+import 'package:campestre/models/preguntasModel.dart';
+import 'package:campestre/models/reporteModel.dart';
+import 'package:campestre/models/usuarioModel.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:io';
@@ -9,14 +15,7 @@ import 'dart:convert';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:async';
 import 'package:path/path.dart' as Path;
-
-import '../bloc/usuario_bloc.dart';
-import '../models/eventoModel.dart';
-import '../models/fraccionamientos.dart';
-import '../models/invitadoModel.dart';
-import '../models/preguntasModel.dart';
-import '../models/reporteModel.dart';
-import '../models/usuarioModel.dart';
+import 'package:campestre/bloc/usuario_bloc.dart';
 
 class DatabaseServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -72,7 +71,7 @@ class DatabaseServices {
 
   Future<List<Usuario>> getUsuarioByTitular() async {
     Usuario user = new Usuario();
-    List<Usuario> lista = [];
+    List<Usuario> lista = [];    
 
     QuerySnapshot<Map<String, dynamic>> snap =
         await db.collection('usuarios').get();
@@ -128,7 +127,7 @@ class DatabaseServices {
     return lista;
   }
 
-  Future<List<Usuario>> getUsuariosAdmin() async {
+  Future<List<Usuario>> getUsuariosAdmin() async {    
     List<Usuario> lista = [];
 
     QuerySnapshot<Map<String, dynamic>> snap =

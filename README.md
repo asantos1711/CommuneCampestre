@@ -1,4 +1,4 @@
-# campestreapp
+# campestre
 
 A new Flutter project.
 

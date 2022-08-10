@@ -1,36 +1,61 @@
-/*import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/provider/splashProvider.dart';
+import 'package:campestre/services/push_notifications_services.dart';
+import 'package:campestre/view/login.dart';
+import 'package:campestre/view/menuInicio.dart';
+import 'package:campestre/view/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_document_reader_core_full/flutter_document_reader_core_full.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:campestre/config/routes.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'bloc/usuario_bloc.dart';
-import 'config/routes.dart';
 import 'firebase_options.dart';
 import 'models/preferenciasUsuario.dart';
 import 'provider/carritoRestaurantProvider.dart';
-import 'provider/splashProvider.dart';
-import 'services/push_notifications_services.dart';
-import 'view/login.dart';
-import 'view/menuInicio.dart';
-import 'view/splash.dart';
 import 'view/splashView.dart';
+
+/*String getKey() {
+  var order = fetchUserOrder();
+  
+
+  return 'Your order is: $order';
+}
+
+Future<String> fetchUserOrder() async {
+  final usrPref =
+      PreferenciasUsuario(); //Inicializar la clase para almacenar parémetros que se usan durante el procesp de precheckin.
+  await usrPref.initPref();
+  DatabaseServices _databaseServices = new DatabaseServices();
+
+  if(usrPref.idFraccionamiento != null  || usrPref.idFraccionamiento != ""){
+    await _databaseServices.getFraccionamientoId(usrPref.idFraccionamiento);
+  }
+
+  UsuarioBloc _usuarioBloc = new UsuarioBloc();
+  print(_usuarioBloc.miFraccionamiento);
+
+  return _usuarioBloc.miFraccionamiento.keyStripe.toString();
+
+
+}*/
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Stripe.publishableKey =
-  //  "pk_test_51Jti97CudYnKG9fPgdsVEk4vwEzpEY24wJ7s72VxZDhmHVHqzjR6a8STNK2wnP6h6VhKlPG7vvg6gvrEigB0mcE800GgxoOaoB"; //usrPref.keyStripe.toString();
+  Stripe.publishableKey =
+      "pk_test_51Jti97CudYnKG9fPgdsVEk4vwEzpEY24wJ7s72VxZDhmHVHqzjR6a8STNK2wnP6h6VhKlPG7vvg6gvrEigB0mcE800GgxoOaoB"; //usrPref.keyStripe.toString();
   await PushNotificationsService.initializeApp();
   // set the publishable key for Stripe - this is mandatory
   //Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
   //Stripe.urlScheme = 'flutterstripe';
   SharedPreferences usuario = await PreferenciasUsuario().initPref();
-  //Stripe.instance.applySettings();
+  Stripe.instance.applySettings();
   final usrPref =
       PreferenciasUsuario(); //Inicializar la clase para almacenar parémetros que se usan durante el procesp de precheckin.
   await usrPref.initPref();
@@ -198,120 +223,109 @@ class _MyAppState extends State<MyApp> {
       return MaterialPageRoute(builder: (BuildContext context) => Splash());
     }
   }
-}*/
-
-import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import 'view/login.dart';
-import 'view/seleccionFraccionamiento.dart';
-
-void main() {
-  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class NotificationManger {
+  late BuildContext _context;
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: [GlobalMaterialLocalizations.delegate],
-      supportedLocales: [Locale('es', "MX")],
-      debugShowCheckedModeBanner: false,
-      title: 'Commune',
-      theme: ThemeData(
-          fontFamily: GoogleFonts.poppins().fontFamily,
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity),
-      home: LoginPage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  init({required BuildContext context}) {
+    _context = context;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+  //this method used when notification come and app is closed or in background and
+  // user click on it, i will left it empty for you
+  static handleDataMsg(Map<String, dynamic> data) {}
+
+  //this our method called when notification come and app is foreground
+  handleNotificationMsg(Map<String, dynamic> message) {
+    debugPrint("from mangger  $message");
+
+    final dynamic data = message['data'];
+    //as ex we have some data json for every notification to know how to handle that
+    //let say showDialog here so fire some action
+    if (data.containsKey('showDialog')) {
+      // Handle data message with dialog
+      _showDialog(data: data);
+    }
+  }
+
+  _showDialog({required Map<String, dynamic> data}) {
+    //you can use data map also to know what must show in MyDialog
+    UsuarioBloc _usuarioBloc = new UsuarioBloc();
+    showDialog(
+        context: _context,
+        builder: (_) => AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            // title: Container(child: Text("")), //Row(children: <Widget>[Icon(FontAwesomeIcons.checkCircle, color: Colors.green),Text("Envio éxitoso"),],),
+            content: Container(
+                width: w - 170,
+                height: 150,
+                child: Column(
+                  children: [
+                    Container(
+                      child: Text("¿Estás seguro de "),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        InkWell(
+                            onTap: () {},
+                            child: Container(
+                              child: Text(
+                                "Aceprtar",
+                                style: TextStyle(
+                                    letterSpacing: 0.8,
+                                    color: Color.fromARGB(
+                                        255,
+                                        _usuarioBloc.miFraccionamiento.color!.r,
+                                        _usuarioBloc.miFraccionamiento.color!.g,
+                                        _usuarioBloc
+                                            .miFraccionamiento.color!.b)),
+                              ),
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 1.0,
+                                    color: Color.fromARGB(
+                                        255,
+                                        _usuarioBloc.miFraccionamiento.color!.r,
+                                        _usuarioBloc.miFraccionamiento.color!.g,
+                                        _usuarioBloc
+                                            .miFraccionamiento.color!.b)),
+                                borderRadius: BorderRadius.all(Radius.circular(
+                                        15.0) //                 <--- border radius here
+                                    ),
+                              ),
+                            )),
+                        InkWell(
+                            onTap: () {},
+                            child: Container(
+                              child: Text(
+                                "Aceptar",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  letterSpacing: 0.8,
+                                ),
+                              ),
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(
+                                    255,
+                                    _usuarioBloc.miFraccionamiento.color!.r,
+                                    _usuarioBloc.miFraccionamiento.color!.g,
+                                    _usuarioBloc.miFraccionamiento.color!.b),
+                                borderRadius: BorderRadius.all(Radius.circular(
+                                        15.0) //                 <--- border radius here
+                                    ),
+                              ),
+                            )),
+                      ],
+                    ),
+                  ],
+                ))));
   }
 }

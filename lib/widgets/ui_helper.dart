@@ -1,9 +1,8 @@
+import 'package:campestre/view/inicio.dart';
+import 'package:campestre/view/invitadosList.dart';
+import 'package:campestre/view/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../view/inicio.dart';
-import '../view/invitadosList.dart';
-import '../view/menu.dart';
 
 class UIHelper {
   Widget bottomBar(double? h, double w, int position, BuildContext context) {

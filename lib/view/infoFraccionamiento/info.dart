@@ -1,4 +1,4 @@
-import 'package:campestreapp/widgets/columnBuilder.dart';
+import 'package:campestre/widgets/columnBuilder.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/NoticiasModel.dart';

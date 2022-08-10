@@ -1,6 +1,6 @@
-import '../models/fraccionamientos.dart';
-import '../models/invitadoModel.dart';
-import '../models/usuarioModel.dart';
+import 'package:campestre/models/fraccionamientos.dart';
+import 'package:campestre/models/invitadoModel.dart';
+import 'package:campestre/models/usuarioModel.dart';
 
 class UsuarioBloc {
   UsuarioBloc._internal();
@@ -11,7 +11,7 @@ class UsuarioBloc {
   List<Invitado>? listRecurrentes;
 
   String? qrInvitado;
-
+  
   String? nombreTrabId;
 
   String? jwt;

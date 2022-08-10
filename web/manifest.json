@@ -1,6 +1,6 @@
 {
-    "name": "campestreapp",
-    "short_name": "campestreapp",
+    "name": "campestre",
+    "short_name": "campestre",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

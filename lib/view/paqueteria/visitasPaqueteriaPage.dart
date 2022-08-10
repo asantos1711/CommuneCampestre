@@ -1,6 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/controls/connection.dart';
+import 'package:campestre/models/invitadoModel.dart';
+import 'package:campestre/provider/splashProvider.dart';
+import 'package:campestre/view/confirmacionVisita.dart';
+import 'package:campestre/widgets/textfielborder.dart';
+import 'package:campestre/widgets/ui_helper.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -10,14 +17,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:time_range/time_range.dart';
-
-import '../../bloc/usuario_bloc.dart';
-import '../../controls/connection.dart';
-import '../../models/invitadoModel.dart';
-import '../../provider/splashProvider.dart';
-import '../../widgets/textfielborder.dart';
-import '../../widgets/ui_helper.dart';
-import '../confirmacionVisita.dart';
 
 class VisitasPaquteriaPage extends StatefulWidget {
   const VisitasPaquteriaPage({Key? key}) : super(key: key);

@@ -1,7 +1,6 @@
+import 'package:campestre/bloc/usuario_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../bloc/usuario_bloc.dart';
 
 class Perfil extends StatefulWidget {
   //const Perfil({ Key? key }) : super(key: key);

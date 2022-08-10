@@ -1,6 +1,17 @@
-import 'package:campestreapp/view/recuperarContra.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/controls/connection.dart';
+import 'package:campestre/models/fraccionamientos.dart';
+import 'package:campestre/models/preferenciasUsuario.dart';
+import 'package:campestre/models/responseLote.dart';
+import 'package:campestre/models/usuarioModel.dart';
+import 'package:campestre/provider/splashProvider.dart';
+import 'package:campestre/services/apiResidencial/registroUsuarios.dart';
+import 'package:campestre/services/jwt.dart';
+import 'package:campestre/services/push_notifications_services.dart';
+import 'package:campestre/view/recuperarContra.dart';
+import 'package:campestre/view/registroOpciones.dart';
+import 'package:campestre/widgets/textfielborder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
@@ -11,23 +22,11 @@ import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../bloc/usuario_bloc.dart';
-import '../controls/connection.dart';
 import '../controls/notificaciones.dart';
 import '../firebase_options.dart';
-import '../models/fraccionamientos.dart';
 import '../models/modeloRegistro.dart';
-import '../models/preferenciasUsuario.dart';
-import '../models/responseLote.dart';
-import '../models/usuarioModel.dart';
-import '../provider/splashProvider.dart';
-import '../services/apiResidencial/registroUsuarios.dart';
-import '../services/jwt.dart';
-import '../services/push_notifications_services.dart';
 import '../widgets/cuadroLoginShape.dart';
-import '../widgets/textfielborder.dart';
 import 'menuInicio.dart';
-import 'registroOpciones.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -265,13 +264,6 @@ class _LoginPageState extends State<LoginPage> {
           print(_usuario.tokenNoti);
           print(a.getToken());
           String tokenNew = a.getToken();
-          if (!_usuario.tokenNoti!.contains(tokenNew)) {
-            print("si son diferentes*****");
-            setState(() {
-              _usuario.tokenNoti = tokenNew;
-            });
-            db.updateUsuario(_usuario);
-          }
 
           if (!_usuario.idFraccionamiento!
               .contains(usuarioBloc.miFraccionamiento.id.toString())) {
@@ -319,6 +311,17 @@ class _LoginPageState extends State<LoginPage> {
               .getRegistroStatus(usuarioBloc.perfil.idRegistro ?? 0);
 
           print("ESTATUS del servicio de Javi : $response");
+
+          /*if (!_usuario.tokenNoti!.contains(tokenNew)) {
+            print("si son diferentes*****");
+            setState(() {
+              _usuario.tokenNoti = tokenNew;
+            });
+            db.updateUsuario(_usuario);
+
+            await connect.actualizarToken(_usuario, response);
+          }*/
+          await connect.actualizarToken(_usuario, response);
 
           if ("pendiente".contains(response.toLowerCase())) {
             //usuarioBloc.perfil.estatus == "0" &&

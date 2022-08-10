@@ -1,15 +1,15 @@
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/controls/connection.dart';
+import 'package:campestre/models/usuarioModel.dart';
+import 'package:campestre/view/menuInicio.dart';
+import 'package:campestre/view/registroAsociados.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
-import '../bloc/usuario_bloc.dart';
-import '../controls/connection.dart';
-import '../models/usuarioModel.dart';
 import '../widgets/columnBuilder.dart';
-import 'menuInicio.dart';
-import 'registroAsociados.dart';
 
 class CuentasAsociadas extends StatefulWidget {
   const CuentasAsociadas({Key? key}) : super(key: key);

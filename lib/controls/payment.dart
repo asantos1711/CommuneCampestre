@@ -1,19 +1,19 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/models/pagos/manttoPorPagar.dart';
+import 'package:campestre/models/pagos/pagosMultas.dart';
+import 'package:campestre/services/jwt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
-import '../bloc/usuario_bloc.dart';
-import '../models/pagos/manttoPorPagar.dart';
-import '../models/pagos/pagosMultas.dart';
-import '../services/jwt.dart';
-
 class PaymentController extends GetxController {
   Map<String, dynamic>? paymentIntentData;
   UsuarioBloc _usuarioBloc = new UsuarioBloc();
+  
 
   Future<bool> initPayment(
       {required String currency,
@@ -164,7 +164,7 @@ class PaymentController extends GetxController {
     String urlAPi = _usuarioBloc.miFraccionamiento.urlApi.toString();
     JWTProvider jwtProvider = JWTProvider();
     PagosMultas model = new PagosMultas();
-    String url = urlAPi + "api/v1/pagosmultas/save";
+    String url = urlAPi+"api/v1/pagosmultas/save";
     String tk = await jwtProvider.getJWT();
     int deuda = 0;
     String token = "Bearer $tk"; //await _jwt.getJWT();
@@ -209,7 +209,7 @@ class PaymentController extends GetxController {
 
     try {
       if (response.statusCode == 200) {
-        final decodeData = json.decode(utf8.decode(response.bodyBytes));
+        final decodeData = json.decode(utf8.decode(response.bodyBytes));      
       } else {
         print("availabilityHotels service status code: ${response.body}");
       }
@@ -221,12 +221,12 @@ class PaymentController extends GetxController {
     return model;
   }
 
-  Future<PagosMultas> saveCuota(String usuario, String multa, int monto) async {
+  Future<PagosMultas> saveCuota(String usuario, String multa, int monto) async {   
     String urlAPi = _usuarioBloc.miFraccionamiento.urlApi.toString();
     JWTProvider jwtProvider = JWTProvider();
     PagosMultas model = new PagosMultas();
-    String url = urlAPi + "api/v1/cuota/save";
-    String tk = await jwtProvider.getJWT();
+    String url = urlAPi+"api/v1/cuota/save";
+    String tk = await jwtProvider.getJWT();    
     String token = "Bearer $tk"; //await _jwt.getJWT();
     DateTime _fechaHoy;
     DateTime now = DateTime.now();
@@ -296,9 +296,9 @@ class PaymentController extends GetxController {
     JWTProvider jwtProvider = JWTProvider();
     PagosMultas model = new PagosMultas();
     String urlAPi = _usuarioBloc.miFraccionamiento.urlApi.toString();
-    String url = urlAPi + "api/v1/pagocuotaextraordinaria/save";
-    String tk = await jwtProvider.getJWT();
-    String token = "Bearer $tk"; //await _jwt.getJWT();
+    String url = urlAPi+"api/v1/pagocuotaextraordinaria/save";
+    String tk = await jwtProvider.getJWT();    
+    String token = "Bearer $tk"; //await _jwt.getJWT();    
     DateTime now = DateTime.now();
     DateFormat formatter = DateFormat('yyyy-MM-dd');
     String formatted = formatter.format(now);
@@ -350,16 +350,16 @@ class PaymentController extends GetxController {
     return model;
   }
 
-  Future<PagosMultas> saveMantto(String usuario, double deuda) async {
+  Future<PagosMultas> saveMantto(String usuario, double deuda) async {   
     JWTProvider jwtProvider = JWTProvider();
     PagosMultas model = new PagosMultas();
     String urlAPi = _usuarioBloc.miFraccionamiento.urlApi.toString();
-    String url = urlAPi + "api/v1/cobromantenimiento/save";
+    String url = urlAPi+"api/v1/cobromantenimiento/save";
     String tk = await jwtProvider.getJWT();
     //int deuda = 0;
     int cant = 0;
     int cantDesc = 0;
-    String token = "Bearer $tk"; //await _jwt.getJWT();
+    String token = "Bearer $tk"; //await _jwt.getJWT();    
     DateTime now = DateTime.now();
     DateFormat formatter = DateFormat('yyyy-MM-dd');
     String formattedHoy = formatter.format(now);
@@ -369,7 +369,7 @@ class PaymentController extends GetxController {
     ManttoPorPagar _mantosPendientes = await getManttos(usuario);
 
     List<Map<String, String>> _fechasList = [];
-
+    
     var _intereses = [];
 
     _mantosPendientes.data?.interesesMoratoriosList?.forEach((element) {
@@ -415,7 +415,7 @@ class PaymentController extends GetxController {
       "noCuenta": "1111",
       "payMoratorio": false,
     };
-
+   
     /*print(body);
     print("--------avilabilityHotelsAPI----------");
     print(url);*/
@@ -451,7 +451,7 @@ class PaymentController extends GetxController {
     JWTProvider jwtProvider = JWTProvider();
     ManttoPorPagar model = new ManttoPorPagar();
     String urlAPi = _usuarioBloc.miFraccionamiento.urlApi.toString();
-    String url = urlAPi + "api/v1/lote/get-for-pagarmantenimiento/" + lote;
+    String url = urlAPi+"api/v1/lote/get-for-pagarmantenimiento/" +lote;
     String tk = await jwtProvider.getJWT();
     double deuda = 0;
     String token = "Bearer $tk"; //await _jwt.getJWT();
@@ -489,7 +489,7 @@ class PaymentController extends GetxController {
     JWTProvider jwtProvider = JWTProvider();
     ManttoPorPagar model = new ManttoPorPagar();
     String urlAPi = _usuarioBloc.miFraccionamiento.urlApi.toString();
-    String url = urlAPi + "api/v1/lote/get-for-pagarmantenimiento/" + lote;
+    String url = urlAPi+"api/v1/lote/get-for-pagarmantenimiento/" +lote;
     String tk = await jwtProvider.getJWT();
     double deuda = 0;
     String token = "Bearer $tk"; //await _jwt.getJWT();

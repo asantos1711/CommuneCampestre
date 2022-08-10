@@ -1,11 +1,11 @@
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/models/restaurante/responseMenuJson.dart';
+import 'package:campestre/view/amenidades/casaClub/platillos.dart';
+import 'package:campestre/widgets/columnBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../../bloc/usuario_bloc.dart';
-import '../../../models/restaurante/responseMenuJson.dart';
 import '../../../services/serviciosAyB.dart';
-import '../../../widgets/columnBuilder.dart';
-import 'platillos.dart';
 
 class OrdenarView extends StatefulWidget {
   String qr;

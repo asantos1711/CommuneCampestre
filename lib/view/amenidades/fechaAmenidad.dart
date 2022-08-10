@@ -1,14 +1,13 @@
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/models/amenidades/allAmenidades.dart';
+import 'package:campestre/models/amenidades/horariosAmenidades.dart';
+import 'package:campestre/services/apiResidencial/amenidadesProvider.dart';
+import 'package:campestre/view/amenidades/menuAmenidades.dart';
+import 'package:campestre/widgets/columnBuilder.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
-import '../../bloc/usuario_bloc.dart';
-import '../../models/amenidades/allAmenidades.dart';
-import '../../models/amenidades/horariosAmenidades.dart';
-import '../../services/apiResidencial/amenidadesProvider.dart';
-import '../../widgets/columnBuilder.dart';
-import 'menuAmenidades.dart';
 
 class FechaAmenidad extends StatefulWidget {
   AllAmenidades? idAmenidad;

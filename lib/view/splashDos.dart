@@ -1,8 +1,8 @@
+import 'package:campestre/view/login.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../bloc/usuario_bloc.dart';
-import 'login.dart';
 
 class SplashDos extends StatefulWidget {
   //const SplashDos({ Key? key }) : super(key: key);

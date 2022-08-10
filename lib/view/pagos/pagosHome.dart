@@ -1,16 +1,15 @@
 import 'dart:ui';
 
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/controls/payment.dart';
+import 'package:campestre/models/estadoCuenta/detailEstadoCuenta.dart';
+import 'package:campestre/services/apiResidencial/estadoCuentaProvider.dart';
+import 'package:campestre/view/login.dart';
+import 'package:campestre/view/pagos/strippe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-
-import '../../bloc/usuario_bloc.dart';
-import '../../controls/payment.dart';
-import '../../models/estadoCuenta/detailEstadoCuenta.dart';
-import '../../services/apiResidencial/estadoCuentaProvider.dart';
-import '../login.dart';
-import 'strippe.dart';
 
 class PagosHome extends StatefulWidget {
   //const PagosHome({ Key? key }) : super(key: key);

@@ -1,11 +1,10 @@
+import 'package:campestre/view/menuInicio.dart';
+import 'package:campestre/view/registroAsociados.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'menuInicio.dart';
-import 'registroAsociados.dart';
-
 class AjustesView extends StatefulWidget {
-  const AjustesView({Key? key}) : super(key: key);
+  const AjustesView({ Key? key }) : super(key: key);
 
   @override
   State<AjustesView> createState() => _AjustesViewState();
@@ -22,9 +21,7 @@ class _AjustesViewState extends State<AjustesView> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              height: 30,
-            ),
+            SizedBox(height: 30,),
             InkWell(
               onTap: () {
                 Navigator.push(
@@ -32,9 +29,9 @@ class _AjustesViewState extends State<AjustesView> {
                   MaterialPageRoute(builder: (context) => RegistroAsociados()),
                 );
               },
-              child: _opcion(
-                  FontAwesomeIcons.squarePlus, "Añadir cuentas asociadas"),
+              child: _opcion(FontAwesomeIcons.squarePlus, "Añadir cuentas asociadas"),
             ),
+           
           ],
         ),
       ),
@@ -102,4 +99,5 @@ class _AjustesViewState extends State<AjustesView> {
       ),
     );
   }
+
 }

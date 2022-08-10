@@ -1,8 +1,7 @@
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/view/menuInicio.dart';
+import 'package:campestre/view/registroAsociados.dart';
 import 'package:flutter/material.dart';
-
-import '../bloc/usuario_bloc.dart';
-import 'menuInicio.dart';
-import 'registroAsociados.dart';
 
 class RegistroSucess extends StatefulWidget {
   const RegistroSucess({Key? key}) : super(key: key);

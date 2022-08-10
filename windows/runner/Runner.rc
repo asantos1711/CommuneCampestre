@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.commune" "\0"
-            VALUE "FileDescription", "campestreapp" "\0"
+            VALUE "FileDescription", "campestre" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "campestreapp" "\0"
+            VALUE "InternalName", "campestre" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 com.commune. All rights reserved." "\0"
-            VALUE "OriginalFilename", "campestreapp.exe" "\0"
-            VALUE "ProductName", "campestreapp" "\0"
+            VALUE "OriginalFilename", "campestre.exe" "\0"
+            VALUE "ProductName", "campestre" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

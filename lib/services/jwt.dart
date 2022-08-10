@@ -1,12 +1,11 @@
+import 'package:campestre/bloc/usuario_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-import '../bloc/usuario_bloc.dart';
 
 class JWTProvider {
   //final String _url = "https://apimadrid.commune.com.mx/api/v1/security/login";
   UsuarioBloc _configBloc = new UsuarioBloc();
-
+  
   Future<String> getJWT() async {
     //print("es aqui");
     //print("token " + _configBloc.jwt.toString());
@@ -23,6 +22,7 @@ class JWTProvider {
 
     return token;
   }
+
 
   Future<String> setJWT() async {
     String urlApi = _configBloc.miFraccionamiento.urlApi.toString();

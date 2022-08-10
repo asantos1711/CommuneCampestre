@@ -4,8 +4,9 @@
 
 import 'dart:convert';
 
+import 'package:campestre/bloc/usuario_bloc.dart';
+
 import 'package:http/http.dart' as http;
-import '../bloc/usuario_bloc.dart';
 import '../services/jwt.dart';
 
 EstadoCuentaDireccion estadoCuentaDireccionFromJson(String str) =>

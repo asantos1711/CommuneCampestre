@@ -1,8 +1,7 @@
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/controls/connection.dart';
+import 'package:campestre/models/preguntasModel.dart';
 import 'package:flutter/material.dart';
-
-import '../bloc/usuario_bloc.dart';
-import '../controls/connection.dart';
-import '../models/preguntasModel.dart';
 
 class PreguntasView extends StatefulWidget {
   //const PreguntasView({ Key? key }) : super(key: key);

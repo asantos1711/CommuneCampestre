@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:92424595254:android:dd41b46d424307da1f7597",
+        "mobilesdk_app_id": "1:92424595254:android:72bdee289363995b1f7597",
         "android_client_info": {
-          "package_name": "com.commune.campestreapp"
+          "package_name": "com.commune.campestre"
         }
       },
       "oauth_client": [

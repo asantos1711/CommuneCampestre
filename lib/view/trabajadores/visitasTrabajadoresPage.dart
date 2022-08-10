@@ -1,6 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:campestre/controls/connection.dart';
+import 'package:campestre/view/confirmacionVisita.dart';
+import 'package:campestre/view/idReader.dart';
+import 'package:campestre/view/menuInicio.dart';
+import 'package:campestre/widgets/textfielborder.dart';
+import 'package:campestre/widgets/ui_helper.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -15,14 +21,8 @@ import 'package:time_range/time_range.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 
 import '../../bloc/usuario_bloc.dart';
-import '../../controls/connection.dart';
 import '../../models/invitadoModel.dart';
 import '../../provider/splashProvider.dart';
-import '../../widgets/textfielborder.dart';
-import '../../widgets/ui_helper.dart';
-import '../confirmacionVisita.dart';
-import '../idReader.dart';
-import '../menuInicio.dart';
 
 class VisitasTrabajadoresPage extends StatefulWidget {
   const VisitasTrabajadoresPage({Key? key}) : super(key: key);
@@ -40,7 +40,7 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
   TextEditingController _fechaSalida = new TextEditingController();
   TextEditingController _hora = new TextEditingController();
   TextEditingController _hora2 = new TextEditingController();
-  TextEditingController _placas = new TextEditingController();
+  TextEditingController _placas = new TextEditingController(); 
   TextEditingController _fotoIdUrl = new TextEditingController();
   DatabaseServices db = new DatabaseServices();
   DateTime selectedDate = new DateTime.now().add(Duration(days: 1));
@@ -1245,7 +1245,7 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
           fechaSalida = picked.end;
           _fechaSalida.text = DateFormat('dd-MM-yyyy').format(fechaSalida);
         });
-      } else {
+      } else{
         Fluttertoast.showToast(
           msg: "Máximo 31 días",
           toastLength: Toast.LENGTH_LONG,

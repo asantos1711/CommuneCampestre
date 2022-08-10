@@ -1,7 +1,6 @@
+import 'package:campestre/view/menuInicio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../menuInicio.dart';
 
 class ReporteSucess extends StatefulWidget {
   const ReporteSucess({Key? key}) : super(key: key);

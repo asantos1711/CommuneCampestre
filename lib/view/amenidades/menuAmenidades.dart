@@ -1,12 +1,12 @@
+import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/models/amenidades/allAmenidades.dart';
+import 'package:campestre/services/apiResidencial/amenidadesProvider.dart';
+import 'package:campestre/view/amenidades/fechaAmenidad.dart';
+import 'package:campestre/view/menuInicio.dart';
+import 'package:campestre/widgets/columnBuilder.dart';
 import 'package:flutter/material.dart';
 
-import '../../bloc/usuario_bloc.dart';
-import '../../models/amenidades/allAmenidades.dart';
-import '../../services/apiResidencial/amenidadesProvider.dart';
-import '../../widgets/columnBuilder.dart';
-import '../menuInicio.dart';
 import 'casaClub/qr.dart';
-import 'fechaAmenidad.dart';
 
 class MenuAmenidades extends StatefulWidget {
   const MenuAmenidades({Key? key}) : super(key: key);
