@@ -267,12 +267,18 @@ class _LoginPageState extends State<LoginPage> {
 
           if (!_usuario.idFraccionamiento!
               .contains(usuarioBloc.miFraccionamiento.id.toString())) {
+                Fluttertoast.showToast(
+              msg: 'No tiene permiso para accesar.',
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.BOTTOM,
+              backgroundColor: Colors.grey[800],
+            );
             print("si son diferentes*****");
-            setState(() {
+           /* setState(() {
               _usuario.idFraccionamiento =
                   usuarioBloc.miFraccionamiento.id.toString();
             });
-            db.updateUsuario(_usuario);
+            db.updateUsuario(_usuario);*/
           }
 
           RegistroUsuarioConnect connect = RegistroUsuarioConnect();
