@@ -16,7 +16,9 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'controls/connection.dart';
 import 'firebase_options.dart';
+import 'models/fraccionamientos.dart';
 import 'models/preferenciasUsuario.dart';
 import 'provider/carritoRestaurantProvider.dart';
 import 'view/splashView.dart';
@@ -77,6 +79,8 @@ class _MyAppState extends State<MyApp> {
   //SharedPreferences _prefs = SharedPreferences.getInstance();
   UsuarioBloc _usuarioBloc = new UsuarioBloc();
   late PreferenciasUsuario usuario;
+  
+  DatabaseServices databaseServices = new DatabaseServices();
   var mail;
   var pass;
   String _platformVersion = 'Unknown';
@@ -86,6 +90,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     _initPreference();
     initPlatformState();
+    _setFraccionamiento();
 
     PushNotificationsService.messageStream.listen((event) {
       print("MyApp : ${event}");
@@ -117,13 +122,23 @@ class _MyAppState extends State<MyApp> {
     await Future.delayed(Duration(seconds: 1));
   }
 
+  _setFraccionamiento() async {
+    List<Fraccionamiento>? lista = await databaseServices.getFracionamientos();
+    Fraccionamiento campestre  = lista!.firstWhere((element) => element.id == "campestre");
+ _usuarioBloc.miFraccionamiento = campestre;
+                usuario
+                    .setIdFraccionamiento(_usuarioBloc.miFraccionamiento.id.toString());
+
+
+  }
+
   @override
   Widget build(BuildContext context) {
     String ruta = "inicio_sesion"; //"/";
     //usuario.setiniciarSesion(false);
     print("IDFRACCIONAMIENTO" + usuario.idFraccionamiento);
     print("isLoggedIn" + usuario.isLoggedIn.toString());
-
+    
     if (usuario.isLoggedIn != true && !usuario.isiniciarSesion) {
       ruta = "/";
       usuario.setiniciarSesion(false);

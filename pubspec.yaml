@@ -76,7 +76,7 @@ dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/iconoresidente.png"
+  image_path: "assets/images/campestre.jpeg"
   #flutter pub run flutter_launcher_icons:main
 
 dev_dependencies:
