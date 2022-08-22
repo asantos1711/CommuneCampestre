@@ -55,7 +55,7 @@ void main() async {
   await PushNotificationsService.initializeApp();
   // set the publishable key for Stripe - this is mandatory
   //Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
-  //Stripe.urlScheme = 'flutterstripe';
+  //Stripe.urlScheme = 'flutterstripe'
   SharedPreferences usuario = await PreferenciasUsuario().initPref();
   Stripe.instance.applySettings();
   final usrPref =
@@ -79,7 +79,7 @@ class _MyAppState extends State<MyApp> {
   //SharedPreferences _prefs = SharedPreferences.getInstance();
   UsuarioBloc _usuarioBloc = new UsuarioBloc();
   late PreferenciasUsuario usuario;
-  
+
   DatabaseServices databaseServices = new DatabaseServices();
   var mail;
   var pass;
@@ -124,12 +124,10 @@ class _MyAppState extends State<MyApp> {
 
   _setFraccionamiento() async {
     List<Fraccionamiento>? lista = await databaseServices.getFracionamientos();
-    Fraccionamiento campestre  = lista!.firstWhere((element) => element.id == "campestre");
- _usuarioBloc.miFraccionamiento = campestre;
-                usuario
-                    .setIdFraccionamiento(_usuarioBloc.miFraccionamiento.id.toString());
-
-
+    Fraccionamiento campestre =
+        lista!.firstWhere((element) => element.id == "campestre");
+    _usuarioBloc.miFraccionamiento = campestre;
+    usuario.setIdFraccionamiento(_usuarioBloc.miFraccionamiento.id.toString());
   }
 
   @override
@@ -138,7 +136,7 @@ class _MyAppState extends State<MyApp> {
     //usuario.setiniciarSesion(false);
     print("IDFRACCIONAMIENTO" + usuario.idFraccionamiento);
     print("isLoggedIn" + usuario.isLoggedIn.toString());
-    
+
     if (usuario.isLoggedIn != true && !usuario.isiniciarSesion) {
       ruta = "/";
       usuario.setiniciarSesion(false);
