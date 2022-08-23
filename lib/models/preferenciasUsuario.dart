@@ -44,7 +44,8 @@ class PreferenciasUsuario {
   void setisFirstTime(bool val) async =>
       await _pref.setBool('isFirstTime', val);
 
-  String get idFraccionamiento => _pref.getString('idFraccionamiento') ?? "";
+  String get idFraccionamiento =>
+      _pref.getString('idFraccionamiento') ?? "campestre";
   void setIdFraccionamiento(String val) async =>
       await _pref.setString('idFraccionamiento', val);
 }

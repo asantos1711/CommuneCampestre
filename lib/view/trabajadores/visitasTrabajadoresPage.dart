@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:campestre/controls/connection.dart';
 import 'package:campestre/view/confirmacionVisita.dart';
-import 'package:campestre/view/idReader.dart';
 import 'package:campestre/view/menuInicio.dart';
 import 'package:campestre/widgets/textfielborder.dart';
 import 'package:campestre/widgets/ui_helper.dart';
@@ -40,7 +39,7 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
   TextEditingController _fechaSalida = new TextEditingController();
   TextEditingController _hora = new TextEditingController();
   TextEditingController _hora2 = new TextEditingController();
-  TextEditingController _placas = new TextEditingController(); 
+  TextEditingController _placas = new TextEditingController();
   TextEditingController _fotoIdUrl = new TextEditingController();
   DatabaseServices db = new DatabaseServices();
   DateTime selectedDate = new DateTime.now().add(Duration(days: 1));
@@ -777,20 +776,6 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
     );
   }
 
-  _opcionLeerId() {
-    return _opcion("Escanear ID", FontAwesome.id_card, () async {
-      try {
-        Provider.of<LoadingProvider>(context, listen: false).setLoad(true);
-
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => IdReaderView()),
-        );
-        Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-      } catch (e) {}
-    });
-  }
-
   _opcion(String text, IconData icon, Function() funcion) {
     return InkWell(
       onTap: funcion,
@@ -1245,7 +1230,7 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
           fechaSalida = picked.end;
           _fechaSalida.text = DateFormat('dd-MM-yyyy').format(fechaSalida);
         });
-      } else{
+      } else {
         Fluttertoast.showToast(
           msg: "Máximo 31 días",
           toastLength: Toast.LENGTH_LONG,
