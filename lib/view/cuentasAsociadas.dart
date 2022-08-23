@@ -27,13 +27,30 @@ class _CuentasAsociadasState extends State<CuentasAsociadas> {
   final FirebaseStorage storage = FirebaseStorage.instance;
   int numActivos = 0;
   int numPermitidos = 0;
-  
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _boton();
+    super.initState();
+  }
+
+  _boton() async {
+    numPermitidos = _usuarioBloc.miFraccionamiento.numCuentasAsoc!.toInt() ?? 0;
+    List<Usuario> list = await _databaseServices.getUsuarioByTitular();
+    for (var item in list) {
+      if (item.estatus!.contains("1")) {
+        setState(() {
+          numActivos++;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     w = MediaQuery.of(context).size.width;
     h = MediaQuery.of(context).size.height;
-    numPermitidos = _usuarioBloc.miFraccionamiento.numCuentasAsoc!.toInt();
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -59,15 +76,12 @@ class _CuentasAsociadasState extends State<CuentasAsociadas> {
             ),
           ),
         ),
-        body: 
-        SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Column(children: [
-            numActivos < numPermitidos  ? _agregarUsuario() : SizedBox(),
-           _lista()
-            
+            numActivos < numPermitidos ? _agregarUsuario() : SizedBox(),
+            _lista()
           ]),
-        )
-        );
+        ));
   }
 
   _agregarUsuario() {
@@ -119,19 +133,20 @@ class _CuentasAsociadasState extends State<CuentasAsociadas> {
 
         _list = sn.data;
 
-        return  ColumnBuilder(
+        if (_list.isEmpty) return SizedBox();
+
+        return ColumnBuilder(
             itemCount: _list.length,
             itemBuilder: (context, index) {
-              if (_list[index].estatus!.contains("1")) {
+              /* if (_list[index].estatus!.contains("1")) {
                 numActivos++;
-              }
+              }*/
               return Container(
                 margin: EdgeInsets.only(left: 30, right: 30, top: 30),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    
                     Container(
                       margin: EdgeInsets.only(left: 25, right: 25),
                       child: Row(
@@ -181,10 +196,7 @@ class _CuentasAsociadasState extends State<CuentasAsociadas> {
                   ],
                 ),
               );
-            }
-            
-                      
-        ) ;
+            });
       },
     );
   }
@@ -203,7 +215,7 @@ class _CuentasAsociadasState extends State<CuentasAsociadas> {
               // title: Container(child: Text("")), //Row(children: <Widget>[Icon(FontAwesomeIcons.checkCircle, color: Colors.green),Text("Envio éxitoso"),],),
               content: Container(
                   width: w - 170,
-                  height: 150,
+                  height: h / 5,
                   child: Column(
                     children: [
                       Container(

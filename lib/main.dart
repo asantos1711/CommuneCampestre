@@ -57,7 +57,7 @@ void main() async {
   //Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
   //Stripe.urlScheme = 'flutterstripe'
   SharedPreferences usuario = await PreferenciasUsuario().initPref();
-  Stripe.instance.applySettings();
+  //Stripe.instance.applySettings();
   final usrPref =
       PreferenciasUsuario(); //Inicializar la clase para almacenar parémetros que se usan durante el procesp de precheckin.
   await usrPref.initPref();
@@ -100,20 +100,11 @@ class _MyAppState extends State<MyApp> {
   Future<void> initPlatformState() async {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      platformVersion = await FlutterDocumentReaderCore.platformVersion;
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
     if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
   }
 
   _initPreference() async {
@@ -159,6 +150,9 @@ class _MyAppState extends State<MyApp> {
           ),
           ChangeNotifierProvider<LoadingProvider>(
             create: (_) => LoadingProvider(),
+          ),
+          ChangeNotifierProvider<CuentasAsociadoProvider>(
+            create: (_) => CuentasAsociadoProvider(),
           ),
         ],
         child: Builder(

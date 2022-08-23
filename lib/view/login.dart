@@ -267,19 +267,22 @@ class _LoginPageState extends State<LoginPage> {
 
           if (!_usuario.idFraccionamiento!
               .contains(usuarioBloc.miFraccionamiento.id.toString())) {
-                Fluttertoast.showToast(
-              msg: 'El acceso a su aplicación ha sido restringido por falta de pago. Regularice sus pagos en la administración',
+            Fluttertoast.showToast(
+              msg:
+                  'El acceso a su aplicación ha sido restringido por falta de pago. Regularice sus pagos en la administración',
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.BOTTOM,
               backgroundColor: Colors.grey[800],
             );
             print("si son diferentes*****");
-           /* setState(() {
+            /* setState(() {
               _usuario.idFraccionamiento =
                   usuarioBloc.miFraccionamiento.id.toString();
             });
             db.updateUsuario(_usuario);*/
-            return ;
+
+            Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
+            return;
           }
 
           RegistroUsuarioConnect connect = RegistroUsuarioConnect();
@@ -328,7 +331,7 @@ class _LoginPageState extends State<LoginPage> {
 
             await connect.actualizarToken(_usuario, response);
           }
-         // await connect.actualizarToken(_usuario, response);
+          // await connect.actualizarToken(_usuario, response);
 
           if ("pendiente".contains(response.toLowerCase())) {
             //usuarioBloc.perfil.estatus == "0" &&
@@ -345,7 +348,7 @@ class _LoginPageState extends State<LoginPage> {
             Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
             Fluttertoast.showToast(
               msg:
-                  'Tu acceso ha sido bloqueado, favor de comunicarse con administración',
+                  'El acceso a su aplicación ha sido restringido por falta de pago. Regularice sus pagos en la administración',
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.BOTTOM,
               backgroundColor: Colors.grey[800],

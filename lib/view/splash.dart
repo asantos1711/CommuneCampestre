@@ -41,8 +41,8 @@ class _SplashState extends State<Splash> {
             ),
             Container(
                 alignment: Alignment.center,
-                padding: EdgeInsets.only(left: 44, right: 44, top: h! / 10),
-                margin: EdgeInsets.only(top: 50),
+                padding: EdgeInsets.only(left: 44, right: 44, top: 40),
+                // margin: EdgeInsets.only(top: 50),
                 child: Text("Control de acceso",
                     style: TextStyle(fontSize: 50, color: Colors.black))),
             Container(

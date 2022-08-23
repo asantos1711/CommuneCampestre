@@ -8,3 +8,12 @@ class LoadingProvider with ChangeNotifier {
     notifyListeners();
   }
 }
+
+class CuentasAsociadoProvider with ChangeNotifier {
+  bool isMinorAndEqual = false;
+  bool get getIsMinorAndEqual => isMinorAndEqual;
+  setLoad(bool status) {
+    isMinorAndEqual = status;
+    notifyListeners();
+  }
+}
