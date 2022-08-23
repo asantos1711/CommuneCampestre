@@ -268,7 +268,7 @@ class _LoginPageState extends State<LoginPage> {
           if (!_usuario.idFraccionamiento!
               .contains(usuarioBloc.miFraccionamiento.id.toString())) {
                 Fluttertoast.showToast(
-              msg: 'No tiene permiso para accesar.',
+              msg: 'El acceso a su aplicación ha sido restringido por falta de pago. Regularice sus pagos en la administración',
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.BOTTOM,
               backgroundColor: Colors.grey[800],
@@ -279,6 +279,7 @@ class _LoginPageState extends State<LoginPage> {
                   usuarioBloc.miFraccionamiento.id.toString();
             });
             db.updateUsuario(_usuario);*/
+            return ;
           }
 
           RegistroUsuarioConnect connect = RegistroUsuarioConnect();
@@ -318,7 +319,7 @@ class _LoginPageState extends State<LoginPage> {
 
           print("ESTATUS del servicio de Javi : $response");
 
-          /*if (!_usuario.tokenNoti!.contains(tokenNew)) {
+          if (!_usuario.tokenNoti!.contains(tokenNew)) {
             print("si son diferentes*****");
             setState(() {
               _usuario.tokenNoti = tokenNew;
@@ -326,8 +327,8 @@ class _LoginPageState extends State<LoginPage> {
             db.updateUsuario(_usuario);
 
             await connect.actualizarToken(_usuario, response);
-          }*/
-          await connect.actualizarToken(_usuario, response);
+          }
+         // await connect.actualizarToken(_usuario, response);
 
           if ("pendiente".contains(response.toLowerCase())) {
             //usuarioBloc.perfil.estatus == "0" &&

@@ -26,11 +26,14 @@ class _CuentasAsociadasState extends State<CuentasAsociadas> {
   double w = 0.0, h = 0.0;
   final FirebaseStorage storage = FirebaseStorage.instance;
   int numActivos = 0;
+  int numPermitidos = 0;
+  
 
   @override
   Widget build(BuildContext context) {
     w = MediaQuery.of(context).size.width;
     h = MediaQuery.of(context).size.height;
+    numPermitidos = _usuarioBloc.miFraccionamiento.numCuentasAsoc!.toInt();
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -56,12 +59,15 @@ class _CuentasAsociadasState extends State<CuentasAsociadas> {
             ),
           ),
         ),
-        body: SingleChildScrollView(
+        body: 
+        SingleChildScrollView(
           child: Column(children: [
-            numActivos < 5 ? _agregarUsuario() : SizedBox(),
-            _lista()
+            numActivos < numPermitidos  ? _agregarUsuario() : SizedBox(),
+           _lista()
+            
           ]),
-        ));
+        )
+        );
   }
 
   _agregarUsuario() {
@@ -113,7 +119,7 @@ class _CuentasAsociadasState extends State<CuentasAsociadas> {
 
         _list = sn.data;
 
-        return ColumnBuilder(
+        return  ColumnBuilder(
             itemCount: _list.length,
             itemBuilder: (context, index) {
               if (_list[index].estatus!.contains("1")) {
@@ -125,6 +131,7 @@ class _CuentasAsociadasState extends State<CuentasAsociadas> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    
                     Container(
                       margin: EdgeInsets.only(left: 25, right: 25),
                       child: Row(
@@ -174,7 +181,10 @@ class _CuentasAsociadasState extends State<CuentasAsociadas> {
                   ],
                 ),
               );
-            });
+            }
+            
+                      
+        ) ;
       },
     );
   }
