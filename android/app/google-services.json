@@ -32,10 +32,10 @@
               "client_type": 3
             },
             {
-              "client_id": "92424595254-jkrvk9q3qpb9u4krdvjq8r16osrndeoa.apps.googleusercontent.com",
+              "client_id": "92424595254-gek3l9cnmj9trcab0q0b0kctri7qomlq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.commune.communeadmin"
+                "bundle_id": "com.commune.taina"
               }
             }
           ]
@@ -68,10 +68,10 @@
               "client_type": 3
             },
             {
-              "client_id": "92424595254-jkrvk9q3qpb9u4krdvjq8r16osrndeoa.apps.googleusercontent.com",
+              "client_id": "92424595254-gek3l9cnmj9trcab0q0b0kctri7qomlq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.commune.communeadmin"
+                "bundle_id": "com.commune.taina"
               }
             }
           ]
@@ -104,10 +104,46 @@
               "client_type": 3
             },
             {
-              "client_id": "92424595254-jkrvk9q3qpb9u4krdvjq8r16osrndeoa.apps.googleusercontent.com",
+              "client_id": "92424595254-gek3l9cnmj9trcab0q0b0kctri7qomlq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.commune.communeadmin"
+                "bundle_id": "com.commune.taina"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92424595254:android:99eb1148d03c4ef51f7597",
+        "android_client_info": {
+          "package_name": "com.commune.taina"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "92424595254-vjgvosfm174kvtl4hfu84ue87egsaqri.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-oROZ9NFqD4hteCnMUxOZLtSTcQhfMiw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "92424595254-vjgvosfm174kvtl4hfu84ue87egsaqri.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "92424595254-gek3l9cnmj9trcab0q0b0kctri7qomlq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.commune.taina"
               }
             }
           ]
@@ -140,10 +176,10 @@
               "client_type": 3
             },
             {
-              "client_id": "92424595254-jkrvk9q3qpb9u4krdvjq8r16osrndeoa.apps.googleusercontent.com",
+              "client_id": "92424595254-gek3l9cnmj9trcab0q0b0kctri7qomlq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.commune.communeadmin"
+                "bundle_id": "com.commune.taina"
               }
             }
           ]

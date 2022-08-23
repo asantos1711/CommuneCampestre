@@ -97,7 +97,7 @@ class _TipoAccesoState extends State<TipoAcceso> {
             },
             child: _opcion(null, "Fiestas y eventos"),
           ),*/
-          InkWell(
+          /*InkWell(
             onTap: () {
               Navigator.push(
                 context,
@@ -105,7 +105,7 @@ class _TipoAccesoState extends State<TipoAcceso> {
               );
             },
             child: _opcion(null, "Renta Vacional y Airbnb"),
-          ),
+          ),*/
         ],
       ),
     );

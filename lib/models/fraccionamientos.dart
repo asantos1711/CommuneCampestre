@@ -13,6 +13,7 @@ class Fraccionamiento {
   bool? reportes;
   String? idRestaurante;
   String? terminos;
+  int? numCuentasAsoc;
 
   Fraccionamiento(
       {this.nombre,
@@ -23,6 +24,7 @@ class Fraccionamiento {
       this.keyStripe,
       this.urlApi,
       this.idRestaurante,
+      this.numCuentasAsoc,
       this.pagar, this.amenidades, this.terminos, this.reportes});
 
   Color getColor() {
@@ -43,6 +45,7 @@ class Fraccionamiento {
         amenidades: json["amenidades"] == null ? false : json["amenidades"],
         reportes: json["reportes"] == null ? false : json["reportes"],
         terminos: json["terminos"] == null ? null : json["terminos"],
+        numCuentasAsoc: json["numCuentasAsoc"] == null ? null : json["numCuentasAsoc"],
         color: json["color"] == null ? null : ColorF.fromJson(json["color"]),
       );
 
@@ -58,6 +61,7 @@ class Fraccionamiento {
         "amenidades": amenidades == null ? null : amenidades,
         "terminos": terminos == null ? false : terminos,
         "reportes": reportes == null ? false : reportes,
+        "numCuentasAsoc": numCuentasAsoc == null ? 0 : numCuentasAsoc,
         "color": color == null ? null : color!.toJson(),
       };
 }
