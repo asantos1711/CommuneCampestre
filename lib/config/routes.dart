@@ -8,7 +8,7 @@ import '../view/seleccionFraccionamiento.dart';
 
 Map<String, WidgetBuilder> getApplicationRoutes() {
   return <String, WidgetBuilder>{
-    '/': (context) => LoginPage(), // Splash(),
+    '/': (context) => Splash(),
     'inicio_sesion': (context) => LoginPage(),
     'menu_inicio': (context) => MenuInicio(),
   };
