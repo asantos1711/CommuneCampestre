@@ -114,11 +114,11 @@ class _MyAppState extends State<MyApp> {
 
   _setFraccionamiento() async {
     List<Fraccionamiento>? lista = await databaseServices.getFracionamientos();
-    /*Fraccionamiento campestre =
+    Fraccionamiento campestre =
         lista!.firstWhere((element) => element.id == "commune");
-    _usuarioBloc.miFraccionamiento = campestre;*/
-    await databaseServices.getFraccionamientoId("commune");
-    usuario.setIdFraccionamiento(_usuarioBloc.miFraccionamiento.id.toString());
+    _usuarioBloc.miFraccionamiento = campestre;
+    //await databaseServices.getFraccionamientoId("commune");
+    //usuario.setIdFraccionamiento(_usuarioBloc.miFraccionamiento.id.toString());
   }
 
   @override

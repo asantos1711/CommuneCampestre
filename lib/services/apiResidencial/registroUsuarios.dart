@@ -184,7 +184,7 @@ class RegistroUsuarioConnect {
   }
 
   Future<String> getRegistroStatus(int id) async {
-    //print("Mantenimientos*****");
+    print("Mantenimientos*****");
     String model = "";
     String urlApi = _usuarioBloc.miFraccionamiento.urlApi.toString();
 
@@ -199,6 +199,10 @@ class RegistroUsuarioConnect {
     };
 
     final response = await http.get(Uri.parse(url), headers: headers);
+    print("el response****");
+
+    print(response.request);
+    print(response);
 
     try {
       if (response.statusCode == 200) {

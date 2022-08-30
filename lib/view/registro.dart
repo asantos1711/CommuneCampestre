@@ -351,11 +351,12 @@ class _RegistroViewState extends State<RegistroView> {
           _usuario.estatus = "0";
           _usuario.lote = hayLote ? int.parse(this.widget.lote) : null;
 
-          Map<String, bool> val =
+          UserCredential val =
               await db.registerUser(_email.text, _password.text);
 
           print("el val****");
           print(val);
+          _usuario.idResidente = val.user?.uid;
 
           db.guardarDatosRegistro(_usuario).whenComplete(() async {
             if (!hayLote) {
