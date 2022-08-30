@@ -46,10 +46,11 @@ final FirebaseFirestore datab = FirebaseFirestore.instance;
 class _LoginPageState extends State<LoginPage> {
   bool isLoading = false;
   UsuarioBloc usuarioBloc = new UsuarioBloc();
+  DatabaseServices database = DatabaseServices();
 
   @override
   void initState() {
-    getFraccionamientoId(usuario.idFraccionamiento);
+    database.getFraccionamiento();
     if (usuario.idFraccionamiento != "" &&
         usuarioBloc.miFraccionamiento != null) {
       //_usuarioBloc.miFraccionamiento = snap
@@ -119,7 +120,8 @@ class _LoginPageState extends State<LoginPage> {
                         //height:250,
                         //width: 250,
                         child: Image.network(
-                          usuarioBloc.miFraccionamiento.urlLogopng.toString(),
+                          usuarioBloc.miFraccionamiento.urlLogopngBlanco
+                              .toString(),
                           height: h * 0.1,
                           alignment: Alignment.topLeft,
                         ),

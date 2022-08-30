@@ -11,6 +11,7 @@ import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:io';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:async';
@@ -71,7 +72,7 @@ class DatabaseServices {
 
   Future<List<Usuario>> getUsuarioByTitular() async {
     Usuario user = new Usuario();
-    List<Usuario> lista = [];    
+    List<Usuario> lista = [];
 
     QuerySnapshot<Map<String, dynamic>> snap =
         await db.collection('usuarios').get();
@@ -127,7 +128,7 @@ class DatabaseServices {
     return lista;
   }
 
-  Future<List<Usuario>> getUsuariosAdmin() async {    
+  Future<List<Usuario>> getUsuariosAdmin() async {
     List<Usuario> lista = [];
 
     QuerySnapshot<Map<String, dynamic>> snap =
@@ -169,6 +170,30 @@ class DatabaseServices {
     }
 
     //print(usuarioBloc.miFraccionamiento.color?.r);
+  }
+
+  getFraccionamiento() async {
+    final String _url =
+        'https://communecampestre-default-rtdb.firebaseio.com/configuracion/fraccionamiento.json';
+
+    Fraccionamiento fraccionamiento;
+    UsuarioBloc _usuarioBloc = new UsuarioBloc();
+
+    try {
+      final response =
+          await http.get(Uri.parse(_url)).timeout(Duration(seconds: 5));
+      final decodedData = jsonDecode(response.body);
+      fraccionamiento = Fraccionamiento.fromJson(decodedData);
+
+      _usuarioBloc.miFraccionamiento = fraccionamiento;
+    } on TimeoutException catch (exception) {
+      print(
+          'Error al cargar la configuracion. Tiempo de espera exedido: ${exception.message}');
+    } catch (exception) {
+      print("Erro inesperado al cargar la configuración: $exception");
+    }
+
+    return;
   }
 
   Future<Fraccionamiento> getFracionamientosById(String id) async {

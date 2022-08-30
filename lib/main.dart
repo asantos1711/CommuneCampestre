@@ -65,7 +65,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );*/
 
-
   runApp(MyApp());
 }
 
@@ -113,11 +112,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   _setFraccionamiento() async {
-    List<Fraccionamiento>? lista = await databaseServices.getFracionamientos();
+    //List<Fraccionamiento>? lista = await databaseServices.getFracionamientos();
     /*Fraccionamiento campestre =
         lista!.firstWhere((element) => element.id == "commune");
     _usuarioBloc.miFraccionamiento = campestre;*/
-    await databaseServices.getFraccionamientoId("commune");
+    await databaseServices.getFraccionamiento();
     usuario.setIdFraccionamiento(_usuarioBloc.miFraccionamiento.id.toString());
   }
 

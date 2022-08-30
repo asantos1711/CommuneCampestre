@@ -93,7 +93,7 @@ class _MenuInicioState extends State<MenuInicio> {
   _inicio() async {
     if (usuario.idFraccionamiento != "" &&
         _usuarioBloc.miFraccionamiento != null) {
-      await _databaseServices.getFraccionamientoId(usuario.idFraccionamiento);
+      await _databaseServices.getFraccionamiento();
       //_usuarioBloc.miFraccionamiento = snap
     }
     if (usuario.isiniciarSesion) {

@@ -34,7 +34,7 @@ class _SplashDosState extends State<SplashDos> {
               alignment: Alignment.centerLeft,
               margin: EdgeInsets.only(right: 44, top: 55),
               child: Image.network(
-                  _usuarioBloc.miFraccionamiento.urlLogopng.toString(),
+                  _usuarioBloc.miFraccionamiento.urlLogopngColor.toString(),
                   width: w! * .5),
               /*Image.asset(
                   'assets/images/logo.png',
