@@ -352,24 +352,20 @@ class DatabaseServices {
     //return null;*/
   }
 
-  Future<Map<String, bool>> registerUser(String correo, String contra) async {
+  Future<UserCredential> registerUser(String correo, String contra) async {
     Map<String, bool> map = Map<String, bool>();
-    try {
-      UserCredential result = await _auth.createUserWithEmailAndPassword(
+    UserCredential result;
+    
+      result = await _auth.createUserWithEmailAndPassword(
           email: correo, password: contra);
 
       print("result: " + result.toString());
       //User? user = result.user;
       //print("result: " + user.toString());
 
-      return map;
-    } on FirebaseAuthException catch (ef) {
-      print("Error n registerUser connect " + ef.toString());
-      throw ef;
-    } catch (e) {
-      print("Error n registerUser connect " + e.toString());
-      return map;
-    }
+      return result;
+    
+    
   }
 
   Future guardarDatosRegistro(Usuario usuario) async {
@@ -377,13 +373,13 @@ class DatabaseServices {
     var bytes = utf8.encode(usuario.nombre!); // data being hashed
 
     var digest = sha1.convert(bytes);
-    usuario.idResidente = digest.toString();
+    //usuario.idResidente = digest.toString();
     final FirebaseFirestore db = FirebaseFirestore.instance;
     //print("Digest as bytes: ${digest.bytes}");
     //print("Digest as hex string: $digest");
     //usuarioBloc.qrInvitado = digest.toString();
     try {
-      await db.collection('usuarios').doc("${digest}").set(usuario.toJson());
+      await db.collection('usuarios').doc("${usuario.idResidente}").set(usuario.toJson());
       //print("profile.id " + profile.id);
 
       print("Listo");

@@ -257,37 +257,22 @@ class _LoginPageState extends State<LoginPage> {
               .signInWithEmailAndPassword(
                   email: _email.text, password: _password.text);
 
-          //print("additionalUserInfo " + user.user.toString());
+          print("additionalUserInfo " + user.user.toString());
 
           Usuario _usuario = await db.getUsuario(_email.text);
+          _usuario.idResidente = user.user?.uid.toString();
           usuarioBloc.perfil = _usuario;
           PushNotificationsService a = new PushNotificationsService();
           //a.getToken();
-          print(_usuario.tokenNoti);
-          print(a.getToken());
+          //print(_usuario.tokenNoti);
+          //print(a.getToken());
           String tokenNew = a.getToken();
-
-          if (!_usuario.idFraccionamiento!
-              .contains(usuarioBloc.miFraccionamiento.id.toString())) {
-            Fluttertoast.showToast(
-              msg:
-                  'El acceso a su aplicación ha sido restringido por falta de pago. Regularice sus pagos en la administración',
-              toastLength: Toast.LENGTH_LONG,
-              gravity: ToastGravity.BOTTOM,
-              backgroundColor: Colors.grey[800],
-            );
-            print("si son diferentes*****");
-            /* setState(() {
-              _usuario.idFraccionamiento =
-                  usuarioBloc.miFraccionamiento.id.toString();
-            });
-            db.updateUsuario(_usuario);*/
-
-            Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-            return;
-          }
-
           RegistroUsuarioConnect connect = RegistroUsuarioConnect();
+
+           String response = await connect
+              .getRegistroStatus(usuarioBloc.perfil.idRegistro ?? 0);
+
+          print("ESTATUS del servicio de Javi : $response");
 
           /**Validar si es habitante */
           if ("Habitante".contains(_usuario.tipo.toString()) &&
@@ -319,10 +304,7 @@ class _LoginPageState extends State<LoginPage> {
             return;
           }
 
-          String response = await connect
-              .getRegistroStatus(usuarioBloc.perfil.idRegistro ?? 0);
-
-          print("ESTATUS del servicio de Javi : $response");
+         
 
           if (!_usuario.tokenNoti!.contains(tokenNew)) {
             print("si son diferentes*****");
@@ -376,33 +358,7 @@ class _LoginPageState extends State<LoginPage> {
             );
           }
 
-          /*final datosUser = user;
-          //print("usuario***" + user?.email);
-          //registro.perfil.email = user?.email;
-          //addCredenciales(_email.text,_password.text );
-          final SharedPreferences prefs = await _prefs;
-
-          final mail = prefs.getString('email');
-          final pass = prefs.getString('pass');
-
-          if (mail == null && pass == null) {
-            prefs.setString('email', _email.text);
-            prefs.setString('pass', _password.text);
-          }
-          print("despues***");
-          print(prefs.getString('email'));*/
-
-          /*var snap =  FirebaseFirestore.instance
-              .collection('usuarios')
-              .where("email", isEqualTo: _email.text) //registro.perfil?.email)
-              .snapshots();
-
-          snap.forEach((element) {
-            element.docs.forEach((element) {
-              usuarioBloc.perfil = Usuario.fromFirestore(element);
-              print("nombre***" + usuarioBloc.perfil.nombre.toString());
-            });
-          });*/
+    
 
         } catch (error) {
           //  removeCredenciales();
