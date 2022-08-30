@@ -1,4 +1,5 @@
 import 'package:campestre/view/menuInicio.dart';
+import 'package:campestre/view/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:campestre/view/login.dart';
@@ -7,7 +8,7 @@ import '../view/seleccionFraccionamiento.dart';
 
 Map<String, WidgetBuilder> getApplicationRoutes() {
   return <String, WidgetBuilder>{
-    '/': (context) => LoginPage(),
+    '/': (context) => Splash(),
     'inicio_sesion': (context) => LoginPage(),
     'menu_inicio': (context) => MenuInicio(),
   };
@@ -22,7 +23,7 @@ List<BottomNavigationBarItem> navButtons() {
     ),
     BottomNavigationBarItem(
       icon: FaIcon(FontAwesomeIcons.users),
-      label: "Perfil", 
+      label: "Perfil",
       activeIcon: FaIcon(FontAwesomeIcons.users),
     ),
     /* BottomNavigationBarItem(

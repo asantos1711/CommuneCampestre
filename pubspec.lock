@@ -300,6 +300,23 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.1"
+<<<<<<< HEAD
+=======
+  flutter_document_reader_api:
+    dependency: "direct main"
+    description:
+      name: flutter_document_reader_api
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.5.0"
+  flutter_document_reader_core_full:
+    dependency: "direct main"
+    description:
+      name: flutter_document_reader_core_full
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.5.0"
+>>>>>>> e3bb772d683b3703219cac619e29503d605c9f10
   flutter_launcher_icons:
     dependency: "direct main"
     description:
