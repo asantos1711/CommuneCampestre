@@ -53,6 +53,7 @@ class DatabaseServices {
     Usuario user = new Usuario();
     List<Usuario> lista = [];
     print(_auth.currentUser!.uid);
+    //print(db.);
     QuerySnapshot<Map<String, dynamic>> snap =
         await db.collection('usuarios').get();
 
