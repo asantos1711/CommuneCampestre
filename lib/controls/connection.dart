@@ -52,7 +52,7 @@ class DatabaseServices {
   Future<Usuario> getUsuario(String email) async {
     Usuario user = new Usuario();
     List<Usuario> lista = [];
-
+    print(_auth.currentUser!.uid);
     QuerySnapshot<Map<String, dynamic>> snap =
         await db.collection('usuarios').get();
 
@@ -355,17 +355,15 @@ class DatabaseServices {
   Future<UserCredential> registerUser(String correo, String contra) async {
     Map<String, bool> map = Map<String, bool>();
     UserCredential result;
-    
-      result = await _auth.createUserWithEmailAndPassword(
-          email: correo, password: contra);
 
-      print("result: " + result.toString());
-      //User? user = result.user;
-      //print("result: " + user.toString());
+    result = await _auth.createUserWithEmailAndPassword(
+        email: correo, password: contra);
 
-      return result;
-    
-    
+    print("result: " + result.toString());
+    //User? user = result.user;
+    //print("result: " + user.toString());
+
+    return result;
   }
 
   Future guardarDatosRegistro(Usuario usuario) async {
@@ -379,7 +377,10 @@ class DatabaseServices {
     //print("Digest as hex string: $digest");
     //usuarioBloc.qrInvitado = digest.toString();
     try {
-      await db.collection('usuarios').doc("${usuario.idResidente}").set(usuario.toJson());
+      await db
+          .collection('usuarios')
+          .doc("${usuario.idResidente}")
+          .set(usuario.toJson());
       //print("profile.id " + profile.id);
 
       print("Listo");

@@ -44,9 +44,9 @@ Fraccionamiento _fraccionamiento = new Fraccionamiento();
 final FirebaseFirestore datab = FirebaseFirestore.instance;
 
 class _LoginPageState extends State<LoginPage> {
+  DatabaseServices database = DatabaseServices();
   bool isLoading = false;
   UsuarioBloc usuarioBloc = new UsuarioBloc();
-  DatabaseServices database = DatabaseServices();
 
   @override
   void initState() {
@@ -58,6 +58,35 @@ class _LoginPageState extends State<LoginPage> {
     _init();
     super.initState();
     //_checkJWT();
+  }
+
+  bool validateLogin() {
+    if (_formKey.currentState!.validate()) {
+      return true;
+    }
+    _charge(false);
+    return false;
+  }
+
+  getFraccionamientoId(String id) async {
+    //var snap = _databaseServices.getFracionamientosById(usuario.idFraccionamiento);
+
+    Fraccionamiento _fracc = new Fraccionamiento();
+
+    DocumentSnapshot snaps =
+        await datab.collection('fraccionamientos').doc(id).get();
+    print(snaps.data());
+
+    if (snaps.exists) {
+      print("dentro");
+      Map<String, dynamic> mapa = snaps.data() as Map<String, dynamic>;
+      _fracc = Fraccionamiento.fromJson(mapa);
+      setState(() {
+        usuarioBloc.miFraccionamiento = _fracc;
+      });
+    }
+
+    print(usuarioBloc.miFraccionamiento.color?.r);
   }
 
   _init() async {
@@ -79,14 +108,6 @@ class _LoginPageState extends State<LoginPage> {
     print(s);
   }
 
-  bool validateLogin() {
-    if (_formKey.currentState!.validate()) {
-      return true;
-    }
-    _charge(false);
-    return false;
-  }
-
   _charge(bool val) {
     setState(() {
       isLoading = val;
@@ -97,79 +118,6 @@ class _LoginPageState extends State<LoginPage> {
     this.setState(() {
       isLoading = !isLoading;
     });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    w = MediaQuery.of(context).size.width;
-    h = MediaQuery.of(context).size.height;
-    // ScreenUtil.init(context);
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: OKToast(
-            child: usuarioBloc.miFraccionamiento.color?.r != null
-                ? Stack(
-                    children: [
-                      _form(),
-                      Positioned(
-                        top: 40,
-                        //bottom: 0,
-                        left: 5,
-                        right: 0,
-                        //left: 30,
-                        //height:250,
-                        //width: 250,
-                        child: Image.network(
-                          usuarioBloc.miFraccionamiento.urlLogopngBlanco
-                              .toString(),
-                          height: h * 0.1,
-                          alignment: Alignment.topLeft,
-                        ),
-
-                        /* Image.asset(
-                    "assets/images/logoBlanco.png",
-                    alignment: Alignment.topLeft,
-                  )*/
-                      ),
-                      Positioned(
-                        top: 40,
-                        //bottom: 0,
-                        //left: 130,
-                        right: 0,
-                        //left: 30,
-                        //height:250,
-                        //width: 250,
-                        child: InkWell(
-                            onTap: () async {
-                              _sendNotificacionSOS();
-                            },
-                            child: Container(
-                                width: w / 5,
-                                height: 50,
-                                alignment: Alignment.center,
-                                child: Text(
-                                  "SOS",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 18),
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(
-                                          50.0) //                 <--- border radius here
-                                      ),
-                                ))),
-                      )
-                    ],
-                  )
-                : Center(
-                    child: Image.asset(
-                      "assets/icon/casita.gif",
-                      width: 200,
-                      height: 200,
-                      fit: BoxFit.contain,
-                    ),
-                  )));
   }
 
   Widget _form() {
@@ -269,7 +217,7 @@ class _LoginPageState extends State<LoginPage> {
           String tokenNew = a.getToken();
           RegistroUsuarioConnect connect = RegistroUsuarioConnect();
 
-           String response = await connect
+          String response = await connect
               .getRegistroStatus(usuarioBloc.perfil.idRegistro ?? 0);
 
           print("ESTATUS del servicio de Javi : $response");
@@ -303,8 +251,6 @@ class _LoginPageState extends State<LoginPage> {
             );
             return;
           }
-
-         
 
           if (!_usuario.tokenNoti!.contains(tokenNew)) {
             print("si son diferentes*****");
@@ -357,9 +303,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
             );
           }
-
-    
-
         } catch (error) {
           //  removeCredenciales();
           _charge(false);
@@ -400,27 +343,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
-
-  getFraccionamientoId(String id) async {
-    //var snap = _databaseServices.getFracionamientosById(usuario.idFraccionamiento);
-
-    Fraccionamiento _fracc = new Fraccionamiento();
-
-    DocumentSnapshot snaps =
-        await datab.collection('fraccionamientos').doc(id).get();
-    print(snaps.data());
-
-    if (snaps.exists) {
-      print("dentro");
-      Map<String, dynamic> mapa = snaps.data() as Map<String, dynamic>;
-      _fracc = Fraccionamiento.fromJson(mapa);
-      setState(() {
-        usuarioBloc.miFraccionamiento = _fracc;
-      });
-    }
-
-    print(usuarioBloc.miFraccionamiento.color?.r);
   }
 
   Widget _opciones() {
@@ -549,5 +471,92 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    w = MediaQuery.of(context).size.width;
+    h = MediaQuery.of(context).size.height;
+    // ScreenUtil.init(context);
+    return FutureBuilder(
+        future: database.getFraccionamiento(),
+        builder: (context, s) {
+          if (s.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: Image.asset(
+                "assets/icon/casita.gif",
+                width: 200,
+                height: 200,
+                fit: BoxFit.contain,
+              ),
+            );
+          }
+          return Scaffold(
+              backgroundColor: Colors.white,
+              body: OKToast(
+                  child: usuarioBloc.miFraccionamiento.color?.r != null
+                      ? Stack(
+                          children: [
+                            _form(),
+                            Positioned(
+                              top: 40,
+                              //bottom: 0,
+                              left: 5,
+                              right: 0,
+                              //left: 30,
+                              //height:250,
+                              //width: 250,
+                              child: Image.network(
+                                usuarioBloc.miFraccionamiento.urlLogopngBlanco
+                                    .toString(),
+                                height: h * 0.1,
+                                alignment: Alignment.topLeft,
+                              ),
+
+                              /* Image.asset(
+                        "assets/images/logoBlanco.png",
+                        alignment: Alignment.topLeft,
+                      )*/
+                            ),
+                            Positioned(
+                              top: 40,
+                              //bottom: 0,
+                              //left: 130,
+                              right: 0,
+                              //left: 30,
+                              //height:250,
+                              //width: 250,
+                              child: InkWell(
+                                  onTap: () async {
+                                    _sendNotificacionSOS();
+                                  },
+                                  child: Container(
+                                      width: w / 5,
+                                      height: 50,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        "SOS",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 18),
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(
+                                                50.0) //                 <--- border radius here
+                                            ),
+                                      ))),
+                            )
+                          ],
+                        )
+                      : Center(
+                          child: Image.asset(
+                            "assets/icon/casita.gif",
+                            width: 200,
+                            height: 200,
+                            fit: BoxFit.contain,
+                          ),
+                        )));
+        });
   }
 }
