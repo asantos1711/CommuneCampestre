@@ -203,7 +203,7 @@ class _CuentasAsociadasState extends State<CuentasAsociadas> {
               // title: Container(child: Text("")), //Row(children: <Widget>[Icon(FontAwesomeIcons.checkCircle, color: Colors.green),Text("Envio éxitoso"),],),
               content: Container(
                   width: w - 170,
-                  height: 150,
+                  height: h/5,
                   child: Column(
                     children: [
                       Container(

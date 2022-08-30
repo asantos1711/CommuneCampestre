@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:campestre/controls/connection.dart';
 import 'package:campestre/view/confirmacionVisita.dart';
 import 'package:campestre/view/menuInicio.dart';
+import 'package:campestre/view/tipoAcceso.dart';
 import 'package:campestre/widgets/textfielborder.dart';
 import 'package:campestre/widgets/ui_helper.dart';
 import 'package:crypto/crypto.dart';
@@ -120,7 +121,7 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MenuInicio()),
+                MaterialPageRoute(builder: (context) => TipoAcceso()),
               );
             },
             child: Icon(

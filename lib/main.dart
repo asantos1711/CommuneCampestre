@@ -8,7 +8,6 @@ import 'package:campestre/view/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_document_reader_core_full/flutter_document_reader_core_full.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:campestre/config/routes.dart';
@@ -98,10 +97,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initPlatformState() async {
-    String platformVersion;
+    /*String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await FlutterDocumentReaderCore.platformVersion;
+      //platformVersion;// = await FlutterDocumentReaderCore.platformVersion;
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -113,7 +112,7 @@ class _MyAppState extends State<MyApp> {
 
     setState(() {
       _platformVersion = platformVersion;
-    });
+    });*/
   }
 
   _initPreference() async {
