@@ -61,9 +61,10 @@ void main() async {
       PreferenciasUsuario(); //Inicializar la clase para almacenar parémetros que se usan durante el procesp de precheckin.
   await usrPref.initPref();
   //await usuario.initPref();
-  await Firebase.initializeApp(
+  /*await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  );
+  );*/
+
 
   runApp(MyApp());
 }
@@ -124,7 +125,7 @@ class _MyAppState extends State<MyApp> {
   _setFraccionamiento() async {
     List<Fraccionamiento>? lista = await databaseServices.getFracionamientos();
     Fraccionamiento campestre =
-        lista!.firstWhere((element) => element.id == "campestre");
+        lista!.firstWhere((element) => element.id == "commune");
     _usuarioBloc.miFraccionamiento = campestre;
     usuario.setIdFraccionamiento(_usuarioBloc.miFraccionamiento.id.toString());
   }
