@@ -136,34 +136,38 @@ class _MenuInicioState extends State<MenuInicio> {
 
         /**VALIDACION Matenimientos*/
         int dias = 0, maxDia = 0;
+        int diasMatto = 0;
         for (var item in matenimientos) {
           print(item.fechaCreado);
           dias = DateTime.now().difference(item.fechaCreado!).inDays;
           maxDia = maxDia > dias ? maxDia : dias;
           print(dias);
+           diasMatto = int.parse(_usuarioBloc.miFraccionamiento.diasMantto.toString());
           plazoVencidoMantenimientos =
-              dias <= 61 ? plazoVencidoMantenimientos : true;
+              dias <= diasMatto ? plazoVencidoMantenimientos : true;
         }
         print(maxDia);
 
-        if ((maxDia == 62 || maxDia == 63) &&
+        if ((maxDia == diasMatto+1 || maxDia == diasMatto+2) &&
             (DateTime.now().weekday == DateTime.saturday ||
                 DateTime.now().weekday == DateTime.sunday)) {
           plazoVencidoMantenimientos = false;
         }
 
-        /**VALIDACION SANCONES */
+        /**VALIDACION SANCIONES */
         int diasS = 0, maxDiaS = 0;
+        int diasSancciones = 0;
         for (var item in sanciones) {
           print(item.fechaCreado);
           diasS = DateTime.now().difference(item.fechaCreado!).inDays;
           maxDiaS = maxDiaS > diasS ? maxDiaS : diasS;
           print(dias);
-          plazoVencidoSancion = diasS <= 14 ? plazoVencidoSancion : true;
+          diasSancciones = int.parse(_usuarioBloc.miFraccionamiento.diasSanciones.toString());
+          plazoVencidoSancion = diasS <=  diasSancciones? plazoVencidoSancion : true;
         }
         print(maxDiaS);
 
-        if ((maxDiaS == 16 || maxDiaS == 17) &&
+        if ((maxDiaS == diasSancciones+1 || maxDiaS == diasSancciones+2) &&
             (DateTime.now().weekday == DateTime.saturday ||
                 DateTime.now().weekday == DateTime.sunday)) {
           plazoVencidoSancion = false;

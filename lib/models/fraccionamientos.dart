@@ -17,6 +17,8 @@ class Fraccionamiento {
   int? numCuentasAsoc;
   bool? infoFracc;
   bool? preguntasFrec;
+  int? diasMantto;
+  int? diasSanciones;
 
   Fraccionamiento(
       {this.nombre,
@@ -34,6 +36,8 @@ class Fraccionamiento {
       this.terminos,
       this.infoFracc,
       this.preguntasFrec,
+      this.diasMantto,
+      this.diasSanciones,
       this.reportes});
 
   Color getColor() {
@@ -57,6 +61,8 @@ class Fraccionamiento {
         amenidades: json["amenidades"] == null ? false : json["amenidades"],
         reportes: json["reportes"] == null ? false : json["reportes"],
         infoFracc: json["infoFracc"] == null ? false : json["infoFracc"],
+        diasMantto: json["diasMantto"] == null ? 0 : json["diasMantto"],
+        diasSanciones: json["diasSanciones"] == null ? 0 : json["diasSanciones"],
         preguntasFrec: json["preguntasFrec"] == null ? false : json["preguntasFrec"],
         terminos: json["terminos"] == null ? null : json["terminos"],
         numCuentasAsoc:
@@ -77,6 +83,8 @@ class Fraccionamiento {
         "amenidades": amenidades == null ? null : amenidades,
         "terminos": terminos == null ? false : terminos,
         "reportes": reportes == null ? false : reportes,
+        "diasSanciones": diasSanciones == null ? 0 : diasSanciones,
+        "diasMantto": diasMantto == null ? 0 : diasMantto,
         "numCuentasAsoc": numCuentasAsoc == null ? 0 : numCuentasAsoc,
         "color": color == null ? null : color!.toJson(),
       };
