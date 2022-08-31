@@ -348,7 +348,7 @@ class _MenuInicioState extends State<MenuInicio> {
                 child: _opcion(FontAwesomeIcons.treeCity, "Amenidades"),
               )
             : SizedBox(),
-        InkWell(
+        _usuarioBloc.miFraccionamiento.preguntasFrec as bool ? InkWell(
           onTap: () {
             Navigator.push(
               context,
@@ -357,8 +357,8 @@ class _MenuInicioState extends State<MenuInicio> {
           },
           child:
               _opcion(FontAwesomeIcons.circleQuestion, "Preguntas frecuentes"),
-        ),
-        InkWell(
+        ) : SizedBox(),
+        _usuarioBloc.miFraccionamiento.infoFracc as bool ?  InkWell(
           onTap: () {
             Navigator.push(
               context,
@@ -367,7 +367,7 @@ class _MenuInicioState extends State<MenuInicio> {
           },
           child: _opcion(
               FontAwesomeIcons.newspaper, "Información del fraccionamiento"),
-        ),
+        ) : SizedBox(),
         _usuarioBloc.miFraccionamiento.reportes as bool
             ? InkWell(
                 onTap: () {
@@ -413,7 +413,7 @@ class _MenuInicioState extends State<MenuInicio> {
           },
           child: _opcion(Icons.person_outlined, "Acceso a visitas"),
         ),
-        InkWell(
+        _usuarioBloc.miFraccionamiento.preguntasFrec as bool ? InkWell(
           onTap: () {
             Navigator.push(
               context,
@@ -422,26 +422,28 @@ class _MenuInicioState extends State<MenuInicio> {
           },
           child:
               _opcion(FontAwesomeIcons.circleQuestion, "Preguntas frecuentes"),
-        ),
-        InkWell(
+        ) : SizedBox(),
+        _usuarioBloc.miFraccionamiento.infoFracc as bool ?  InkWell(
           onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => InfoFraccionamiento()),
             );
           },
-          child: _opcion(FontAwesomeIcons.circleQuestion,
-              "Información del fraccionamiento"),
-        ),
-        InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ReportesView()),
-            );
-          },
-          child: _opcion(Icons.flag, "Generar reportes a administración"),
-        ),
+          child: _opcion(
+              FontAwesomeIcons.newspaper, "Información del fraccionamiento"),
+        ) : SizedBox(),
+        _usuarioBloc.miFraccionamiento.reportes as bool
+          ? InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ReportesView()),
+                );
+              },
+              child: _opcion(Icons.flag, "Generar reportes a administración"),
+            )
+          : SizedBox(),
       ],
     );
   }

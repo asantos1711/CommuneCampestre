@@ -15,6 +15,8 @@ class Fraccionamiento {
   String? idRestaurante;
   String? terminos;
   int? numCuentasAsoc;
+  bool? infoFracc;
+  bool? preguntasFrec;
 
   Fraccionamiento(
       {this.nombre,
@@ -30,6 +32,8 @@ class Fraccionamiento {
       this.pagar,
       this.amenidades,
       this.terminos,
+      this.infoFracc,
+      this.preguntasFrec,
       this.reportes});
 
   Color getColor() {
@@ -52,6 +56,8 @@ class Fraccionamiento {
         pagar: json["pagar"] == null ? null : json["pagar"],
         amenidades: json["amenidades"] == null ? false : json["amenidades"],
         reportes: json["reportes"] == null ? false : json["reportes"],
+        infoFracc: json["infoFracc"] == null ? false : json["infoFracc"],
+        preguntasFrec: json["preguntasFrec"] == null ? false : json["preguntasFrec"],
         terminos: json["terminos"] == null ? null : json["terminos"],
         numCuentasAsoc:
             json["numCuentasAsoc"] == null ? null : json["numCuentasAsoc"],
