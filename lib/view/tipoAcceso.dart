@@ -1,4 +1,5 @@
 import 'package:campestre/bloc/usuario_bloc.dart';
+import 'package:campestre/view/menuInicio.dart';
 import 'package:campestre/view/rentaVacacional/rentaVacacional.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +35,11 @@ class _TipoAccesoState extends State<TipoAcceso> {
         centerTitle: true,
         leading: InkWell(
           onTap: () {
-            Navigator.pop(context);
+            //Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MenuInicio()),
+            );
           },
           child: Icon(
             Icons.arrow_back,
@@ -67,7 +72,7 @@ class _TipoAccesoState extends State<TipoAcceso> {
             },
             child: _opcion(null, "Trabajador"),
           ),
-          InkWell(
+          /*InkWell(
             onTap: () {
               Navigator.push(
                 context,
@@ -75,7 +80,7 @@ class _TipoAccesoState extends State<TipoAcceso> {
               );
             },
             child: _opcion(null, "Paquetería / Uber"),
-          ),
+          ),*/
           _usuarioBloc.perfil.tipo!.contains("Titular")
               ? InkWell(
                   onTap: () {
