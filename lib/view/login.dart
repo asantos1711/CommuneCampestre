@@ -90,9 +90,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _init() async {
-    await Firebase.initializeApp(
+    /* await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
-    );
+    );*/
 
     /*if (usuarioBloc.miFraccionamiento.id == null) {
       _databaseServices.getFraccionamientoId(usuario.idFraccionamiento);

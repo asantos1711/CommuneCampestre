@@ -118,7 +118,7 @@ class _VistaQRInvitadoState extends State<VistaQRInvitado> {
                   onPressed: () async {
                     //_getWidgetImage();
                     String urlPadre =
-                        "https://commune-cf48f.web.app/#/commune/qr/";
+                        "https://communecampestre.web.app/#/commune/qr/";
                     String url = urlPadre + _usuarioBloc.invitado.id!;
                     await Share.share(
                         "¡Hola!,este es el link para tu acceso ${url}");
@@ -295,7 +295,7 @@ class _VistaQRInvitadoState extends State<VistaQRInvitado> {
       final linkData = await shortener.generateShortLink(longUrl: urlQr);
       urlCorta = linkData.link;
       print(linkData.link);*/
-      String urlPadre = "https://commune-cf48f.web.app/#/commune/qr/";
+      String urlPadre = "https://communecampestre.web.app/#/commune/qr/";
       String url = urlPadre + _usuarioBloc.invitado.id!;
 
       FlutterClipboard.copy("¡Hola!,este es el link para tu acceso : ${url}")

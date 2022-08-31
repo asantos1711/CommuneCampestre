@@ -159,7 +159,7 @@ class _VisitasActivasState extends State<VisitasActivas> {
           String? urfinal = linkData.link;
           print(linkData.link);*/
 
-          String urlPadre = "https://commune-cf48f.web.app/#/commune/qr/";
+          String urlPadre = "https://communecampestre.web.app/#/commune/qr/";
           String url = urlPadre + _invitado.id!;
           await Share.share("¡Hola!,este es el link para tu acceso ${url}");
         },
