@@ -36,7 +36,7 @@ class _CuentasAsociadasState extends State<CuentasAsociadas> {
   }
 
   _boton() async {
-    numPermitidos = _usuarioBloc.miFraccionamiento.numCuentasAsoc!.toInt() ?? 0;
+    numPermitidos = _usuarioBloc.miFraccionamiento.numCuentasAsoc!.toInt();
     List<Usuario> list = await _databaseServices.getUsuarioByTitular();
     for (var item in list) {
       if (item.estatus!.contains("1")) {
