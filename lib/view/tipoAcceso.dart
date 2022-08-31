@@ -67,7 +67,7 @@ class _TipoAccesoState extends State<TipoAcceso> {
             },
             child: _opcion(null, "Trabajador"),
           ),
-          InkWell(
+          /*InkWell(
             onTap: () {
               Navigator.push(
                 context,
@@ -75,7 +75,7 @@ class _TipoAccesoState extends State<TipoAcceso> {
               );
             },
             child: _opcion(null, "Paquetería / Uber"),
-          ),
+          ),*/
           _usuarioBloc.perfil.tipo!.contains("Titular")
               ? InkWell(
                   onTap: () {
