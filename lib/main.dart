@@ -6,6 +6,7 @@ import 'package:campestre/view/login.dart';
 import 'package:campestre/view/menuInicio.dart';
 import 'package:campestre/view/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -91,8 +92,18 @@ class _MyAppState extends State<MyApp> {
     initPlatformState();
     _setFraccionamiento();
 
+    FirebaseMessaging.instance.getInitialMessage();
+    FirebaseMessaging.onMessage.listen((event) {
+      if (event.notification != null) {
+        print(event.notification!.body);
+        print(event.notification!.title);
+      }
+    });
+
     PushNotificationsService.messageStream.listen((event) {
-      print("MyApp : ${event}");
+      if (event.isNotEmpty) {
+        print("MyApp : ${event}");
+      }
     });
   }
 
