@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:campestre/view/tipoAcceso.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -908,7 +909,10 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
           centerTitle: true,
           leading: InkWell(
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TipoAcceso()),
+              );
             },
             child: Icon(
               Icons.arrow_back,

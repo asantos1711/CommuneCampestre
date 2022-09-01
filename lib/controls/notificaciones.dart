@@ -22,7 +22,7 @@ class Notificaciones {
 
     String url = "https://fcm.googleapis.com/fcm/send";
     String? tk =
-        "AAAAFYTvZzY:APA91bGA5GESkoiJsaRy60scVzw1du9_7xB5lU_CmYaNIIccFwb4OYNANop5zv5kllXMwDhbRdl-oHkl286kLqirot6TAnPPNWR8pcH-2a2Q60CxzMi6sLGZB7v_cvyhSVWAQr9Y1ozq";
+        "AAAAuxP4iOo:APA91bHpofo-unmmtiNe8rSsHMMnt-kE59Yn0Rwt5V9FY5nDUluaC4hg6BIwjstvkcdybR6bgluMoMsdl8_yh5IoDkL4iih7EZXHm7wwfOXHI8dTnHRnirfL3fYf0j6h9bT6uPb8A-kx";
     String? toUser = usuario.tokenNoti;
     String token = "Bearer $tk"; //await _jwt.getJWT();
 
@@ -74,7 +74,7 @@ class Notificaciones {
     usuarios.forEach((usuario) async {
       String url = "https://fcm.googleapis.com/fcm/send";
       String? tk =
-          "AAAAFYTvZzY:APA91bGA5GESkoiJsaRy60scVzw1du9_7xB5lU_CmYaNIIccFwb4OYNANop5zv5kllXMwDhbRdl-oHkl286kLqirot6TAnPPNWR8pcH-2a2Q60CxzMi6sLGZB7v_cvyhSVWAQr9Y1ozq";
+          "AAAAuxP4iOo:APA91bHpofo-unmmtiNe8rSsHMMnt-kE59Yn0Rwt5V9FY5nDUluaC4hg6BIwjstvkcdybR6bgluMoMsdl8_yh5IoDkL4iih7EZXHm7wwfOXHI8dTnHRnirfL3fYf0j6h9bT6uPb8A-kx";
       String? toUser = usuario.tokenNoti;
       String token = "Bearer $tk"; //await _jwt.getJWT();
 

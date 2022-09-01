@@ -174,7 +174,7 @@ class _FraccionamientoViewState extends State<FraccionamientoView> {
                   value.nombre.toString(),
                 ),
                 Image.network(
-                  value.urlLogopng.toString(),
+                  value.urlLogopngColor.toString(),
                   height: 30,
                 )
               ],

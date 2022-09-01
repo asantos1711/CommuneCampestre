@@ -29,7 +29,7 @@ class _SplashState extends State<Splash> {
   }
 
   _setFraccionamiento() async {
-    await databaseServices.getFraccionamientoId("campestre");
+    await databaseServices.getFraccionamiento();
 
     usuario.setIdFraccionamiento(_usuarioBloc.miFraccionamiento.id.toString());
   }
@@ -40,7 +40,7 @@ class _SplashState extends State<Splash> {
     h = MediaQuery.of(context).size.height;
     return Scaffold(
         body: FutureBuilder(
-      future: databaseServices.getFraccionamientoId("campestre"),
+      future: databaseServices.getFraccionamiento(),
       builder: (c, s) {
         if (s.connectionState == ConnectionState.waiting) {
           return Center(
@@ -61,7 +61,7 @@ class _SplashState extends State<Splash> {
                   alignment: Alignment.centerLeft,
                   margin: EdgeInsets.only(right: 44, top: 55),
                   child: Image.network(
-                      _usuarioBloc.miFraccionamiento.urlLogopng.toString(),
+                      _usuarioBloc.miFraccionamiento.urlLogopngColor.toString(),
                       width: w! * .5),
                   /*Image.asset(
                   'assets/images/logo.png',

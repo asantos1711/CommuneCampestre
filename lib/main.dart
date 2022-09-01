@@ -8,7 +8,6 @@ import 'package:campestre/view/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_document_reader_core_full/flutter_document_reader_core_full.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:campestre/config/routes.dart';
@@ -62,9 +61,9 @@ void main() async {
       PreferenciasUsuario(); //Inicializar la clase para almacenar parémetros que se usan durante el procesp de precheckin.
   await usrPref.initPref();
   //await usuario.initPref();
-  await Firebase.initializeApp(
+  /*await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  );
+  );*/
 
   runApp(MyApp());
 }
@@ -98,13 +97,12 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initPlatformState() async {
-    String platformVersion;
+    /*String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
+    setState(() {
+      _platformVersion = platformVersion;
+    });*/
   }
 
   _initPreference() async {
@@ -114,8 +112,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   _setFraccionamiento() async {
-    await databaseServices.getFraccionamientoId("campestre");
-
+    //List<Fraccionamiento>? lista = await databaseServices.getFracionamientos();
+    /*Fraccionamiento campestre =
+        lista!.firstWhere((element) => element.id == "commune");
+    _usuarioBloc.miFraccionamiento = campestre;*/
+    await databaseServices.getFraccionamiento();
     usuario.setIdFraccionamiento(_usuarioBloc.miFraccionamiento.id.toString());
   }
 

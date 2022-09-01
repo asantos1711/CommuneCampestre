@@ -44,12 +44,13 @@ Fraccionamiento _fraccionamiento = new Fraccionamiento();
 final FirebaseFirestore datab = FirebaseFirestore.instance;
 
 class _LoginPageState extends State<LoginPage> {
+  DatabaseServices database = DatabaseServices();
   bool isLoading = false;
   UsuarioBloc usuarioBloc = new UsuarioBloc();
 
   @override
   void initState() {
-    getFraccionamientoId(usuario.idFraccionamiento);
+    database.getFraccionamiento();
     if (usuario.idFraccionamiento != "" &&
         usuarioBloc.miFraccionamiento != null) {
       //_usuarioBloc.miFraccionamiento = snap
@@ -59,10 +60,39 @@ class _LoginPageState extends State<LoginPage> {
     //_checkJWT();
   }
 
+  bool validateLogin() {
+    if (_formKey.currentState!.validate()) {
+      return true;
+    }
+    _charge(false);
+    return false;
+  }
+
+  getFraccionamientoId(String id) async {
+    //var snap = _databaseServices.getFracionamientosById(usuario.idFraccionamiento);
+
+    Fraccionamiento _fracc = new Fraccionamiento();
+
+    DocumentSnapshot snaps =
+        await datab.collection('fraccionamientos').doc(id).get();
+    print(snaps.data());
+
+    if (snaps.exists) {
+      print("dentro");
+      Map<String, dynamic> mapa = snaps.data() as Map<String, dynamic>;
+      _fracc = Fraccionamiento.fromJson(mapa);
+      setState(() {
+        usuarioBloc.miFraccionamiento = _fracc;
+      });
+    }
+
+    print(usuarioBloc.miFraccionamiento.color?.r);
+  }
+
   _init() async {
-    await Firebase.initializeApp(
+    /* await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
-    );
+    );*/
 
     /*if (usuarioBloc.miFraccionamiento.id == null) {
       _databaseServices.getFraccionamientoId(usuario.idFraccionamiento);
@@ -78,14 +108,6 @@ class _LoginPageState extends State<LoginPage> {
     print(s);
   }
 
-  bool validateLogin() {
-    if (_formKey.currentState!.validate()) {
-      return true;
-    }
-    _charge(false);
-    return false;
-  }
-
   _charge(bool val) {
     setState(() {
       isLoading = val;
@@ -96,78 +118,6 @@ class _LoginPageState extends State<LoginPage> {
     this.setState(() {
       isLoading = !isLoading;
     });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    w = MediaQuery.of(context).size.width;
-    h = MediaQuery.of(context).size.height;
-    // ScreenUtil.init(context);
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: OKToast(
-            child: usuarioBloc.miFraccionamiento.color?.r != null
-                ? Stack(
-                    children: [
-                      _form(),
-                      Positioned(
-                        top: 40,
-                        //bottom: 0,
-                        left: 5,
-                        right: 0,
-                        //left: 30,
-                        //height:250,
-                        //width: 250,
-                        child: Image.network(
-                          usuarioBloc.miFraccionamiento.urlLogopng.toString(),
-                          height: h * 0.1,
-                          alignment: Alignment.topLeft,
-                        ),
-
-                        /* Image.asset(
-                    "assets/images/logoBlanco.png",
-                    alignment: Alignment.topLeft,
-                  )*/
-                      ),
-                      Positioned(
-                        top: 40,
-                        //bottom: 0,
-                        //left: 130,
-                        right: 0,
-                        //left: 30,
-                        //height:250,
-                        //width: 250,
-                        child: InkWell(
-                            onTap: () async {
-                              _sendNotificacionSOS();
-                            },
-                            child: Container(
-                                width: w / 5,
-                                height: 50,
-                                alignment: Alignment.center,
-                                child: Text(
-                                  "SOS",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 18),
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(
-                                          50.0) //                 <--- border radius here
-                                      ),
-                                ))),
-                      )
-                    ],
-                  )
-                : Center(
-                    child: Image.asset(
-                      "assets/icon/casita.gif",
-                      width: 200,
-                      height: 200,
-                      fit: BoxFit.contain,
-                    ),
-                  )));
   }
 
   Widget _form() {
@@ -255,37 +205,22 @@ class _LoginPageState extends State<LoginPage> {
               .signInWithEmailAndPassword(
                   email: _email.text, password: _password.text);
 
-          //print("additionalUserInfo " + user.user.toString());
+          print("additionalUserInfo " + user.user.toString());
 
           Usuario _usuario = await db.getUsuario(_email.text);
+          _usuario.idResidente = user.user?.uid.toString();
           usuarioBloc.perfil = _usuario;
           PushNotificationsService a = new PushNotificationsService();
           //a.getToken();
-          print(_usuario.tokenNoti);
-          print(a.getToken());
+          //print(_usuario.tokenNoti);
+          //print(a.getToken());
           String tokenNew = a.getToken();
-
-          if (!_usuario.idFraccionamiento!
-              .contains(usuarioBloc.miFraccionamiento.id.toString())) {
-            Fluttertoast.showToast(
-              msg:
-                  'El acceso a su aplicación ha sido restringido por falta de pago. Regularice sus pagos en la administración',
-              toastLength: Toast.LENGTH_LONG,
-              gravity: ToastGravity.BOTTOM,
-              backgroundColor: Colors.grey[800],
-            );
-            print("si son diferentes*****");
-            /* setState(() {
-              _usuario.idFraccionamiento =
-                  usuarioBloc.miFraccionamiento.id.toString();
-            });
-            db.updateUsuario(_usuario);*/
-
-            Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-            return;
-          }
-
           RegistroUsuarioConnect connect = RegistroUsuarioConnect();
+
+          String response = await connect
+              .getRegistroStatus(usuarioBloc.perfil.idRegistro ?? 0);
+
+          print("ESTATUS del servicio de Javi : $response");
 
           /**Validar si es habitante */
           if ("Habitante".contains(_usuario.tipo.toString()) &&
@@ -316,11 +251,6 @@ class _LoginPageState extends State<LoginPage> {
             );
             return;
           }
-
-          String response = await connect
-              .getRegistroStatus(usuarioBloc.perfil.idRegistro ?? 0);
-
-          print("ESTATUS del servicio de Javi : $response");
 
           if (!_usuario.tokenNoti!.contains(tokenNew)) {
             print("si son diferentes*****");
@@ -373,35 +303,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
             );
           }
-
-          /*final datosUser = user;
-          //print("usuario***" + user?.email);
-          //registro.perfil.email = user?.email;
-          //addCredenciales(_email.text,_password.text );
-          final SharedPreferences prefs = await _prefs;
-
-          final mail = prefs.getString('email');
-          final pass = prefs.getString('pass');
-
-          if (mail == null && pass == null) {
-            prefs.setString('email', _email.text);
-            prefs.setString('pass', _password.text);
-          }
-          print("despues***");
-          print(prefs.getString('email'));*/
-
-          /*var snap =  FirebaseFirestore.instance
-              .collection('usuarios')
-              .where("email", isEqualTo: _email.text) //registro.perfil?.email)
-              .snapshots();
-
-          snap.forEach((element) {
-            element.docs.forEach((element) {
-              usuarioBloc.perfil = Usuario.fromFirestore(element);
-              print("nombre***" + usuarioBloc.perfil.nombre.toString());
-            });
-          });*/
-
         } catch (error) {
           //  removeCredenciales();
           _charge(false);
@@ -442,27 +343,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
-
-  getFraccionamientoId(String id) async {
-    //var snap = _databaseServices.getFracionamientosById(usuario.idFraccionamiento);
-
-    Fraccionamiento _fracc = new Fraccionamiento();
-
-    DocumentSnapshot snaps =
-        await datab.collection('fraccionamientos').doc(id).get();
-    print(snaps.data());
-
-    if (snaps.exists) {
-      print("dentro");
-      Map<String, dynamic> mapa = snaps.data() as Map<String, dynamic>;
-      _fracc = Fraccionamiento.fromJson(mapa);
-      setState(() {
-        usuarioBloc.miFraccionamiento = _fracc;
-      });
-    }
-
-    print(usuarioBloc.miFraccionamiento.color?.r);
   }
 
   Widget _opciones() {
@@ -591,5 +471,92 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    w = MediaQuery.of(context).size.width;
+    h = MediaQuery.of(context).size.height;
+    // ScreenUtil.init(context);
+    return FutureBuilder(
+        future: database.getFraccionamiento(),
+        builder: (context, s) {
+          if (s.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: Image.asset(
+                "assets/icon/casita.gif",
+                width: 200,
+                height: 200,
+                fit: BoxFit.contain,
+              ),
+            );
+          }
+          return Scaffold(
+              backgroundColor: Colors.white,
+              body: OKToast(
+                  child: usuarioBloc.miFraccionamiento.color?.r != null
+                      ? Stack(
+                          children: [
+                            _form(),
+                            Positioned(
+                              top: 40,
+                              //bottom: 0,
+                              left: 5,
+                              right: 0,
+                              //left: 30,
+                              //height:250,
+                              //width: 250,
+                              child: Image.network(
+                                usuarioBloc.miFraccionamiento.urlLogopngBlanco
+                                    .toString(),
+                                height: h * 0.1,
+                                alignment: Alignment.topLeft,
+                              ),
+
+                              /* Image.asset(
+                        "assets/images/logoBlanco.png",
+                        alignment: Alignment.topLeft,
+                      )*/
+                            ),
+                            Positioned(
+                              top: 40,
+                              //bottom: 0,
+                              //left: 130,
+                              right: 0,
+                              //left: 30,
+                              //height:250,
+                              //width: 250,
+                              child: InkWell(
+                                  onTap: () async {
+                                    _sendNotificacionSOS();
+                                  },
+                                  child: Container(
+                                      width: w / 5,
+                                      height: 50,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        "SOS",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 18),
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(
+                                                50.0) //                 <--- border radius here
+                                            ),
+                                      ))),
+                            )
+                          ],
+                        )
+                      : Center(
+                          child: Image.asset(
+                            "assets/icon/casita.gif",
+                            width: 200,
+                            height: 200,
+                            fit: BoxFit.contain,
+                          ),
+                        )));
+        });
   }
 }

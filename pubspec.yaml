@@ -63,8 +63,6 @@ dependencies:
   qr_code_scanner: ^0.7.0
   flutter_pdfview: ^1.2.2
   
-  flutter_document_reader_api: ^6.4.0
-  flutter_document_reader_core_full: ^6.4.0
   
   date_format: ^2.0.6
   #firebase_messaging: any

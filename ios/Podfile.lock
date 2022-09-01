@@ -606,55 +606,52 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.24):
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Interface (0.0.24)
-  - cloud_firestore (3.4.3):
-    - Firebase/Firestore (= 9.3.0)
+  - cloud_firestore (3.4.6):
+    - Firebase/Firestore (= 9.4.0)
     - firebase_core
     - Flutter
-  - DocumentReader (6.4.2552):
-    - RegulaCommon (= 6.4.133)
-  - DocumentReaderFull (6.4.6402)
   - esys_flutter_share_plus (0.0.1):
     - Flutter
-  - Firebase/Analytics (9.3.0):
+  - Firebase/Analytics (9.4.0):
     - Firebase/Core
-  - Firebase/Auth (9.3.0):
+  - Firebase/Auth (9.4.0):
     - Firebase/CoreOnly
-    - FirebaseAuth (~> 9.3.0)
-  - Firebase/Core (9.3.0):
+    - FirebaseAuth (~> 9.4.0)
+  - Firebase/Core (9.4.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (~> 9.3.0)
-  - Firebase/CoreOnly (9.3.0):
-    - FirebaseCore (= 9.3.0)
-  - Firebase/Firestore (9.3.0):
+    - FirebaseAnalytics (~> 9.4.0)
+  - Firebase/CoreOnly (9.4.0):
+    - FirebaseCore (= 9.4.0)
+  - Firebase/Firestore (9.4.0):
     - Firebase/CoreOnly
-    - FirebaseFirestore (~> 9.3.0)
-  - Firebase/Messaging (9.3.0):
+    - FirebaseFirestore (~> 9.4.0)
+  - Firebase/Messaging (9.4.0):
     - Firebase/CoreOnly
-    - FirebaseMessaging (~> 9.3.0)
-  - Firebase/Storage (9.3.0):
+    - FirebaseMessaging (~> 9.4.0)
+  - Firebase/Storage (9.4.0):
     - Firebase/CoreOnly
-    - FirebaseStorage (~> 9.3.0)
-  - firebase_analytics (9.3.0):
-    - Firebase/Analytics (= 9.3.0)
+    - FirebaseStorage (~> 9.4.0)
+  - firebase_analytics (9.3.3):
+    - Firebase/Analytics (= 9.4.0)
     - firebase_core
     - Flutter
   - firebase_auth (3.4.2):
-    - Firebase/Auth (= 9.3.0)
+    - Firebase/Auth (= 9.4.0)
     - firebase_core
     - Flutter
-  - firebase_core (1.20.0):
-    - Firebase/CoreOnly (= 9.3.0)
+  - firebase_core (1.21.1):
+    - Firebase/CoreOnly (= 9.4.0)
     - Flutter
   - firebase_messaging (11.4.4):
-    - Firebase/Messaging (= 9.3.0)
+    - Firebase/Messaging (= 9.4.0)
     - firebase_core
     - Flutter
-  - firebase_storage (10.3.4):
-    - Firebase/Storage (= 9.3.0)
+  - firebase_storage (10.3.7):
+    - Firebase/Storage (= 9.4.0)
     - firebase_core
     - Flutter
-  - FirebaseAnalytics (9.3.0):
-    - FirebaseAnalytics/AdIdSupport (= 9.3.0)
+  - FirebaseAnalytics (9.4.0):
+    - FirebaseAnalytics/AdIdSupport (= 9.4.0)
     - FirebaseCore (~> 9.0)
     - FirebaseInstallations (~> 9.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
@@ -662,23 +659,23 @@ PODS:
     - GoogleUtilities/Network (~> 7.7)
     - "GoogleUtilities/NSData+zlib (~> 7.7)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseAnalytics/AdIdSupport (9.3.0):
+  - FirebaseAnalytics/AdIdSupport (9.4.0):
     - FirebaseCore (~> 9.0)
     - FirebaseInstallations (~> 9.0)
-    - GoogleAppMeasurement (= 9.3.0)
+    - GoogleAppMeasurement (= 9.4.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
     - GoogleUtilities/MethodSwizzler (~> 7.7)
     - GoogleUtilities/Network (~> 7.7)
     - "GoogleUtilities/NSData+zlib (~> 7.7)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
   - FirebaseAppCheckInterop (9.4.0)
-  - FirebaseAuth (9.3.0):
+  - FirebaseAuth (9.4.0):
     - FirebaseCore (~> 9.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
     - GoogleUtilities/Environment (~> 7.7)
     - GTMSessionFetcher/Core (< 3.0, >= 1.7)
   - FirebaseAuthInterop (9.4.0)
-  - FirebaseCore (9.3.0):
+  - FirebaseCore (9.4.0):
     - FirebaseCoreDiagnostics (~> 9.0)
     - FirebaseCoreInternal (~> 9.0)
     - GoogleUtilities/Environment (~> 7.7)
@@ -692,7 +689,7 @@ PODS:
     - FirebaseCore (~> 9.0)
   - FirebaseCoreInternal (9.4.0):
     - "GoogleUtilities/NSData+zlib (~> 7.7)"
-  - FirebaseFirestore (9.3.0):
+  - FirebaseFirestore (9.4.0):
     - abseil/algorithm (~> 1.20211102.0)
     - abseil/base (~> 1.20211102.0)
     - abseil/container/flat_hash_map (~> 1.20211102.0)
@@ -710,7 +707,7 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/UserDefaults (~> 7.7)
     - PromisesObjC (~> 2.1)
-  - FirebaseMessaging (9.3.0):
+  - FirebaseMessaging (9.4.0):
     - FirebaseCore (~> 9.0)
     - FirebaseInstallations (~> 9.0)
     - GoogleDataTransport (< 10.0.0, >= 9.1.4)
@@ -719,7 +716,7 @@ PODS:
     - GoogleUtilities/Reachability (~> 7.7)
     - GoogleUtilities/UserDefaults (~> 7.7)
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseStorage (9.3.0):
+  - FirebaseStorage (9.4.0):
     - FirebaseAppCheckInterop (~> 9.0)
     - FirebaseAuthInterop (~> 9.0)
     - FirebaseCore (~> 9.0)
@@ -729,12 +726,6 @@ PODS:
     - FirebaseCore (~> 9.0)
     - GTMSessionFetcher/Core (< 3.0, >= 1.7)
   - Flutter (1.0.0)
-  - flutter_document_reader_api (6.4.0):
-    - DocumentReader (= 6.4.2552)
-    - Flutter
-  - flutter_document_reader_core_full (6.4.0):
-    - DocumentReaderFull (= 6.4.6402)
-    - Flutter
   - flutter_notification_channel (0.0.1):
     - Flutter
   - flutter_pdfview (1.0.2):
@@ -742,21 +733,21 @@ PODS:
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
-  - GoogleAppMeasurement (9.3.0):
-    - GoogleAppMeasurement/AdIdSupport (= 9.3.0)
+  - GoogleAppMeasurement (9.4.0):
+    - GoogleAppMeasurement/AdIdSupport (= 9.4.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
     - GoogleUtilities/MethodSwizzler (~> 7.7)
     - GoogleUtilities/Network (~> 7.7)
     - "GoogleUtilities/NSData+zlib (~> 7.7)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/AdIdSupport (9.3.0):
-    - GoogleAppMeasurement/WithoutAdIdSupport (= 9.3.0)
+  - GoogleAppMeasurement/AdIdSupport (9.4.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 9.4.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
     - GoogleUtilities/MethodSwizzler (~> 7.7)
     - GoogleUtilities/Network (~> 7.7)
     - "GoogleUtilities/NSData+zlib (~> 7.7)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/WithoutAdIdSupport (9.3.0):
+  - GoogleAppMeasurement/WithoutAdIdSupport (9.4.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
     - GoogleUtilities/MethodSwizzler (~> 7.7)
     - GoogleUtilities/Network (~> 7.7)
@@ -860,7 +851,6 @@ PODS:
   - qr_code_scanner (0.2.0):
     - Flutter
     - MTBBarcodeScanner
-  - RegulaCommon (6.4.133)
   - share_files_and_screenshot_widgets (0.0.1):
     - Flutter
   - share_plus (0.0.1):
@@ -903,8 +893,6 @@ DEPENDENCIES:
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - Flutter (from `Flutter`)
-  - flutter_document_reader_api (from `.symlinks/plugins/flutter_document_reader_api/ios`)
-  - flutter_document_reader_core_full (from `.symlinks/plugins/flutter_document_reader_core_full/ios`)
   - flutter_notification_channel (from `.symlinks/plugins/flutter_notification_channel/ios`)
   - flutter_pdfview (from `.symlinks/plugins/flutter_pdfview/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
@@ -922,8 +910,6 @@ SPEC REPOS:
   trunk:
     - abseil
     - BoringSSL-GRPC
-    - DocumentReader
-    - DocumentReaderFull
     - Firebase
     - FirebaseAnalytics
     - FirebaseAppCheckInterop
@@ -949,7 +935,6 @@ SPEC REPOS:
     - MTBBarcodeScanner
     - nanopb
     - PromisesObjC
-    - RegulaCommon
     - Stripe
     - StripeApplePay
     - StripeConnections
@@ -977,10 +962,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_storage/ios"
   Flutter:
     :path: Flutter
-  flutter_document_reader_api:
-    :path: ".symlinks/plugins/flutter_document_reader_api/ios"
-  flutter_document_reader_core_full:
-    :path: ".symlinks/plugins/flutter_document_reader_core_full/ios"
   flutter_notification_channel:
     :path: ".symlinks/plugins/flutter_notification_channel/ios"
   flutter_pdfview:
@@ -1010,36 +991,32 @@ SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
   barcode_scan2: 0af2bb63c81b4565aab6cd78278e4c0fa136dbb0
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
-  cloud_firestore: 08093e207dfb2e6c82a6b272def699e022548786
-  DocumentReader: 4e4e0122621e5b4b7922af87e9eff61eec43f125
-  DocumentReaderFull: db3e9053571b3145285821714a9bd73b1c92f18c
+  cloud_firestore: 6448075c9bac372319e7f025fdfa6f1d382644d7
   esys_flutter_share_plus: 302b73471e2686a9ce282898d1df5d6f4382edba
-  Firebase: ef75abb1cdbc746d5a38f4e26c422c807b189b8c
-  firebase_analytics: 8f772ccb3dad1e8968019a158823f99e63069d2b
-  firebase_auth: abe46b4b5465b491c48ea4c9d4c031c40f0fd4af
-  firebase_core: 96214f90497b808a2cf2a24517084c5f6de37b53
-  firebase_messaging: 24112f219663060db68ef803f20166d374138b6e
-  firebase_storage: e95ec41580e311cb30b1ed7459b9e94fb4bbe672
-  FirebaseAnalytics: bf46f5163f44097ce2c789de0b3e6f87f1da834a
+  Firebase: 7703fc4022824b6d6db1bf7bea58d13b8e17ec46
+  firebase_analytics: 63825a37b8ebabd44189b2c04f44ecd864554ebc
+  firebase_auth: 7a3383756f4621fd2e5808fdf7ff8fda8a04396e
+  firebase_core: 8e500850dd138c269d197c8dfca3ae886fa3b6f2
+  firebase_messaging: c7f8a34e148cdcbbcbf01b3644204db33a91c587
+  firebase_storage: 846832b7f2d22238678dc9abc513f2151f102462
+  FirebaseAnalytics: a1a24e72b7ba7f47045a4633f1abb545c07bd29c
   FirebaseAppCheckInterop: 63119cdfc94b16c3e9421513c17f597aee2ea225
-  FirebaseAuth: 9ebc3577fe0acf9092df21ac314024b70aebf21e
+  FirebaseAuth: ae5d4402e1516497357d909162b091b3ca2a2e9c
   FirebaseAuthInterop: 826d3d772b554e3675ceaab8c665008277ca9d1c
-  FirebaseCore: c088995ece701a021a48a1348ea0174877de2a6a
+  FirebaseCore: 9a2b10270a854731c4d4d8a97d0aa8380ec3458d
   FirebaseCoreDiagnostics: aaa87098082c4d4bdd1a9557b1186d18ca85ce8c
   FirebaseCoreExtension: 2cf8c542b54ad3c2d4b746c22e8828b670dcd9b0
   FirebaseCoreInternal: a13302b0088fbf5f38b79b6ece49c2af7d3e05d6
-  FirebaseFirestore: 5a72aa925528f67469b16a54a6cfc369467197e4
+  FirebaseFirestore: 945196dd78f4e92de6fc47b38569a1e7088af81f
   FirebaseInstallations: 61db1054e688d2bdc4e2b3f744c1b086e913b742
-  FirebaseMessaging: 2f6e38b6133059eb796ec224104f09379298a8c3
-  FirebaseStorage: 1414d27e15fa04f6350ef6602accef0e951c8bca
+  FirebaseMessaging: 4e220eddd356181469ba2ec5f7d5fafbc2312841
+  FirebaseStorage: 160ba975dd3452d9c59a3bf5ea9bf70ff96bd3c2
   FirebaseStorageInternal: 425c7dc7de44d9b7e07a9f8d6515bab0f1266b87
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
-  flutter_document_reader_api: 16aa793a988870abba27bee98e85d6cdd2a79707
-  flutter_document_reader_core_full: c17ecae221a8d95ba92e8dabecec60596adfa3cc
   flutter_notification_channel: 42a4f4938a3654cca62aa2a51aba0021dbfcac88
   flutter_pdfview: 25f53dd6097661e6395b17de506e6060585946bd
   fluttertoast: 16fbe6039d06a763f3533670197d01fc73459037
-  GoogleAppMeasurement: b907bdad775b6975a8108762345b2cfbf1a93c37
+  GoogleAppMeasurement: 5d69e04287fc2c10cc43724bfa4bf31fc12c3dff
   GoogleDataTransport: 1c8145da7117bd68bbbed00cf304edb6a24de00f
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   "gRPC-C++": 9675f953ace2b3de7c506039d77be1f2e77a8db2
@@ -1054,7 +1031,6 @@ SPEC CHECKSUMS:
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   qr_code_scanner: bb67d64904c3b9658ada8c402e8b4d406d5d796e
-  RegulaCommon: 9c3fa05d10ca05c1e0f5007524c92d72e871d3f2
   share_files_and_screenshot_widgets: 11063d06810f086eade3c1170946f8599e276adb
   share_plus: 056a1e8ac890df3e33cb503afffaf1e9b4fbae68
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad

@@ -1,41 +1,77 @@
 {
   "project_info": {
-    "project_number": "92424595254",
-    "firebase_url": "https://commune-cf48f-default-rtdb.firebaseio.com",
-    "project_id": "commune-cf48f",
-    "storage_bucket": "commune-cf48f.appspot.com"
+    "project_number": "803493939434",
+    "firebase_url": "https://communecampestre-default-rtdb.firebaseio.com",
+    "project_id": "communecampestre",
+    "storage_bucket": "communecampestre.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:92424595254:android:72bdee289363995b1f7597",
+        "mobilesdk_app_id": "1:803493939434:android:0bb38b29b725e8cdc26f93",
+        "android_client_info": {
+          "package_name": "com.commune.admincampestre"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "803493939434-c2d7guvuudkbn0hc73j44ger74ml0sck.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiHgkewwoFe0LQXigKWj3tkfqMxPk4wjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "803493939434-c2d7guvuudkbn0hc73j44ger74ml0sck.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "803493939434-1588m46lffurkdr70b53qvib37osj9hg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.commune.admincampestre"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803493939434:android:b1995b1a96eb4117c26f93",
         "android_client_info": {
           "package_name": "com.commune.campestre"
         }
       },
       "oauth_client": [
         {
-          "client_id": "92424595254-vjgvosfm174kvtl4hfu84ue87egsaqri.apps.googleusercontent.com",
+          "client_id": "803493939434-c2d7guvuudkbn0hc73j44ger74ml0sck.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA-oROZ9NFqD4hteCnMUxOZLtSTcQhfMiw"
+          "current_key": "AIzaSyCiHgkewwoFe0LQXigKWj3tkfqMxPk4wjI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "92424595254-vjgvosfm174kvtl4hfu84ue87egsaqri.apps.googleusercontent.com",
+              "client_id": "803493939434-c2d7guvuudkbn0hc73j44ger74ml0sck.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "92424595254-gek3l9cnmj9trcab0q0b0kctri7qomlq.apps.googleusercontent.com",
+              "client_id": "803493939434-1588m46lffurkdr70b53qvib37osj9hg.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.commune.taina"
+                "bundle_id": "com.commune.admincampestre"
               }
             }
           ]
@@ -44,142 +80,34 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:92424595254:android:21c1fe638823efcd1f7597",
+        "mobilesdk_app_id": "1:803493939434:android:174d65b3a15f4947c26f93",
         "android_client_info": {
-          "package_name": "com.commune.communeadmin"
+          "package_name": "com.commune.communeadmi"
         }
       },
       "oauth_client": [
         {
-          "client_id": "92424595254-vjgvosfm174kvtl4hfu84ue87egsaqri.apps.googleusercontent.com",
+          "client_id": "803493939434-c2d7guvuudkbn0hc73j44ger74ml0sck.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA-oROZ9NFqD4hteCnMUxOZLtSTcQhfMiw"
+          "current_key": "AIzaSyCiHgkewwoFe0LQXigKWj3tkfqMxPk4wjI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "92424595254-vjgvosfm174kvtl4hfu84ue87egsaqri.apps.googleusercontent.com",
+              "client_id": "803493939434-c2d7guvuudkbn0hc73j44ger74ml0sck.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "92424595254-gek3l9cnmj9trcab0q0b0kctri7qomlq.apps.googleusercontent.com",
+              "client_id": "803493939434-1588m46lffurkdr70b53qvib37osj9hg.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.commune.taina"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:92424595254:android:5b0c7fef72a1e3eb1f7597",
-        "android_client_info": {
-          "package_name": "com.commune.communeapp"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "92424595254-vjgvosfm174kvtl4hfu84ue87egsaqri.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyA-oROZ9NFqD4hteCnMUxOZLtSTcQhfMiw"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "92424595254-vjgvosfm174kvtl4hfu84ue87egsaqri.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "92424595254-gek3l9cnmj9trcab0q0b0kctri7qomlq.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.commune.taina"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:92424595254:android:99eb1148d03c4ef51f7597",
-        "android_client_info": {
-          "package_name": "com.commune.taina"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "92424595254-vjgvosfm174kvtl4hfu84ue87egsaqri.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyA-oROZ9NFqD4hteCnMUxOZLtSTcQhfMiw"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "92424595254-vjgvosfm174kvtl4hfu84ue87egsaqri.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "92424595254-gek3l9cnmj9trcab0q0b0kctri7qomlq.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.commune.taina"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:92424595254:android:4809b161db6c74511f7597",
-        "android_client_info": {
-          "package_name": "com.example.mensaje"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "92424595254-vjgvosfm174kvtl4hfu84ue87egsaqri.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyA-oROZ9NFqD4hteCnMUxOZLtSTcQhfMiw"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "92424595254-vjgvosfm174kvtl4hfu84ue87egsaqri.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "92424595254-gek3l9cnmj9trcab0q0b0kctri7qomlq.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.commune.taina"
+                "bundle_id": "com.commune.admincampestre"
               }
             }
           ]

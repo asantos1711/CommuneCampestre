@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class Fraccionamiento {
   String? nombre;
-  String? urlLogopng;
+  String? urlLogopngColor;
+  String? urlLogopngBlanco;
   String? urlLogojpg;
   ColorF? color;
   String? id;
@@ -14,10 +15,15 @@ class Fraccionamiento {
   String? idRestaurante;
   String? terminos;
   int? numCuentasAsoc;
+  bool? infoFracc;
+  bool? preguntasFrec;
+  int? diasMantto;
+  int? diasSanciones;
 
   Fraccionamiento(
       {this.nombre,
-      this.urlLogopng,
+      this.urlLogopngBlanco,
+      this.urlLogopngColor,
       this.color,
       this.urlLogojpg,
       this.id,
@@ -25,7 +31,14 @@ class Fraccionamiento {
       this.urlApi,
       this.idRestaurante,
       this.numCuentasAsoc,
-      this.pagar, this.amenidades, this.terminos, this.reportes});
+      this.pagar,
+      this.amenidades,
+      this.terminos,
+      this.infoFracc,
+      this.preguntasFrec,
+      this.diasMantto,
+      this.diasSanciones,
+      this.reportes});
 
   Color getColor() {
     return Color.fromARGB(255, color!.r, color!.g, color!.b);
@@ -37,15 +50,23 @@ class Fraccionamiento {
         idRestaurante:
             json["idRestaurante"] == null ? null : json["idRestaurante"],
         id: json["id"] == null ? null : json["id"],
-        urlLogopng: json["urlLogopng"] == null ? null : json["urlLogopng"],
+        urlLogopngColor:
+            json["urlLogopngColor"] == null ? null : json["urlLogopngColor"],
         urlLogojpg: json["urlLogojpg"] == null ? null : json["urlLogojpg"],
+        urlLogopngBlanco:
+            json["urlLogopngBlanco"] == null ? null : json["urlLogopngBlanco"],
         keyStripe: json["keyStripe"] == null ? null : json["keyStripe"],
         urlApi: json["urlApi"] == null ? null : json["urlApi"],
         pagar: json["pagar"] == null ? null : json["pagar"],
         amenidades: json["amenidades"] == null ? false : json["amenidades"],
         reportes: json["reportes"] == null ? false : json["reportes"],
+        infoFracc: json["infoFracc"] == null ? false : json["infoFracc"],
+        diasMantto: json["diasMantto"] == null ? 0 : json["diasMantto"],
+        diasSanciones: json["diasSanciones"] == null ? 0 : json["diasSanciones"],
+        preguntasFrec: json["preguntasFrec"] == null ? false : json["preguntasFrec"],
         terminos: json["terminos"] == null ? null : json["terminos"],
-        numCuentasAsoc: json["numCuentasAsoc"] == null ? null : json["numCuentasAsoc"],
+        numCuentasAsoc:
+            json["numCuentasAsoc"] == null ? null : json["numCuentasAsoc"],
         color: json["color"] == null ? null : ColorF.fromJson(json["color"]),
       );
 
@@ -53,7 +74,8 @@ class Fraccionamiento {
         "id": id == null ? null : id,
         "idRestaurante": idRestaurante == null ? null : idRestaurante,
         "nombre": nombre == null ? null : nombre,
-        "urlLogopng": urlLogopng == null ? null : urlLogopng,
+        "urlLogopngColor": urlLogopngColor == null ? null : urlLogopngColor,
+        "urlLogopngBlanco": urlLogopngBlanco == null ? null : urlLogopngBlanco,
         "urlLogojpg": urlLogojpg == null ? null : urlLogojpg,
         "keyStripe": keyStripe == null ? null : keyStripe,
         "urlApi": urlApi == null ? null : urlApi,
@@ -61,6 +83,8 @@ class Fraccionamiento {
         "amenidades": amenidades == null ? null : amenidades,
         "terminos": terminos == null ? false : terminos,
         "reportes": reportes == null ? false : reportes,
+        "diasSanciones": diasSanciones == null ? 0 : diasSanciones,
+        "diasMantto": diasMantto == null ? 0 : diasMantto,
         "numCuentasAsoc": numCuentasAsoc == null ? 0 : numCuentasAsoc,
         "color": color == null ? null : color!.toJson(),
       };

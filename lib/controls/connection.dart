@@ -11,6 +11,7 @@ import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:io';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:async';
@@ -51,7 +52,8 @@ class DatabaseServices {
   Future<Usuario> getUsuario(String email) async {
     Usuario user = new Usuario();
     List<Usuario> lista = [];
-
+    print(_auth.currentUser!.uid);
+    //print(db.);
     QuerySnapshot<Map<String, dynamic>> snap =
         await db.collection('usuarios').get();
 
@@ -71,7 +73,7 @@ class DatabaseServices {
 
   Future<List<Usuario>> getUsuarioByTitular() async {
     Usuario user = new Usuario();
-    List<Usuario> lista = [];    
+    List<Usuario> lista = [];
 
     QuerySnapshot<Map<String, dynamic>> snap =
         await db.collection('usuarios').get();
@@ -127,7 +129,7 @@ class DatabaseServices {
     return lista;
   }
 
-  Future<List<Usuario>> getUsuariosAdmin() async {    
+  Future<List<Usuario>> getUsuariosAdmin() async {
     List<Usuario> lista = [];
 
     QuerySnapshot<Map<String, dynamic>> snap =
@@ -169,6 +171,30 @@ class DatabaseServices {
     }
 
     //print(usuarioBloc.miFraccionamiento.color?.r);
+  }
+
+  getFraccionamiento() async {
+    final String _url =
+        'https://communecampestre-default-rtdb.firebaseio.com/configuracion/fraccionamiento.json';
+
+    Fraccionamiento fraccionamiento;
+    UsuarioBloc _usuarioBloc = new UsuarioBloc();
+
+    try {
+      final response =
+          await http.get(Uri.parse(_url)).timeout(Duration(seconds: 5));
+      final decodedData = jsonDecode(response.body);
+      fraccionamiento = Fraccionamiento.fromJson(decodedData);
+
+      _usuarioBloc.miFraccionamiento = fraccionamiento;
+    } on TimeoutException catch (exception) {
+      print(
+          'Error al cargar la configuracion. Tiempo de espera exedido: ${exception.message}');
+    } catch (exception) {
+      print("Erro inesperado al cargar la configuración: $exception");
+    }
+
+    return;
   }
 
   Future<Fraccionamiento> getFracionamientosById(String id) async {
@@ -327,24 +353,18 @@ class DatabaseServices {
     //return null;*/
   }
 
-  Future<Map<String, bool>> registerUser(String correo, String contra) async {
+  Future<UserCredential> registerUser(String correo, String contra) async {
     Map<String, bool> map = Map<String, bool>();
-    try {
-      UserCredential result = await _auth.createUserWithEmailAndPassword(
-          email: correo, password: contra);
+    UserCredential result;
 
-      print("result: " + result.toString());
-      //User? user = result.user;
-      //print("result: " + user.toString());
+    result = await _auth.createUserWithEmailAndPassword(
+        email: correo, password: contra);
 
-      return map;
-    } on FirebaseAuthException catch (ef) {
-      print("Error n registerUser connect " + ef.toString());
-      throw ef;
-    } catch (e) {
-      print("Error n registerUser connect " + e.toString());
-      return map;
-    }
+    print("result: " + result.toString());
+    //User? user = result.user;
+    //print("result: " + user.toString());
+
+    return result;
   }
 
   Future guardarDatosRegistro(Usuario usuario) async {
@@ -352,13 +372,16 @@ class DatabaseServices {
     var bytes = utf8.encode(usuario.nombre!); // data being hashed
 
     var digest = sha1.convert(bytes);
-    usuario.idResidente = digest.toString();
+    //usuario.idResidente = digest.toString();
     final FirebaseFirestore db = FirebaseFirestore.instance;
     //print("Digest as bytes: ${digest.bytes}");
     //print("Digest as hex string: $digest");
     //usuarioBloc.qrInvitado = digest.toString();
     try {
-      await db.collection('usuarios').doc("${digest}").set(usuario.toJson());
+      await db
+          .collection('usuarios')
+          .doc("${usuario.idResidente}")
+          .set(usuario.toJson());
       //print("profile.id " + profile.id);
 
       print("Listo");
