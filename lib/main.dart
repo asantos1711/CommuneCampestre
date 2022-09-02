@@ -170,6 +170,9 @@ class _MyAppState extends State<MyApp> {
             return MaterialApp(
               localizationsDelegates: [GlobalMaterialLocalizations.delegate],
               supportedLocales: [Locale('es', "MX")],
+              shortcuts: {
+                LogicalKeySet(LogicalKeyboardKey.space): ActivateIntent(),
+              },
               debugShowCheckedModeBanner: false,
               title: 'Commune',
               theme: ThemeData(

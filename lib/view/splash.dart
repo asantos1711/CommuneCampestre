@@ -1,5 +1,6 @@
 import 'package:campestre/bloc/usuario_bloc.dart';
 import 'package:campestre/view/splashDos.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -25,7 +26,12 @@ class _SplashState extends State<Splash> {
   void initState() {
     // TODO: implement initState
     // _setFraccionamiento();
+    _init();
     super.initState();
+  }
+
+  _init() async {
+    await Firebase.initializeApp();
   }
 
   _setFraccionamiento() async {
