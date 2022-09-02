@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Usuario {
@@ -60,8 +59,8 @@ class Usuario {
       tokenNoti: data['tokenNoti'] ?? '',
       idFraccionamiento: data['idFraccionamiento'] ?? '',
       idRegistro: data['idRegistro'] ?? null,
-      lotePadre: data['lotePadre'] ?? 0,
-      lote: int.parse(data['lote'].toString()),
+      lotePadre: data['lotePadre'] ?? null,
+      lote: int.parse(data['lote'].toString()) ?? null,
     );
   }
 
@@ -80,8 +79,8 @@ class Usuario {
       idFraccionamiento: data['idFraccionamiento'] ?? '',
       tokenNoti: data['tokenNoti'] ?? '',
       idTitular: data['idTitular'] ?? '',
-      lotePadre: data['lotePadre'] ?? 0,
-      lote: int.tryParse(data['lote'].toString()) ?? 0,
+      lotePadre: data['lotePadre'] ?? null,
+      lote: int.tryParse(data['lote'].toString()) ?? null,
     );
   }
 }
