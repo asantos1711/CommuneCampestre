@@ -26,18 +26,8 @@ class _SplashState extends State<Splash> {
   void initState() {
     // TODO: implement initState
     // _setFraccionamiento();
-    _init();
+    // _init();
     super.initState();
-  }
-
-  _init() async {
-    await Firebase.initializeApp();
-  }
-
-  _setFraccionamiento() async {
-    await databaseServices.getFraccionamiento();
-
-    usuario.setIdFraccionamiento(_usuarioBloc.miFraccionamiento.id.toString());
   }
 
   @override
@@ -46,7 +36,7 @@ class _SplashState extends State<Splash> {
     h = MediaQuery.of(context).size.height;
     return Scaffold(
         body: FutureBuilder(
-      future: databaseServices.getFraccionamiento(),
+      future: DatabaseServices.getFraccionamiento(),
       builder: (c, s) {
         if (s.connectionState == ConnectionState.waiting) {
           return Center(

@@ -47,33 +47,33 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCfzA2ehUlv-pqO0652ktB0dCKEsHw536A',
-    appId: '1:92424595254:web:1efb117576f79fd51f7597',
-    messagingSenderId: '92424595254',
-    projectId: 'commune-cf48f',
-    authDomain: 'commune-cf48f.firebaseapp.com',
-    databaseURL: 'https://commune-cf48f-default-rtdb.firebaseio.com',
-    storageBucket: 'commune-cf48f.appspot.com',
-    measurementId: 'G-BDTF4RDY7H',
+    apiKey: 'AIzaSyA6FDrFIT_pe4tBvw0twGfGmhVA8fkAtsw',
+    appId: '1:803493939434:web:5e655f02046cb96ec26f93',
+    messagingSenderId: '803493939434',
+    projectId: 'communecampestre',
+    authDomain: 'communecampestre.firebaseapp.com',
+    databaseURL: 'https://communecampestre-default-rtdb.firebaseio.com',
+    storageBucket: 'communecampestre.appspot.com',
+    measurementId: 'G-62E5YSYJL9',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA-oROZ9NFqD4hteCnMUxOZLtSTcQhfMiw',
-    appId: '1:92424595254:android:72bdee289363995b1f7597',
-    messagingSenderId: '92424595254',
-    projectId: 'commune-cf48f',
-    databaseURL: 'https://commune-cf48f-default-rtdb.firebaseio.com',
-    storageBucket: 'commune-cf48f.appspot.com',
+    apiKey: 'AIzaSyCiHgkewwoFe0LQXigKWj3tkfqMxPk4wjI',
+    appId: '1:803493939434:android:b1995b1a96eb4117c26f93',
+    messagingSenderId: '803493939434',
+    projectId: 'communecampestre',
+    databaseURL: 'https://communecampestre-default-rtdb.firebaseio.com',
+    storageBucket: 'communecampestre.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCjf0zodLrk3eJySLWsOX30gTNaUK8y4gg',
-    appId: '1:92424595254:ios:461167094b7682ea1f7597',
-    messagingSenderId: '92424595254',
-    projectId: 'commune-cf48f',
-    databaseURL: 'https://commune-cf48f-default-rtdb.firebaseio.com',
-    storageBucket: 'commune-cf48f.appspot.com',
-    iosClientId: '92424595254-i3eqadu5hu1duluooadu57qrmncle6rm.apps.googleusercontent.com',
+    apiKey: 'AIzaSyC73g-HpjebP08q0ZG-T5CxwYPXC9qu6OA',
+    appId: '1:803493939434:ios:85a27c4bfffc6f29c26f93',
+    messagingSenderId: '803493939434',
+    projectId: 'communecampestre',
+    databaseURL: 'https://communecampestre-default-rtdb.firebaseio.com',
+    storageBucket: 'communecampestre.appspot.com',
+    iosClientId: '803493939434-4nn3dgo87b4ndi76l6fqabr22lgujq76.apps.googleusercontent.com',
     iosBundleId: 'com.commune.campestre',
   );
 }

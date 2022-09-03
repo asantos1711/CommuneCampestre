@@ -60,7 +60,7 @@ class Usuario {
       idFraccionamiento: data['idFraccionamiento'] ?? '',
       idRegistro: data['idRegistro'] ?? null,
       lotePadre: data['lotePadre'] ?? null,
-      lote: int.parse(data['lote'].toString()) ?? null,
+      lote: int.parse(data['lote'].toString()),
     );
   }
 

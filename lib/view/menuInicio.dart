@@ -93,7 +93,7 @@ class _MenuInicioState extends State<MenuInicio> {
   _inicio() async {
     if (usuario.idFraccionamiento != "" &&
         _usuarioBloc.miFraccionamiento != null) {
-      await _databaseServices.getFraccionamiento();
+      await DatabaseServices.getFraccionamiento();
       //_usuarioBloc.miFraccionamiento = snap
     }
     if (usuario.isiniciarSesion) {
@@ -142,13 +142,14 @@ class _MenuInicioState extends State<MenuInicio> {
           dias = DateTime.now().difference(item.fechaCreado!).inDays;
           maxDia = maxDia > dias ? maxDia : dias;
           print(dias);
-           diasMatto = int.parse(_usuarioBloc.miFraccionamiento.diasMantto.toString());
+          diasMatto =
+              int.parse(_usuarioBloc.miFraccionamiento.diasMantto.toString());
           plazoVencidoMantenimientos =
               dias <= diasMatto ? plazoVencidoMantenimientos : true;
         }
         print(maxDia);
 
-        if ((maxDia == diasMatto+1 || maxDia == diasMatto+2) &&
+        if ((maxDia == diasMatto + 1 || maxDia == diasMatto + 2) &&
             (DateTime.now().weekday == DateTime.saturday ||
                 DateTime.now().weekday == DateTime.sunday)) {
           plazoVencidoMantenimientos = false;
@@ -162,12 +163,14 @@ class _MenuInicioState extends State<MenuInicio> {
           diasS = DateTime.now().difference(item.fechaCreado!).inDays;
           maxDiaS = maxDiaS > diasS ? maxDiaS : diasS;
           print(dias);
-          diasSancciones = int.parse(_usuarioBloc.miFraccionamiento.diasSanciones.toString());
-          plazoVencidoSancion = diasS <=  diasSancciones? plazoVencidoSancion : true;
+          diasSancciones = int.parse(
+              _usuarioBloc.miFraccionamiento.diasSanciones.toString());
+          plazoVencidoSancion =
+              diasS <= diasSancciones ? plazoVencidoSancion : true;
         }
         print(maxDiaS);
 
-        if ((maxDiaS == diasSancciones+1 || maxDiaS == diasSancciones+2) &&
+        if ((maxDiaS == diasSancciones + 1 || maxDiaS == diasSancciones + 2) &&
             (DateTime.now().weekday == DateTime.saturday ||
                 DateTime.now().weekday == DateTime.sunday)) {
           plazoVencidoSancion = false;
@@ -352,26 +355,31 @@ class _MenuInicioState extends State<MenuInicio> {
                 child: _opcion(FontAwesomeIcons.treeCity, "Amenidades"),
               )
             : SizedBox(),
-        _usuarioBloc.miFraccionamiento.preguntasFrec as bool ? InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PreguntasView()),
-            );
-          },
-          child:
-              _opcion(FontAwesomeIcons.circleQuestion, "Preguntas frecuentes"),
-        ) : SizedBox(),
-        _usuarioBloc.miFraccionamiento.infoFracc as bool ?  InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => InfoFraccionamiento()),
-            );
-          },
-          child: _opcion(
-              FontAwesomeIcons.newspaper, "Información del fraccionamiento"),
-        ) : SizedBox(),
+        _usuarioBloc.miFraccionamiento.preguntasFrec as bool
+            ? InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PreguntasView()),
+                  );
+                },
+                child: _opcion(
+                    FontAwesomeIcons.circleQuestion, "Preguntas frecuentes"),
+              )
+            : SizedBox(),
+        _usuarioBloc.miFraccionamiento.infoFracc as bool
+            ? InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => InfoFraccionamiento()),
+                  );
+                },
+                child: _opcion(FontAwesomeIcons.newspaper,
+                    "Información del fraccionamiento"),
+              )
+            : SizedBox(),
         _usuarioBloc.miFraccionamiento.reportes as bool
             ? InkWell(
                 onTap: () {
@@ -417,37 +425,42 @@ class _MenuInicioState extends State<MenuInicio> {
           },
           child: _opcion(Icons.person_outlined, "Acceso a visitas"),
         ),
-        _usuarioBloc.miFraccionamiento.preguntasFrec as bool ? InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PreguntasView()),
-            );
-          },
-          child:
-              _opcion(FontAwesomeIcons.circleQuestion, "Preguntas frecuentes"),
-        ) : SizedBox(),
-        _usuarioBloc.miFraccionamiento.infoFracc as bool ?  InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => InfoFraccionamiento()),
-            );
-          },
-          child: _opcion(
-              FontAwesomeIcons.newspaper, "Información del fraccionamiento"),
-        ) : SizedBox(),
+        _usuarioBloc.miFraccionamiento.preguntasFrec as bool
+            ? InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PreguntasView()),
+                  );
+                },
+                child: _opcion(
+                    FontAwesomeIcons.circleQuestion, "Preguntas frecuentes"),
+              )
+            : SizedBox(),
+        _usuarioBloc.miFraccionamiento.infoFracc as bool
+            ? InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => InfoFraccionamiento()),
+                  );
+                },
+                child: _opcion(FontAwesomeIcons.newspaper,
+                    "Información del fraccionamiento"),
+              )
+            : SizedBox(),
         _usuarioBloc.miFraccionamiento.reportes as bool
-          ? InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ReportesView()),
-                );
-              },
-              child: _opcion(Icons.flag, "Generar reportes a administración"),
-            )
-          : SizedBox(),
+            ? InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ReportesView()),
+                  );
+                },
+                child: _opcion(Icons.flag, "Generar reportes a administración"),
+              )
+            : SizedBox(),
       ],
     );
   }

@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    database.getFraccionamiento();
+    // database.getFraccionamiento();
     if (usuario.idFraccionamiento != "" &&
         usuarioBloc.miFraccionamiento != null) {
       //_usuarioBloc.miFraccionamiento = snap
@@ -482,7 +482,7 @@ class _LoginPageState extends State<LoginPage> {
     h = MediaQuery.of(context).size.height;
     // ScreenUtil.init(context);
     return FutureBuilder(
-        future: database.getFraccionamiento(),
+        future: DatabaseServices.getFraccionamiento(),
         builder: (context, s) {
           if (s.connectionState == ConnectionState.waiting) {
             return Center(
