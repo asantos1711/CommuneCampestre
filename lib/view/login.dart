@@ -68,75 +68,73 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _form() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.zero,
-            child: Center(
-              child: CustomPaint(
-                size: Size(w, 300),
-                painter: CurvedPainter(),
-              ),
+    return ListView(
+      children: [
+        Container(
+          margin: EdgeInsets.zero,
+          child: Center(
+            child: CustomPaint(
+              size: Size(w, 300),
+              painter: CurvedPainter(),
             ),
           ),
-          Container(
-              alignment: Alignment.centerLeft,
-              margin: EdgeInsets.only(top: 15, left: 50, right: 20),
-              child: Text("Inicio de sesión",
-                  style: TextStyle(color: Colors.black, fontSize: 20))),
-          Container(
-              width: w - 50,
-              margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-              child: Column(
-                children: [
-                  Padding(
+        ),
+        Container(
+            alignment: Alignment.centerLeft,
+            margin: EdgeInsets.only(top: 15, left: 50, right: 20),
+            child: Text("Inicio de sesión",
+                style: TextStyle(color: Colors.black, fontSize: 20))),
+        Container(
+            width: w - 50,
+            margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  child: TextFormFieldBorder("CORREO", _email,
+                      TextInputType.emailAddress, false, Colors.white),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Padding(
                     padding: EdgeInsets.only(left: 20, right: 20),
-                    child: TextFormFieldBorder("CORREO", _email,
-                        TextInputType.emailAddress, false, Colors.white),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Padding(
-                      padding: EdgeInsets.only(left: 20, right: 20),
-                      child: TextFormFieldBorder(
-                          "CONTRASEÑA", //Translations.of(context).text("password"),
-                          _password,
-                          TextInputType.visiblePassword,
-                          true,
-                          Colors.white)),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder: (context, animation1, animation2) =>
-                              RecuperarContra(),
-                          transitionDuration: Duration(seconds: 0),
-                        ),
-                      );
-                    },
-                    child: Container(
-                        padding: EdgeInsets.only(left: 20, right: 20, top: 17),
-                        alignment: Alignment.topRight,
-                        child: Text(
-                          "¿Olvidó su contraseña?",
-                          style: TextStyle(
-                              fontSize: 15,
-                              color: Color.fromRGBO(41, 45, 48, 0.3)),
-                        )),
-                  ),
-                  SizedBox(height: 30),
-                  _button(),
-                  /*SizedBox(
+                    child: TextFormFieldBorder(
+                        "CONTRASEÑA", //Translations.of(context).text("password"),
+                        _password,
+                        TextInputType.visiblePassword,
+                        true,
+                        Colors.white)),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation1, animation2) =>
+                            RecuperarContra(),
+                        transitionDuration: Duration(seconds: 0),
+                      ),
+                    );
+                  },
+                  child: Container(
+                      padding: EdgeInsets.only(left: 20, right: 20, top: 17),
+                      alignment: Alignment.topRight,
+                      child: Text(
+                        "¿Olvidó su contraseña?",
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Color.fromRGBO(41, 45, 48, 0.3)),
+                      )),
+                ),
+                SizedBox(height: 30),
+                _button(),
+                /*SizedBox(
                     height: 30,
                   )*/
-                ],
-              )),
-          _opciones(),
-        ],
-      ),
+              ],
+            )),
+        _opciones(),
+      ],
     );
   }
 
@@ -442,8 +440,7 @@ class _LoginPageState extends State<LoginPage> {
           return Scaffold(
               backgroundColor: Colors.white,
               body: OKToast(
-                child:
-                    _form(), /*usuarioBloc.miFraccionamiento.color?.r != null
+                  child: usuarioBloc.miFraccionamiento.color?.r != null
                       ? Stack(
                           children: [
                             _form(),
@@ -490,8 +487,8 @@ class _LoginPageState extends State<LoginPage> {
                             width: 200,
                             height: 200,
                             fit: BoxFit.contain,
-                          ),*/
-              ));
+                          ),
+                        )));
         });
   }
 }
