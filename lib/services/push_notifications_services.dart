@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -32,8 +33,6 @@ class PushNotificationsService {
 
   static Future initializeApp() async {
     //Push notifications
-    await Firebase.initializeApp();
-
     token = await FirebaseMessaging.instance.getToken();
     print("Token Messaging: " + token.toString());
 

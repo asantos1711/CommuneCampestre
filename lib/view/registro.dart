@@ -106,11 +106,9 @@ class _RegistroViewState extends State<RegistroView> {
   Widget build(BuildContext context) {
     w = MediaQuery.of(context).size.width;
     h = MediaQuery.of(context).size.height;
-    // ScreenUtil.init(context);
+
     return Scaffold(
-      //resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
-      //appBar: appBarOnlyPop(context, w),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -123,10 +121,6 @@ class _RegistroViewState extends State<RegistroView> {
               Icons.arrow_back,
               color: Color(0xFF0C0C0C),
             )),
-        /*title: Text(
-          "Opciones de registro",
-          style: TextStyle(color: Colors.black),
-        ),*/
       ),
       body: _form(),
     );

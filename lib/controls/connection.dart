@@ -173,7 +173,7 @@ class DatabaseServices {
     //print(usuarioBloc.miFraccionamiento.color?.r);
   }
 
-  getFraccionamiento() async {
+  static getFraccionamiento() async {
     final String _url =
         'https://communecampestre-default-rtdb.firebaseio.com/configuracion/fraccionamiento.json';
 
@@ -184,6 +184,7 @@ class DatabaseServices {
       final response =
           await http.get(Uri.parse(_url)).timeout(Duration(seconds: 5));
       final decodedData = jsonDecode(response.body);
+      //print("CONFIGURACIÓN " + decodedData.toString());
       fraccionamiento = Fraccionamiento.fromJson(decodedData);
 
       _usuarioBloc.miFraccionamiento = fraccionamiento;

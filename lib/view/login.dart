@@ -50,14 +50,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    database.getFraccionamiento();
-    if (usuario.idFraccionamiento != "" &&
-        usuarioBloc.miFraccionamiento != null) {
-      //_usuarioBloc.miFraccionamiento = snap
-    }
-    _init();
     super.initState();
-    //_checkJWT();
   }
 
   bool validateLogin() {
@@ -68,55 +61,9 @@ class _LoginPageState extends State<LoginPage> {
     return false;
   }
 
-  getFraccionamientoId(String id) async {
-    //var snap = _databaseServices.getFracionamientosById(usuario.idFraccionamiento);
-
-    Fraccionamiento _fracc = new Fraccionamiento();
-
-    DocumentSnapshot snaps =
-        await datab.collection('fraccionamientos').doc(id).get();
-    print(snaps.data());
-
-    if (snaps.exists) {
-      print("dentro");
-      Map<String, dynamic> mapa = snaps.data() as Map<String, dynamic>;
-      _fracc = Fraccionamiento.fromJson(mapa);
-      setState(() {
-        usuarioBloc.miFraccionamiento = _fracc;
-      });
-    }
-
-    print(usuarioBloc.miFraccionamiento.color?.r);
-  }
-
-  _init() async {
-    /* await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );*/
-
-    /*if (usuarioBloc.miFraccionamiento.id == null) {
-      _databaseServices.getFraccionamientoId(usuario.idFraccionamiento);
-    } else {
-      //_fraccionamiento = usuarioBloc.miFraccionamiento;
-      //_databaseServices.getFraccionamientoId(usuario.idFraccionamiento);
-    }*/
-  }
-
-  _checkJWT() async {
-    JWTProvider jw = new JWTProvider();
-    String s = await jw.getJWT();
-    print(s);
-  }
-
   _charge(bool val) {
     setState(() {
       isLoading = val;
-    });
-  }
-
-  _bloquearPantalla() {
-    this.setState(() {
-      isLoading = !isLoading;
     });
   }
 
@@ -133,7 +80,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          //Image.asset("assets/images/Rectangle2.png", fit: BoxFit.fill),
           Container(
               alignment: Alignment.centerLeft,
               margin: EdgeInsets.only(top: 15, left: 50, right: 20),
@@ -141,7 +87,6 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(color: Colors.black, fontSize: 20))),
           Container(
               width: w - 50,
-              // height: 800,
               margin: EdgeInsets.only(top: 20, left: 20, right: 20),
               child: Column(
                 children: [
@@ -482,7 +427,7 @@ class _LoginPageState extends State<LoginPage> {
     h = MediaQuery.of(context).size.height;
     // ScreenUtil.init(context);
     return FutureBuilder(
-        future: database.getFraccionamiento(),
+        future: DatabaseServices.getFraccionamiento(),
         builder: (context, s) {
           if (s.connectionState == ConnectionState.waiting) {
             return Center(
@@ -497,38 +442,25 @@ class _LoginPageState extends State<LoginPage> {
           return Scaffold(
               backgroundColor: Colors.white,
               body: OKToast(
-                  child: usuarioBloc.miFraccionamiento.color?.r != null
+                child:
+                    _form(), /*usuarioBloc.miFraccionamiento.color?.r != null
                       ? Stack(
                           children: [
                             _form(),
                             Positioned(
                               top: 40,
-                              //bottom: 0,
                               left: 5,
                               right: 0,
-                              //left: 30,
-                              //height:250,
-                              //width: 250,
                               child: Image.network(
                                 usuarioBloc.miFraccionamiento.urlLogopngBlanco
                                     .toString(),
                                 height: h * 0.1,
                                 alignment: Alignment.topLeft,
                               ),
-
-                              /* Image.asset(
-                        "assets/images/logoBlanco.png",
-                        alignment: Alignment.topLeft,
-                      )*/
                             ),
                             Positioned(
                               top: 40,
-                              //bottom: 0,
-                              //left: 130,
                               right: 0,
-                              //left: 30,
-                              //height:250,
-                              //width: 250,
                               child: InkWell(
                                   onTap: () async {
                                     _sendNotificacionSOS();
@@ -558,8 +490,8 @@ class _LoginPageState extends State<LoginPage> {
                             width: 200,
                             height: 200,
                             fit: BoxFit.contain,
-                          ),
-                        )));
+                          ),*/
+              ));
         });
   }
 }

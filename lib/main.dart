@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:campestre/view/notificacion.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:campestre/bloc/usuario_bloc.dart';
 import 'package:campestre/provider/splashProvider.dart';
@@ -23,48 +26,29 @@ import 'models/preferenciasUsuario.dart';
 import 'provider/carritoRestaurantProvider.dart';
 import 'view/splashView.dart';
 
-/*String getKey() {
-  var order = fetchUserOrder();
-  
-
-  return 'Your order is: $order';
-}
-
-Future<String> fetchUserOrder() async {
-  final usrPref =
-      PreferenciasUsuario(); //Inicializar la clase para almacenar parémetros que se usan durante el procesp de precheckin.
-  await usrPref.initPref();
-  DatabaseServices _databaseServices = new DatabaseServices();
-
-  if(usrPref.idFraccionamiento != null  || usrPref.idFraccionamiento != ""){
-    await _databaseServices.getFraccionamientoId(usrPref.idFraccionamiento);
-  }
-
-  UsuarioBloc _usuarioBloc = new UsuarioBloc();
-  print(_usuarioBloc.miFraccionamiento);
-
-  return _usuarioBloc.miFraccionamiento.keyStripe.toString();
-
-
-}*/
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Stripe.publishableKey =
+  /*Stripe.publishableKey =
       "pk_test_51Jti97CudYnKG9fPgdsVEk4vwEzpEY24wJ7s72VxZDhmHVHqzjR6a8STNK2wnP6h6VhKlPG7vvg6gvrEigB0mcE800GgxoOaoB"; //usrPref.keyStripe.toString();
+  */
+
+  final result = await InternetAddress.lookup('example.com');
+  if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+    print('connected');
+  }
+
+  await Firebase.initializeApp(
+    name: "CommuneCampestre",
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   await PushNotificationsService.initializeApp();
-  // set the publishable key for Stripe - this is mandatory
-  //Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
-  //Stripe.urlScheme = 'flutterstripe'
+
   SharedPreferences usuario = await PreferenciasUsuario().initPref();
-  //Stripe.instance.applySettings();
+
   final usrPref =
       PreferenciasUsuario(); //Inicializar la clase para almacenar parémetros que se usan durante el procesp de precheckin.
   await usrPref.initPref();
-  //await usuario.initPref();
-  /*await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );*/
 
   runApp(MyApp());
 }
@@ -84,14 +68,19 @@ class _MyAppState extends State<MyApp> {
   var mail;
   var pass;
   String _platformVersion = 'Unknown';
+  late String ruta;
 
   @override
   void initState() {
     super.initState();
     _initPreference();
-    initPlatformState();
     _setFraccionamiento();
 
+    _listenersMessaging();
+    _restoConfiguracion();
+  }
+
+  _listenersMessaging() {
     FirebaseMessaging.instance.getInitialMessage();
     FirebaseMessaging.onMessage.listen((event) {
       if (event.notification != null) {
@@ -100,19 +89,13 @@ class _MyAppState extends State<MyApp> {
       }
     });
 
-    PushNotificationsService.messageStream.listen((event) {
-      if (event.isNotEmpty) {
-        print("MyApp : ${event}");
-      }
-    });
-  }
-
-  Future<void> initPlatformState() async {
-    /*String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-
-    setState(() {
-      _platformVersion = platformVersion;
+    /*FirebaseMessaging.onMessageOpenedApp.listen((event) {
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) =>
+              NotificacionView(notification: event.notification),
+        ),
+      );
     });*/
   }
 
@@ -123,19 +106,12 @@ class _MyAppState extends State<MyApp> {
   }
 
   _setFraccionamiento() async {
-    //List<Fraccionamiento>? lista = await databaseServices.getFracionamientos();
-    /*Fraccionamiento campestre =
-        lista!.firstWhere((element) => element.id == "commune");
-    _usuarioBloc.miFraccionamiento = campestre;*/
-    await databaseServices.getFraccionamiento();
+    await DatabaseServices.getFraccionamiento();
     usuario.setIdFraccionamiento(_usuarioBloc.miFraccionamiento.id.toString());
   }
 
-  @override
-  Widget build(BuildContext context) {
-    String ruta = "inicio_sesion"; //"/";
-    //usuario.setiniciarSesion(false);
-    print("IDFRACCIONAMIENTO" + usuario.idFraccionamiento);
+  _restoConfiguracion() async {
+    ruta = "inicio_sesion";
     print("isLoggedIn" + usuario.isLoggedIn.toString());
 
     if (usuario.isLoggedIn != true && !usuario.isiniciarSesion) {
@@ -145,7 +121,6 @@ class _MyAppState extends State<MyApp> {
     if (usuario.email.isNotEmpty && usuario.psw.isNotEmpty ||
         usuario.email != "" && usuario.psw != "") {
       usuario.setiniciarSesion(true);
-      //_iniciarSesion(usuario.email, usuario.psw);
       ruta = "menu_inicio";
     }
 
@@ -153,6 +128,11 @@ class _MyAppState extends State<MyApp> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    _restoConfiguracion();
     return MultiProvider(
         providers: [
           ChangeNotifierProvider<CarritoProvider>(
@@ -168,7 +148,11 @@ class _MyAppState extends State<MyApp> {
         child: Builder(
           builder: (BuildContext context) {
             return MaterialApp(
-              localizationsDelegates: [GlobalMaterialLocalizations.delegate],
+              localizationsDelegates: [
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
               supportedLocales: [Locale('es', "MX")],
               shortcuts: {
                 LogicalKeySet(LogicalKeyboardKey.space): ActivateIntent(),
@@ -179,69 +163,12 @@ class _MyAppState extends State<MyApp> {
                   fontFamily: GoogleFonts.poppins().fontFamily,
                   primarySwatch: Colors.blue,
                   visualDensity: VisualDensity.adaptivePlatformDensity),
-              //routes: getApplicationRoutes(),
               builder: LoadingScreen.init(),
-              //home:
               routes: getApplicationRoutes(),
               initialRoute: ruta,
             );
           },
         ));
-  }
-
-  _selectView() async {
-    print("en el main****");
-    /*SharedPreferences usuario = await _prefs;
-
-    PreferenciasUsuario usuario = PreferenciasUsuario();
-    print("usuario.isFirstTime: " + usuario.getString('isFirstTime').toString());
-    print(usuario.getString('email'));
-    bool? prim = usuario.getBool('isFirstTime');
-    bool? isLog =  usuario.getBool('isLoggedIn');
-
-    if (usuario.getString('email')!.isNotEmpty &&
-        usuario.getString('psw')!.isNotEmpty &&
-        !prim! &&  isLog!) */
-    //SharedPreferences usuario = await _prefs;
-
-    PreferenciasUsuario usuario = PreferenciasUsuario();
-    print("usuario.isFirstTime: " + usuario.isFirstTime.toString());
-    print(usuario.email);
-    bool? prim = usuario.isFirstTime;
-    bool? isLog = usuario.isLoggedIn;
-
-    if (usuario.email.isNotEmpty && usuario.psw.isNotEmpty && !prim && isLog) {
-      print("no son nulos");
-      var snap = FirebaseFirestore.instance
-          .collection('usuarios')
-          .where("email", isEqualTo: usuario.email) //registro.perfil?.email)
-          .snapshots();
-
-      snap.forEach((element) {
-        element.docs.forEach((element) {
-          //_usuarioBloc.perfil = Usuario.fromFirestore(element);
-          print("nombre***" + _usuarioBloc.perfil.nombre.toString());
-        });
-      });
-
-      return MaterialPageRoute(builder: (BuildContext context) => MenuInicio());
-      /*if (_usuarioBloc.perfil.tipo != "admin" &&
-          _usuarioBloc.perfil.estatus == "1") {*/
-      /*Navigator.pushReplacement(
-          context,
-          PageRouteBuilder(
-            pageBuilder: (context, animation1, animation2) => MenuInicio(),
-            transitionDuration: Duration(seconds: 0),
-          ));*/
-      /* );
-      } else {
-        return MaterialPageRoute(builder: (BuildContext context) => Splash());
-      }*/
-    } else if (!isLog) {
-      return MaterialPageRoute(builder: (BuildContext context) => LoginPage());
-    } else {
-      return MaterialPageRoute(builder: (BuildContext context) => Splash());
-    }
   }
 }
 

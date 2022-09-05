@@ -77,42 +77,6 @@
           ]
         }
       }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:803493939434:android:174d65b3a15f4947c26f93",
-        "android_client_info": {
-          "package_name": "com.commune.communeadmi"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "803493939434-c2d7guvuudkbn0hc73j44ger74ml0sck.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCiHgkewwoFe0LQXigKWj3tkfqMxPk4wjI"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "803493939434-c2d7guvuudkbn0hc73j44ger74ml0sck.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "803493939434-1588m46lffurkdr70b53qvib37osj9hg.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.commune.admincampestre"
-              }
-            }
-          ]
-        }
-      }
     }
   ],
   "configuration_version": "1"
