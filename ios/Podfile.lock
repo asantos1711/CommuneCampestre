@@ -887,6 +887,7 @@ DEPENDENCIES:
   - barcode_scan2 (from `.symlinks/plugins/barcode_scan2/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - esys_flutter_share_plus (from `.symlinks/plugins/esys_flutter_share_plus/ios`)
+  - Firebase/Messaging
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -1044,6 +1045,6 @@ SPEC CHECKSUMS:
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   url_launcher_ios: 839c58cdb4279282219f5e248c3321761ff3c4de
 
-PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+PODFILE CHECKSUM: e4ac5fad8ab16634ee302045e52b2580c32f3ac0
 
 COCOAPODS: 1.11.3
