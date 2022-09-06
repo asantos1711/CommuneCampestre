@@ -62,6 +62,7 @@ class _RegistroViewState extends State<RegistroView> {
     if (this.widget.lote != null && this.widget.lote.isNotEmpty) {
       EstadoCuentaDireccion datos =
           await EstadoCuentaDireccion.getEstadoDireccion(this.widget.lote);
+      print(datos?.toJson().toString());
       setState(() {
         _nombre.text = datos.data!.direccion!.name.toString();
         _reflote.text = datos.data!.direccion!.direccion.toString();
