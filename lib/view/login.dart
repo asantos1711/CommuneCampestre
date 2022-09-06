@@ -50,6 +50,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
+    DatabaseServices.getFraccionamiento();
     super.initState();
   }
 
@@ -72,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
     w = MediaQuery.of(context).size.width;
     h = MediaQuery.of(context).size.height;
     // ScreenUtil.init(context);
-    return FutureBuilder(
+    /*return FutureBuilder(
         future: DatabaseServices.getFraccionamiento(),
         builder: (context, s) {
           if (s.connectionState == ConnectionState.waiting) {
@@ -84,60 +85,60 @@ class _LoginPageState extends State<LoginPage> {
                 fit: BoxFit.contain,
               ),
             );
-          }
-          return Scaffold(
-              backgroundColor: Colors.white,
-              body: OKToast(
-                  child: usuarioBloc.miFraccionamiento.color?.r != null
-                      ? Stack(
-                          children: [
-                            _form(),
-                            Positioned(
-                              top: 40,
-                              left: 5,
-                              right: 0,
-                              child: Image.network(
-                                usuarioBloc.miFraccionamiento.urlLogopngBlanco
-                                    .toString(),
-                                height: h * 0.1,
-                                alignment: Alignment.topLeft,
-                              ),
-                            ),
-                            Positioned(
-                              top: 40,
-                              right: 0,
-                              child: InkWell(
-                                  onTap: () async {
-                                    _sendNotificacionSOS();
-                                  },
-                                  child: Container(
-                                      width: w / 5,
-                                      height: 50,
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        "SOS",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 18),
+          }*/
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body: OKToast(
+            child: usuarioBloc.miFraccionamiento.color?.r != null
+                ? Stack(
+                    children: [
+                      _form(),
+                      Positioned(
+                        top: 40,
+                        left: 5,
+                        right: 0,
+                        child: Image.network(
+                          usuarioBloc.miFraccionamiento.urlLogopngBlanco
+                              .toString(),
+                          height: h * 0.1,
+                          alignment: Alignment.topLeft,
+                        ),
+                      ),
+                      Positioned(
+                        top: 40,
+                        right: 0,
+                        child: InkWell(
+                            onTap: () async {
+                              _sendNotificacionSOS();
+                            },
+                            child: Container(
+                                width: w / 5,
+                                height: 50,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "SOS",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18),
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          50.0) //                 <--- border radius here
                                       ),
-                                      decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(
-                                                50.0) //                 <--- border radius here
-                                            ),
-                                      ))),
-                            )
-                          ],
-                        )
-                      : Center(
-                          child: Image.asset(
-                            "assets/icon/casita.gif",
-                            width: 200,
-                            height: 200,
-                            fit: BoxFit.contain,
-                          ),
-                        )));
-        });
+                                ))),
+                      )
+                    ],
+                  )
+                : Center(
+                    child: Image.asset(
+                      "assets/icon/casita.gif",
+                      width: 200,
+                      height: 200,
+                      fit: BoxFit.contain,
+                    ),
+                  )));
+    //  });
   }
 
   Widget _form() {
@@ -167,6 +168,9 @@ class _LoginPageState extends State<LoginPage> {
                   child: TextFormFieldBorder("CORREO", _email,
                       TextInputType.emailAddress, false, Colors.white),
                 ),
+                Padding(
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    child: TextFormField()),
                 SizedBox(
                   height: 30,
                 ),
