@@ -18,7 +18,7 @@ import 'package:campestre/config/routes.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'controls/connection.dart';
 import 'firebase_options.dart';
 import 'models/fraccionamientos.dart';
@@ -80,14 +80,53 @@ class _MyAppState extends State<MyApp> {
     _restoConfiguracion();
   }
 
-  _listenersMessaging() {
+  _listenersMessaging() async {
     FirebaseMessaging.instance.getInitialMessage();
-    FirebaseMessaging.onMessage.listen((event) {
-      if (event.notification != null) {
-        print(event.notification!.body);
-        print(event.notification!.title);
+
+
+    if(Platform.isAndroid){
+      const AndroidNotificationChannel channel = AndroidNotificationChannel(
+        'high_importance_channel', // id
+        'High Importance Notifications', // title
+        'This channel is used for important notifications.', // description
+        importance: Importance.max,
+      );
+      final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+          FlutterLocalNotificationsPlugin();
+
+      await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
+      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+        RemoteNotification notification = message.notification as RemoteNotification;
+        AndroidNotification android = message.notification?.android as AndroidNotification;
+
+        // If `onMessage` is triggered with a notification, construct our own
+        // local notification to show to users using the created channel.
+        if (notification != null && android != null) {
+          flutterLocalNotificationsPlugin.show(
+              notification.hashCode,
+              notification.title,
+              notification.body,
+              NotificationDetails(
+                android: AndroidNotificationDetails(
+                  channel.id,
+                  channel.name,
+                  channel.description,
+                  icon: android.smallIcon,
+                  // other properties...
+                ),
+              ));
+        }
+      });
+      }else{
+      FirebaseMessaging.onMessage.listen((event) {
+        if (event.notification != null) {
+          print(event.notification!.body);
+          print(event.notification!.title);
+        }
+      });
       }
-    });
 
     /*FirebaseMessaging.onMessageOpenedApp.listen((event) {
       Navigator.of(context).push(
