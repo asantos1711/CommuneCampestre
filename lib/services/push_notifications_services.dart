@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 // P8 : key ID: 68K3Q7J7DM
@@ -33,7 +32,29 @@ class PushNotificationsService {
 
   static Future initializeApp() async {
     //Push notifications
+
+    if (Platform.isIOS) {
+      NotificationSettings settings = await messaging.requestPermission(
+        alert: true,
+        announcement: false,
+        badge: true,
+        carPlay: false,
+        criticalAlert: false,
+        provisional: false,
+        sound: true,
+      );
+
+      await FirebaseMessaging.instance
+          .setForegroundNotificationPresentationOptions(
+        alert: true, // Required to display a heads up notification
+        badge: true,
+        sound: true,
+      );
+      print('User granted permission: ${settings.authorizationStatus}');
+    }
+
     token = await FirebaseMessaging.instance.getToken();
+
     print("Token Messaging: " + token.toString());
 
     FirebaseMessaging.onBackgroundMessage(_backgroundHandler);
