@@ -1,6 +1,11 @@
 import 'dart:async';
+<<<<<<< HEAD
 import 'dart:io';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+=======
+import 'dart:io' show Platform;
+
+>>>>>>> a0711df5178889c7c44b8168b6f92c071e8cd9b4
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 // P8 : key ID: 68K3Q7J7DM
