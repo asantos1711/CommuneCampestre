@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:io' show Platform;
 
@@ -45,7 +46,6 @@ class PushNotificationsService {
         provisional: false,
         sound: true,
       );
-      
 
       await FirebaseMessaging.instance
           .setForegroundNotificationPresentationOptions(
