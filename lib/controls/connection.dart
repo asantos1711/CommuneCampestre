@@ -182,7 +182,7 @@ class DatabaseServices {
 
     try {
       final response =
-          await http.get(Uri.parse(_url)).timeout(Duration(seconds: 5));
+          await http.get(Uri.parse(_url)).timeout(Duration(seconds: 25));
       final decodedData = jsonDecode(response.body);
       //print("CONFIGURACIÓN " + decodedData.toString());
       fraccionamiento = Fraccionamiento.fromJson(decodedData);
