@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:io' show Platform;
 
@@ -45,7 +46,6 @@ class PushNotificationsService {
         provisional: false,
         sound: true,
       );
-      
 
       await FirebaseMessaging.instance
           .setForegroundNotificationPresentationOptions(
@@ -54,46 +54,55 @@ class PushNotificationsService {
         sound: true,
       );
       print('User granted permission: ${settings.authorizationStatus}');
-    }
+    } /* else {
+      FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+        const AndroidNotificationChannel channel = AndroidNotificationChannel(
+          'high_importance_channel', // id
+          'High Importance Notifications', // title
+          'This channel is used for important notifications.', // description
+          importance: Importance.max,
+        );
+        final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+            FlutterLocalNotificationsPlugin();
 
-    else{
-      const AndroidNotificationChannel channel = AndroidNotificationChannel(
-        'high_importance_channel', // id
-        'High Importance Notifications', // title
-        'This channel is used for important notifications.', // description
-        importance: Importance.max,
-      );
-      final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-          FlutterLocalNotificationsPlugin();
+        await flutterLocalNotificationsPlugin
+            .resolvePlatformSpecificImplementation<
+                AndroidFlutterLocalNotificationsPlugin>()
+            ?.createNotificationChannel(channel);
 
-      await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(channel);
-      
-
-      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      RemoteNotification notification = message.notification as RemoteNotification;
-      AndroidNotification android = message.notification?.android as AndroidNotification;
-
-      // If `onMessage` is triggered with a notification, construct our own
-      // local notification to show to users using the created channel.
-      if (notification != null && android != null) {
-        flutterLocalNotificationsPlugin.show(
-            notification.hashCode,
-            notification.title,
-            notification.body,
-            NotificationDetails(
-              android: AndroidNotificationDetails(
-                channel.id,
-                channel.name,
-                channel.description,
-                icon: android.smallIcon,
-                // other properties...
-              ),
-            ));
-      }
-    });
-    }
+        RemoteNotification notification =
+            message.notification as RemoteNotification;
+        AndroidNotification android =
+            message.notification?.android as AndroidNotification;
+        print(notification.hashCode.toString());
+        print(notification.title.toString());
+        print(notification.body.toString());
+        print(message.notification!.body.toString());
+        // If `onMessage` is triggered with a notification, construct our own
+        // local notification to show to users using the created channel.
+        try {
+          if (notification != null && android != null) {
+            await flutterLocalNotificationsPlugin.show(
+                notification.hashCode,
+                notification.title,
+                notification.body,
+                NotificationDetails(
+                  android: AndroidNotificationDetails(
+                    channel.id,
+                    channel.name,
+                    channel.description,
+                    importance: Importance.max,
+                    color: Colors.blue,
+                    playSound: true,
+                    //icon: '@mipmap/lancher_icon',
+                  ),
+                ));
+          }
+        } catch (e) {
+          print("ERROR EN OTIFICACION " + e.toString());
+        }
+      });
+    }*/
 
     token = await FirebaseMessaging.instance.getToken();
 
