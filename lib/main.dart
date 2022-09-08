@@ -16,10 +16,8 @@ import 'package:campestre/config/routes.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'controls/connection.dart';
 import 'firebase_options.dart';
-import 'models/fraccionamientos.dart';
 import 'models/preferenciasUsuario.dart';
 import 'provider/carritoRestaurantProvider.dart';
 import 'view/splashView.dart';
@@ -103,7 +101,7 @@ class _MyAppState extends State<MyApp> {
     ruta = "inicio_sesion";
     print("isLoggedIn" + usuario.isLoggedIn.toString());
 
-    if (usuario.isLoggedIn != true && !usuario.isiniciarSesion) {
+    if (usuario.isLoggedIn != true) {
       ruta = "/";
       usuario.setiniciarSesion(false);
     }
