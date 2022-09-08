@@ -17,7 +17,7 @@ class RegistroUsuarioConnect {
 
   Future<ResponseRegistro> mandarRegistro(Usuario usuario) async {
     String urlApi = _usuarioBloc.miFraccionamiento.urlApi.toString();
-    print("Pagados*****");
+    //print("Pagados*****");
     JWTProvider jwtProvider = JWTProvider();
     ResponseRegistro model = new ResponseRegistro();
 
@@ -30,7 +30,7 @@ class RegistroUsuarioConnect {
       "Content-type": "application/json",
       "Authorization": token
     };
-    print(url);
+    //print(url);
     PushNotificationsService service = PushNotificationsService();
     print(service.getToken());
     final body = {
@@ -50,7 +50,7 @@ class RegistroUsuarioConnect {
     try {
       if (response.statusCode == 200) {
         final decodeData = json.decode(utf8.decode(response.bodyBytes));
-        print(decodeData);
+        //print(decodeData);
         model = ResponseRegistro.fromJson(decodeData);
       } else {
         print("mandarRegistro service status code: ${response.body}");
@@ -64,7 +64,7 @@ class RegistroUsuarioConnect {
 
   Future<void> actualizarToken(Usuario usuario, String status) async {
     String urlApi = _usuarioBloc.miFraccionamiento.urlApi.toString();
-    print("Pagados*****");
+    //print("Pagados*****");
     JWTProvider jwtProvider = JWTProvider();
     ResponseRegistro model = new ResponseRegistro();
 
@@ -77,7 +77,7 @@ class RegistroUsuarioConnect {
       "Content-type": "application/json",
       "Authorization": token
     };
-    print(url);
+    //print(url);
     PushNotificationsService service = PushNotificationsService();
     print(service.getToken());
     final body = {
@@ -90,18 +90,18 @@ class RegistroUsuarioConnect {
       "token": service.getToken()
     };
 
-    print(body);
+    //print(body);
 
-    print(json.encode(body));
+    //print(json.encode(body));
     final response = await http.post(Uri.parse(url),
         headers: headers, body: json.encode(body));
 
     try {
       if (response.statusCode == 200) {
         final decodeData = json.decode(utf8.decode(response.bodyBytes));
-        print(decodeData);
+        //print(decodeData);
         model = ResponseRegistro.fromJson(decodeData);
-        print(model.toJson());
+        //print(model.toJson());
       } else {
         print("actualizar token service status code: ${response.body}");
       }
@@ -164,15 +164,15 @@ class RegistroUsuarioConnect {
 
     final response = await http.get(Uri.parse(url), headers: headers);
 
-    print(response);
+    //print(response);
 
     try {
       if (response.statusCode == 200) {
         final decodeData = json.decode(utf8.decode(response.bodyBytes));
 
         model = ResponseGetLote.fromJson(decodeData);
-        print("Datos cargados");
-        print(decodeData);
+        //print("Datos cargados");
+        //print(decodeData);
       } else {
         print("availabilityHotels service status code: ${response.body}");
       }
@@ -184,7 +184,7 @@ class RegistroUsuarioConnect {
   }
 
   Future<String> getRegistroStatus(int id) async {
-    print("Mantenimientos*****");
+    //print("Mantenimientos*****");
     String model = "";
     String urlApi = _usuarioBloc.miFraccionamiento.urlApi.toString();
 
@@ -199,10 +199,10 @@ class RegistroUsuarioConnect {
     };
 
     final response = await http.get(Uri.parse(url), headers: headers);
-    print("el response****");
+    /*print("el response****");
 
     print(response.request);
-    print(response);
+    print(response);*/
 
     try {
       if (response.statusCode == 200) {
