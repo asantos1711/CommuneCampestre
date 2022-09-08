@@ -81,7 +81,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   _listenersMessaging() async {
-    const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    /*const AndroidNotificationChannel channel = AndroidNotificationChannel(
       'high_importance_channel', // id
       'High Importance Notifications', // title
 
@@ -118,7 +118,7 @@ class _MyAppState extends State<MyApp> {
               ),
             ));
       }
-    });
+    });*/
 
     FirebaseMessaging.instance.getInitialMessage();
     FirebaseMessaging.onMessage.listen((event) {
