@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+//import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:io' show Platform;
 
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -55,8 +55,6 @@ class PushNotificationsService {
       );
       print('User granted permission: ${settings.authorizationStatus}');
     }
-
-    
 
     token = await FirebaseMessaging.instance.getToken();
 

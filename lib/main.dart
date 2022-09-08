@@ -16,7 +16,7 @@ import 'package:campestre/config/routes.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+//import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'controls/connection.dart';
 import 'firebase_options.dart';
 import 'models/fraccionamientos.dart';
@@ -80,12 +80,12 @@ class _MyAppState extends State<MyApp> {
 
   _listenersMessaging() async {
     FirebaseMessaging.instance.getInitialMessage();
-      FirebaseMessaging.onMessage.listen((event) {
-        if (event.notification != null) {
-          print(event.notification!.body);
-          print(event.notification!.title);
-        }
-      });
+    FirebaseMessaging.onMessage.listen((event) {
+      if (event.notification != null) {
+        print(event.notification!.body);
+        print(event.notification!.title);
+      }
+    });
   }
 
   _initPreference() async {
