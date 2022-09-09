@@ -726,8 +726,6 @@ PODS:
     - FirebaseCore (~> 9.0)
     - GTMSessionFetcher/Core (< 2.1, >= 1.7)
   - Flutter (1.0.0)
-  - flutter_local_notifications (0.0.1):
-    - Flutter
   - flutter_notification_channel (0.0.1):
     - Flutter
   - flutter_pdfview (1.0.2):
@@ -910,7 +908,6 @@ DEPENDENCIES:
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - Flutter (from `Flutter`)
-  - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - flutter_notification_channel (from `.symlinks/plugins/flutter_notification_channel/ios`)
   - flutter_pdfview (from `.symlinks/plugins/flutter_pdfview/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
@@ -981,8 +978,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_storage/ios"
   Flutter:
     :path: Flutter
-  flutter_local_notifications:
-    :path: ".symlinks/plugins/flutter_local_notifications/ios"
   flutter_notification_channel:
     :path: ".symlinks/plugins/flutter_notification_channel/ios"
   flutter_pdfview:
@@ -1034,7 +1029,6 @@ SPEC CHECKSUMS:
   FirebaseStorage: 160ba975dd3452d9c59a3bf5ea9bf70ff96bd3c2
   FirebaseStorageInternal: 4f8a9e27391a99ac0692adbbd072fe0e5c4125fe
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
-  flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   flutter_notification_channel: 42a4f4938a3654cca62aa2a51aba0021dbfcac88
   flutter_pdfview: 25f53dd6097661e6395b17de506e6060585946bd
   fluttertoast: 16fbe6039d06a763f3533670197d01fc73459037
