@@ -181,8 +181,7 @@ class DatabaseServices {
     UsuarioBloc _usuarioBloc = new UsuarioBloc();
 
     try {
-      final response =
-          await http.get(Uri.parse(_url));
+      final response = await http.get(Uri.parse(_url));
       final decodedData = jsonDecode(response.body);
       //print("CONFIGURACIÓN " + decodedData.toString());
       fraccionamiento = Fraccionamiento.fromJson(decodedData);
@@ -396,8 +395,8 @@ class DatabaseServices {
     print(usuario.toJson());
     var bytes = utf8.encode(usuario.nombre!); // data being hashed
 
-    var digest = sha1.convert(bytes);
-    usuario.idResidente = digest.toString();
+    //var digest = sha1.convert(bytes);
+    //usuario.idResidente = digest.toString();
     final FirebaseFirestore db = FirebaseFirestore.instance;
     //print("Digest as bytes: ${digest.bytes}");
     //print("Digest as hex string: $digest");
