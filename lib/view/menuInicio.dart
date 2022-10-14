@@ -578,6 +578,17 @@ class _MenuInicioState extends State<MenuInicio> {
                             ),
                           ),
                         ),
+                        Container(
+                          width: w / 2,
+                          //margin: EdgeInsets.only(top:30),
+                          child: Text(
+                            _usuarioBloc.perfil.direccion ?? "",
+                            style: TextStyle(
+                              color: Color(0xff303370).withOpacity(0.6),
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),

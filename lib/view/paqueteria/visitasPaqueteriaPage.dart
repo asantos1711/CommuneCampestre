@@ -784,7 +784,7 @@ class _VisitasPaquteriaPageState extends State<VisitasPaquteriaPage> {
   Future getImage() async {
     if (typePhoto) {
       final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.gallery).then((value) {
+          await picker.getImage(source: ImageSource.gallery, imageQuality: 10).then((value) {
         setState(() {
           _invitado.fotoId = File(value!.path);
           _fotoIdUrl.text = value.path;
@@ -792,7 +792,7 @@ class _VisitasPaquteriaPageState extends State<VisitasPaquteriaPage> {
       });
     } else {
       final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.camera).then((value) {
+          await picker.getImage(source: ImageSource.camera, imageQuality: 10).then((value) {
         setState(() {
           _invitado.fotoId = File(value!.path);
           _fotoIdUrl.text = value.path;
@@ -914,7 +914,7 @@ class _VisitasPaquteriaPageState extends State<VisitasPaquteriaPage> {
   Future getImagePlaca() async {
     if (typePhotoPlaca) {
       final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.gallery).then((value) {
+          await picker.getImage(source: ImageSource.gallery, imageQuality: 10).then((value) {
         setState(() {
           _invitado.fotoPlaca = File(value!.path);
           //_fotoPlacaUrl.text = value.path;
@@ -924,7 +924,7 @@ class _VisitasPaquteriaPageState extends State<VisitasPaquteriaPage> {
       _placas.text = plate;
     } else {
       final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.camera).then((value) {
+          await picker.getImage(source: ImageSource.camera, imageQuality: 10).then((value) {
         setState(() {
           _invitado.fotoPlaca = File(value!.path);
           //_fotoPlacaUrl.text = value.path;
