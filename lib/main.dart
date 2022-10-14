@@ -21,6 +21,7 @@ import 'firebase_options.dart';
 import 'models/preferenciasUsuario.dart';
 import 'provider/carritoRestaurantProvider.dart';
 import 'view/splashView.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,12 +34,15 @@ void main() async {
     print('connected');
   }
 
+
   await Firebase.initializeApp(
     name: "CommuneCampestre",
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  await PushNotificationsService.initializeApp();
+  
+  await FirebaseAppCheck.instance.activate(
+    webRecaptchaSiteKey: '6LdW-uYhAAAAAEvh7VhTyHD0A2CG_eZ05LIsPdJi',  // If you're building a web app.
+  );
 
   SharedPreferences usuario = await PreferenciasUsuario().initPref();
 
