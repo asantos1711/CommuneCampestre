@@ -62,6 +62,63 @@ class RegistroUsuarioConnect {
     return model;
   }
 
+  Future<bool> isAlreadyLoteUsed(String lote) async {
+    String urlApi = _usuarioBloc.miFraccionamiento.urlApi.toString();
+    print("Lote*****  $lote");
+    JWTProvider jwtProvider = JWTProvider();
+    ResponseRegistro model = new ResponseRegistro();
+    bool alreadyExist = false;
+    String url = urlApi + "api/v1/userapp/all";
+    String tk = await jwtProvider.getJWT();
+
+    String token = "Bearer $tk"; //await _jwt.getJWT();
+
+    final headers = {
+      "Content-type": "application/json",
+      "Authorization": token
+    };
+    //print(url);
+    /*PushNotificationsService service = PushNotificationsService();
+    print(service.getToken());
+    final body = {
+      "email": usuario.email,
+      "id": null,
+      "lote": (usuario.lote != null) ? {"id": usuario.lote} : null,
+      "name": usuario.nombre,
+      "phone": usuario.telefono,
+      "status": (usuario.lote != null) ? "verificada" : "pendiente",
+      "token": service.getToken()
+    };*/
+
+    // print(json.encode(body));
+    final response = await http.get(Uri.parse(url), headers: headers);
+
+    try {
+      if (response.statusCode == 200) {
+        final List<dynamic> decodeData =
+            json.decode(utf8.decode(response.bodyBytes));
+        print("LOTE del LISTa");
+
+        for (var val in decodeData) {
+          final dd = ((val) as Map);
+          //print(dd["lote"]["id"]);
+
+          String loteNow = dd["lote"]?["id"]?.toString() ?? "";
+          print(loteNow);
+          alreadyExist = lote == loteNow ? true : alreadyExist;
+        }
+
+        // model = ResponseRegistro.fromJson(decodeData);
+      } else {
+        print("isAlreadyLoteUsed service status code: ${response.body}");
+      }
+    } catch (e) {
+      print("Error en isAlreadyLoteUsed $e");
+    }
+
+    return alreadyExist;
+  }
+
   Future<void> actualizarToken(Usuario usuario, String status) async {
     String urlApi = _usuarioBloc.miFraccionamiento.urlApi.toString();
     //print("Pagados*****");

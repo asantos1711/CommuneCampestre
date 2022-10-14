@@ -6,10 +6,12 @@ import 'package:campestre/bloc/usuario_bloc.dart';
 import 'package:campestre/view/registro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/splashProvider.dart';
+import '../services/apiResidencial/registroUsuarios.dart';
 
 class RegistroOpciones extends StatefulWidget {
   const RegistroOpciones({Key? key}) : super(key: key);
@@ -55,7 +57,7 @@ class _RegistroOpcionesState extends State<RegistroOpciones> {
               SizedBox(
                 height: 50,
               ),
-              _registroManual(),
+              // _registroManual(),
               // _opcionLeerId(),
 
               /*SizedBox(
@@ -98,6 +100,21 @@ class _RegistroOpcionesState extends State<RegistroOpciones> {
 
         final str2 = utf8.decode(base64.decode(str));
         print(str2);
+
+        RegistroUsuarioConnect connect = RegistroUsuarioConnect();
+        bool isALreadyExist = await connect.isAlreadyLoteUsed(str2);
+        print("Is Al readyExist");
+        print(isALreadyExist);
+        if (isALreadyExist) {
+          Fluttertoast.showToast(
+            msg: 'Este código de resgistro ya ha sido utilizado',
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            backgroundColor: Colors.grey[800],
+          );
+          Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
+          return;
+        }
 
         if (str2 != null && str2.isNotEmpty) {
           Navigator.push(

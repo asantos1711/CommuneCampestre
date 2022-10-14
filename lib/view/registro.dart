@@ -335,11 +335,14 @@ class _RegistroViewState extends State<RegistroView> {
         }
         bool hayLote =
             (this.widget.lote != null && this.widget.lote.isNotEmpty);
+
+        RegistroUsuarioConnect connect = RegistroUsuarioConnect();
+
         try {
           _usuario.nombre = _nombre.text;
           _usuario.email = _email.text;
           _usuario.telefono = _telefono.text;
-          _usuario.idResidente = _reflote.text;
+          //_usuario.idResidente = _reflote.text;
           _usuario.direccion = _reflote.text;
           _usuario.tokenNoti = PushNotificationsService.token;
           _usuario.tipo = "Titular";

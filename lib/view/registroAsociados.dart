@@ -143,7 +143,7 @@ class _RegistroAsociadosState extends State<RegistroAsociados> {
                     _usuario.nombre = _nombre.text;
                     _usuario.email = _email.text;
                     _usuario.telefono = _telefono.text;
-                    _usuario.idResidente = _reflote.text;
+                    //_usuario.idResidente = _reflote.text;
                     _usuario.direccion = _usuarioBloc.perfil.direccion;
                     _usuario.lote = _usuarioBloc.perfil.lote;
                     _usuario.idTitular = _usuarioBloc.perfil.idResidente;
@@ -151,6 +151,7 @@ class _RegistroAsociadosState extends State<RegistroAsociados> {
                     _usuario.estatus = "1";
                     _usuario.idRegistro = _usuarioBloc.perfil.idRegistro;
                   });
+
                   UserCredential val =
                       await db.registerUser(_email.text, _password.text);
 

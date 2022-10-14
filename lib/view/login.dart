@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:campestre/bloc/usuario_bloc.dart';
 import 'package:campestre/controls/connection.dart';
@@ -23,7 +21,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
 
 import '../controls/notificaciones.dart';
 import '../firebase_options.dart';
@@ -275,12 +272,14 @@ class _LoginPageState extends State<LoginPage> {
             return;
           }
 
+          print("********tokenNew********  $tokenNew");
+          print("********token********  ${_usuario.tokenNoti}");
           if (!_usuario.tokenNoti!.contains(tokenNew)) {
             print("si son diferentes*****");
             setState(() {
               _usuario.tokenNoti = tokenNew;
             });
-            db.updateUsuario(_usuario);
+            await db.updateUsuario(_usuario);
 
             await connect.actualizarToken(_usuario, response);
           }
