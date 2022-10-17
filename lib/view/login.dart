@@ -20,6 +20,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../controls/notificaciones.dart';
@@ -262,13 +263,32 @@ class _LoginPageState extends State<LoginPage> {
           } else if ("Habitante".contains(_usuario.tipo.toString()) &&
               !_usuario.estatus!.contains("1")) {
             Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-            Fluttertoast.showToast(
+            /*Fluttertoast.showToast(
               msg:
                   'Tu acceso ha sido bloqueado, favor de comunicarse con el titular de la cuenta',
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.BOTTOM,
               backgroundColor: Colors.grey[800],
-            );
+            );*/
+
+            Alert(
+              context: context,
+              desc:  'Tu acceso ha sido bloqueado, favor de comunicarse con el titular de la cuenta',
+              buttons: [
+                DialogButton(
+                  radius: BorderRadius.all(Radius.circular(25)),
+                  color: usuarioBloc.miFraccionamiento.getColor(),
+                  child: Text(
+                    "Aceptar",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  width: 120,
+                )
+              ],
+            ).show();
             return;
           }
 
@@ -298,13 +318,32 @@ class _LoginPageState extends State<LoginPage> {
           } else if ("bloqueada".contains(response.toLowerCase())) {
             //usuarioBloc.perfil.estatus == "2" ||
             Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-            Fluttertoast.showToast(
+            /*Fluttertoast.showToast(
               msg:
                   'El acceso a su aplicación ha sido restringido por falta de pago. Regularice sus pagos en la administración',
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.BOTTOM,
               backgroundColor: Colors.grey[800],
-            );
+            );*/
+
+            Alert(
+              context: context,
+              desc:  'El acceso a su aplicación ha sido restringido por falta de pago. Regularice sus pagos en la administración',
+              buttons: [
+                DialogButton(
+                  radius: BorderRadius.all(Radius.circular(25)),
+                  color: usuarioBloc.miFraccionamiento.getColor(),
+                  child: Text(
+                    "Aceptar",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  width: 120,
+                )
+              ],
+            ).show();
           } else if ("verificada".contains(response.toLowerCase())) {
             //(usuarioBloc.perfil.tipo != "admin" &&
             // usuarioBloc.perfil.estatus == "1") &&

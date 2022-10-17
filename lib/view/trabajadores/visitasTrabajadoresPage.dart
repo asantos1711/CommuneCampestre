@@ -17,6 +17,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:time_range/time_range.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 
@@ -660,23 +661,59 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
         Provider.of<LoadingProvider>(context, listen: false).setLoad(true);
         if (!_formKey.currentState!.validate()) {
           Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-          Fluttertoast.showToast(
+          /*Fluttertoast.showToast(
             msg: "Complete los campos faltantes",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.grey[800],
-          );
+          );*/
+          Alert(
+            context: context,
+            desc: "Complete los campos faltantes",
+            buttons: [
+              DialogButton(
+                radius: BorderRadius.all(Radius.circular(25)),
+                color: usuarioBloc.miFraccionamiento.getColor(),
+                child: Text(
+                  "Aceptar",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                width: 120,
+              )
+            ],
+          ).show();
           // _charge(false);
           return;
         }
         if (!daySalected) {
           Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-          Fluttertoast.showToast(
+          /*Fluttertoast.showToast(
             msg: "Seleccione almenos un día de la semana",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.grey[800],
-          );
+          );*/
+          Alert(
+            context: context,
+            desc: "Seleccione al menos un día de la semana",
+            buttons: [
+              DialogButton(
+                radius: BorderRadius.all(Radius.circular(25)),
+                color: usuarioBloc.miFraccionamiento.getColor(),
+                child: Text(
+                  "Aceptar",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                width: 120,
+              )
+            ],
+          ).show();
           return;
         }
 
@@ -711,12 +748,30 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
         bool exitetrabajador = await existeTrabajador(_invitado);
         if (exitetrabajador) {
           Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-          Fluttertoast.showToast(
+          /*Fluttertoast.showToast(
             msg: "Ya hay trabajador",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.grey[800],
-          );
+          );*/
+          Alert(
+            context: context,
+            desc: "Ya hay trabajador",
+            buttons: [
+              DialogButton(
+                radius: BorderRadius.all(Radius.circular(25)),
+                color: usuarioBloc.miFraccionamiento.getColor(),
+                child: Text(
+                  "Aceptar",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                width: 120,
+              )
+            ],
+          ).show();
           return;
         }
 
@@ -1223,7 +1278,7 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
     if (picked != null) {
       int days = picked.end.difference(picked.start).inDays;
       print(days.toString());
-      if (days >= 1 && days <= 31) {
+      if (days >= 1 && days <= usuarioBloc.miFraccionamiento.rangoDiasTrabReg!.toInt()) {
         print(picked);
         setState(() {
           fechaLlegada = picked.start;
@@ -1232,12 +1287,30 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
           _fechaSalida.text = DateFormat('dd-MM-yyyy').format(fechaSalida);
         });
       } else {
-        Fluttertoast.showToast(
-          msg: "Máximo 31 días",
+        /*Fluttertoast.showToast(
+          msg: "Máximo "+usuarioBloc.miFraccionamiento.rangoDiasTrabReg!.toString() + " días",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           backgroundColor: Colors.grey[800],
-        );
+        );*/
+        Alert(
+          context: context,
+          desc: "Máximo "+usuarioBloc.miFraccionamiento.rangoDiasTrabReg!.toString() + " días",
+          buttons: [
+            DialogButton(
+              radius: BorderRadius.all(Radius.circular(25)),
+              color: usuarioBloc.miFraccionamiento.getColor(),
+              child: Text(
+                "Aceptar",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              width: 120,
+            )
+          ],
+        ).show();
       }
     }
   }
@@ -1342,9 +1415,11 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
 
     bool igual = last.tiempos!.fechaEntrada == invitado.tiempos!.fechaEntrada!;
 
+    bool activo = last.activo as bool;
+
     print(igual);
 
-    if (entre || igual) {
+    if (entre || igual || activo) {
       return true;
     } else {
       return false;

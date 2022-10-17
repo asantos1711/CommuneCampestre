@@ -12,6 +12,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../bloc/usuario_bloc.dart';
 import '../../controls/connection.dart';
@@ -862,12 +863,31 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
           _fechaSalida.text = DateFormat('dd-MM-yyyy').format(fechaSalida);
         });
       } else{
-        Fluttertoast.showToast(
-          msg: "Máximo 15 días",
+
+        Alert(
+          context: context,
+          desc: "Máximo "+usuarioBloc.miFraccionamiento.rangoDiasVisitasReg.toString() +" días",
+          buttons: [
+            DialogButton(
+              radius: BorderRadius.all(Radius.circular(25)),
+              color: usuarioBloc.miFraccionamiento.getColor(),
+              child: Text(
+                "Aceptar",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              width: 120,
+            )
+          ],
+        ).show();
+        /*Fluttertoast.showToast(
+          msg: "Máximo "+usuarioBloc.miFraccionamiento.rangoDiasVisitasReg.toString() +" días",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           backgroundColor: Colors.grey[800],
-        );
+        );*/
       }
     }
   }

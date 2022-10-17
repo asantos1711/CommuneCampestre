@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../widgets/columnBuilder.dart';
 
@@ -269,12 +270,30 @@ class _CuentasAsociadasState extends State<CuentasAsociadas> {
                               onTap: () {
                                 _usuario.estatus = opcion;
                                 _databaseServices.desactivarUsuario(_usuario);
-                                Fluttertoast.showToast(
+                                /*Fluttertoast.showToast(
                                   msg: 'El usuario ha sido ' + textToast,
                                   toastLength: Toast.LENGTH_LONG,
                                   gravity: ToastGravity.BOTTOM,
                                   backgroundColor: Colors.grey[800],
-                                );
+                                );*/
+                                Alert(
+                                  context: context,
+                                  desc:  'El usuario ha sido ' + textToast,
+                                  buttons: [
+                                    DialogButton(
+                                      radius: BorderRadius.all(Radius.circular(25)),
+                                      color: _usuarioBloc.miFraccionamiento.getColor(),
+                                      child: Text(
+                                        "Aceptar",
+                                        style: TextStyle(color: Colors.white, fontSize: 20),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      width: 120,
+                                    )
+                                  ],
+                                ).show();
                                 Navigator.pushReplacement(
                                   context,
                                   PageRouteBuilder(
