@@ -19,6 +19,14 @@ class Fraccionamiento {
   bool? preguntasFrec;
   int? diasMantto;
   int? diasSanciones;
+  int? rangoDiasVisitasReg;
+  int? rangoDiasTrabReg;
+  int? rangoDiasAirbnb;
+  int? rangoDiasTrabPerm;
+  int? rangoMesesReg;  
+  int? rangoMesesTrab;
+  int? rangoMesesMud;
+  int? rangoMesesAirbnb;
 
   Fraccionamiento(
       {this.nombre,
@@ -38,6 +46,14 @@ class Fraccionamiento {
       this.preguntasFrec,
       this.diasMantto,
       this.diasSanciones,
+      this.rangoDiasAirbnb,
+      this.rangoDiasTrabPerm,
+      this.rangoDiasTrabReg,
+      this.rangoDiasVisitasReg,
+      this.rangoMesesAirbnb,
+      this.rangoMesesMud,
+      this.rangoMesesReg,
+      this.rangoMesesTrab,
       this.reportes});
 
   Color getColor() {
@@ -65,6 +81,14 @@ class Fraccionamiento {
         diasSanciones: json["diasSanciones"] == null ? 0 : json["diasSanciones"],
         preguntasFrec: json["preguntasFrec"] == null ? false : json["preguntasFrec"],
         terminos: json["terminos"] == null ? null : json["terminos"],
+        rangoDiasAirbnb: json["rangoDiasAirbnb"] == null ? 1 : json["rangoDiasAirbnb"],
+        rangoDiasTrabPerm: json["rangoDiasTrabPerm"] == null ? 1 : json["rangoDiasTrabPerm"],
+        rangoDiasTrabReg: json["rangoDiasTrabReg"] == null ? 1 : json["rangoDiasTrabReg"],
+        rangoDiasVisitasReg: json["rangoDiasVisitasReg"] == null ? 1 : json["rangoDiasVisitasReg"],
+        rangoMesesAirbnb: json["rangoMesesAirbnb"] == null ? 1 : json["rangoMesesAirbnb"],
+        rangoMesesMud: json["rangoMesesMud"] == null ? 1 : json["rangoMesesMud"],
+        rangoMesesReg: json["rangoMesesReg"] == null ? 1 : json["rangoMesesReg"],
+        rangoMesesTrab: json["rangoMesesTrab"] == null ? 1 : json["rangoMesesTrab"],
         numCuentasAsoc:
             json["numCuentasAsoc"] == null ? null : json["numCuentasAsoc"],
         color: json["color"] == null ? null : ColorF.fromJson(json["color"]),

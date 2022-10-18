@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class RegistroAsociados extends StatefulWidget {
   const RegistroAsociados({Key? key}) : super(key: key);
@@ -159,20 +160,36 @@ class _RegistroAsociadosState extends State<RegistroAsociados> {
                   print(val);
                   _usuario.idResidente = val.user?.uid;
                   db.guardarDatosRegistro(_usuario).whenComplete(() async {
-                    Fluttertoast.showToast(
+                    /*Fluttertoast.showToast(
                       msg: 'Se ha dado de alta al usuario',
                       toastLength: Toast.LENGTH_LONG,
                       gravity: ToastGravity.BOTTOM,
                       backgroundColor: Colors.grey[800],
-                    );
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => RegistroSucess()),
-                    );
-
-                    Provider.of<LoadingProvider>(context, listen: false)
+                    );*/
+                     Provider.of<LoadingProvider>(context, listen: false)
                         .setLoad(false);
+                    Alert(
+                      context: context,
+                      desc: 'Se ha dado de alta al usuario',
+                      buttons: [
+                        DialogButton(
+                          radius: BorderRadius.all(Radius.circular(25)),
+                          color: _usuarioBloc.miFraccionamiento.getColor(),
+                          child: Text(
+                            "Aceptar",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => RegistroSucess()),
+                            );
+                          },
+                          width: 120,
+                        )
+                      ],
+                    ).show();                    
+                   
 
                     /*Navigator.push(
                 context,
@@ -191,6 +208,7 @@ class _RegistroAsociadosState extends State<RegistroAsociados> {
                     gravity: ToastGravity.BOTTOM,
                     backgroundColor: Colors.grey[800],
                   );
+                  
                 } catch (e) {
                   Provider.of<LoadingProvider>(context, listen: false)
                       .setLoad(false);

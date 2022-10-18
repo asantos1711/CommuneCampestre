@@ -12,6 +12,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../bloc/usuario_bloc.dart';
 import '../../controls/connection.dart';
@@ -838,7 +839,7 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
           DateTime.now().year, DateTime.now().month, DateTime.now().day),
       //lastDate: DateTime(2101),
       lastDate: DateTime(
-          DateTime.now().year, DateTime.now().month + 1, DateTime.now().day),
+          DateTime.now().year, DateTime.now().month + usuarioBloc.miFraccionamiento.rangoMesesReg!.toInt(), DateTime.now().day),
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.from(
@@ -853,7 +854,7 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
     if (picked != null) {
       int days = picked.end.difference(picked.start).inDays;
       print(days.toString());
-      if (days >= 0 && days <= 15) {
+      if (days >= 0 && days <= usuarioBloc.miFraccionamiento.rangoDiasVisitasReg!.toInt()) {
         print(picked);
         setState(() {
           fechaLlegada = picked.start;
@@ -862,12 +863,31 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
           _fechaSalida.text = DateFormat('dd-MM-yyyy').format(fechaSalida);
         });
       } else{
-        Fluttertoast.showToast(
-          msg: "Máximo 15 días",
+
+        Alert(
+          context: context,
+          desc: "Máximo "+usuarioBloc.miFraccionamiento.rangoDiasVisitasReg.toString() +" días",
+          buttons: [
+            DialogButton(
+              radius: BorderRadius.all(Radius.circular(25)),
+              color: usuarioBloc.miFraccionamiento.getColor(),
+              child: Text(
+                "Aceptar",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              width: 120,
+            )
+          ],
+        ).show();
+        /*Fluttertoast.showToast(
+          msg: "Máximo "+usuarioBloc.miFraccionamiento.rangoDiasVisitasReg.toString() +" días",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           backgroundColor: Colors.grey[800],
-        );
+        );*/
       }
     }
   }
@@ -926,7 +946,7 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
   Future getImage() async {
     if (typePhoto) {
       final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.gallery).then((value) {
+          await picker.getImage(source: ImageSource.gallery, imageQuality: 10).then((value) {
         setState(() {
           _invitado!.fotoId = File(value!.path);
           _fotoIdUrl.text = value.path;
@@ -934,7 +954,7 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
       });
     } else {
       final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.camera).then((value) {
+          await picker.getImage(source: ImageSource.camera, imageQuality: 10).then((value) {
         setState(() {
           _invitado!.fotoId = File(value!.path);
           _fotoIdUrl.text = value.path;
@@ -958,11 +978,13 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
       _placas.text = plate;
     } else {
       final dynamic pickedFile =
-          await picker.pickImage(source: ImageSource.camera);
+          await picker.pickImage(source: ImageSource.camera, imageQuality: 10);
       setState(() {
-        _invitado!.fotoId = File(pickedFile!.path);
+        _invitado!.fotoPlaca = File(pickedFile!.path);
         //_fotoPlacaUrl.text = value.path;
       });
+      /*String plate = await lprExtract(_invitado!.fotoPlaca as File);
+      _placas.text = plate;*/
     }
     Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
   }
@@ -992,7 +1014,7 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
       String str = response.data.results;*/
 
       Response response = await Dio().post(url.toString(), data: formData);
-      //print("LPR Rsponse: $response");
+      print("LPR Rsponse: $response");
       Map responseBody = response.data;
       List results = responseBody['results'];
       print("Hay resultados ?? " + results.length.toString()); //Hay que validar

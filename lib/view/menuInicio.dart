@@ -23,6 +23,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../controls/notificaciones.dart';
 import '../models/estadoCuenta/detailEstadoCuenta.dart';
@@ -222,13 +223,31 @@ class _MenuInicioState extends State<MenuInicio> {
           context,
           MaterialPageRoute(builder: (context) => LoginPage()),
         );
-        Fluttertoast.showToast(
+        /*Fluttertoast.showToast(
           msg:
               'Tu acceso ha sido bloqueado, favor de comunicarse con el titular de la cuenta',
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           backgroundColor: Colors.grey[800],
-        );
+        );*/
+        Alert(
+          context: context,
+          desc:  'Tu acceso ha sido bloqueado, favor de comunicarse con el titular de la cuenta',
+          buttons: [
+            DialogButton(
+              radius: BorderRadius.all(Radius.circular(25)),
+              color: _usuarioBloc.miFraccionamiento.getColor(),
+              child: Text(
+                "Aceptar",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              width: 120,
+            )
+          ],
+        ).show();
         return;
       }
 
@@ -257,13 +276,31 @@ class _MenuInicioState extends State<MenuInicio> {
           context,
           MaterialPageRoute(builder: (context) => LoginPage()),
         );
-        Fluttertoast.showToast(
+        /*Fluttertoast.showToast(
           msg:
               'Tu acceso ha sido bloqueado, favor de comunicarse con administración',
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           backgroundColor: Colors.grey[800],
-        );
+        );*/
+        Alert(
+          context: context,
+          desc:  'Tu acceso ha sido bloqueado, favor de comunicarse con administración',
+          buttons: [
+            DialogButton(
+              radius: BorderRadius.all(Radius.circular(25)),
+              color: _usuarioBloc.miFraccionamiento.getColor(),
+              child: Text(
+                "Aceptar",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              width: 120,
+            )
+          ],
+        ).show();
       } else if ("verificada".contains(response.toLowerCase())) {
         //(usuarioBloc.perfil.tipo != "admin" &&
         // usuarioBloc.perfil.estatus == "1") &&
@@ -427,6 +464,15 @@ class _MenuInicioState extends State<MenuInicio> {
           },
           child: _opcion(Icons.person_outlined, "Acceso a visitas"),
         ),
+        InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => VisitasActivas()),
+            );
+          },
+          child: _opcion(Icons.qr_code, "Mis visitas"),
+        ),
         _usuarioBloc.miFraccionamiento.preguntasFrec as bool
             ? InkWell(
                 onTap: () {
@@ -578,6 +624,17 @@ class _MenuInicioState extends State<MenuInicio> {
                             ),
                           ),
                         ),
+                        Container(
+                          width: w / 2,
+                          //margin: EdgeInsets.only(top:30),
+                          child: Text(
+                            _usuarioBloc.perfil.direccion ?? "",
+                            style: TextStyle(
+                              color: Color(0xff303370).withOpacity(0.6),
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -677,20 +734,56 @@ class _MenuInicioState extends State<MenuInicio> {
                     bodyText:
                         "Se han recibido una señal SOS de ${_usuarioBloc.perfil.nombre}");
 
-                Fluttertoast.showToast(
+                /*Fluttertoast.showToast(
                   msg: "La alerta ha sido enviada ",
                   toastLength: Toast.LENGTH_LONG,
                   gravity: ToastGravity.BOTTOM,
                   backgroundColor: Colors.grey[800],
-                );
+                );*/
+                Alert(
+                  context: context,
+                  desc:  "La alerta ha sido enviada ",
+                  buttons: [
+                    DialogButton(
+                      radius: BorderRadius.all(Radius.circular(25)),
+                      color: _usuarioBloc.miFraccionamiento.getColor(),
+                      child: Text(
+                        "Aceptar",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      width: 120,
+                    )
+                  ],
+                ).show();
               } catch (e) {
                 print("No se pudo enviar la alerta: " + e.toString());
-                Fluttertoast.showToast(
+                /*Fluttertoast.showToast(
                   msg: "No se pudo enviar la alerta ",
                   toastLength: Toast.LENGTH_LONG,
                   gravity: ToastGravity.BOTTOM,
                   backgroundColor: Colors.grey[800],
-                );
+                );*/
+                Alert(
+                  context: context,
+                  desc:  "No se pudo enviar la alerta ",
+                  buttons: [
+                    DialogButton(
+                      radius: BorderRadius.all(Radius.circular(25)),
+                      color: _usuarioBloc.miFraccionamiento.getColor(),
+                      child: Text(
+                        "Aceptar",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      width: 120,
+                    )
+                  ],
+                ).show();
               }
 
               Provider.of<LoadingProvider>(context, listen: false)

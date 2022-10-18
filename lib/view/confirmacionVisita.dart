@@ -13,6 +13,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:share_files_and_screenshot_widgets/share_files_and_screenshot_widgets.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -285,12 +286,31 @@ class _ConfirmacionVistitasState extends State<ConfirmacionVistitas> {
 
       FlutterClipboard.copy("¡Hola!,este es el link para tu acceso : ${url}")
           .then((value) {
-        Fluttertoast.showToast(
+        /*Fluttertoast.showToast(
           msg: 'El url ha sido copiado',
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           backgroundColor: Colors.grey[800],
-        );
+        );*/
+
+        Alert(
+            context: context,
+            desc: "El url ha sido copiado",
+            buttons: [
+              DialogButton(
+                radius: BorderRadius.all(Radius.circular(25)),
+                color: _usuarioBloc.miFraccionamiento.getColor(),
+                child: Text(
+                  "Aceptar",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                width: 120,
+              )
+            ],
+          ).show();
       });
     } on BitLyException catch (e) {
       //For handling TinyUrlException

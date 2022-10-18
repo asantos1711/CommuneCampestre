@@ -10,6 +10,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../bloc/usuario_bloc.dart';
 import '../../controls/connection.dart';
@@ -292,33 +293,90 @@ class _RentaVacacionalViewState extends State<RentaVacacionalView> {
         Provider.of<LoadingProvider>(context, listen: false).setLoad(true);
         if (!_formKey.currentState!.validate()) {
           Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-          Fluttertoast.showToast(
+          /*Fluttertoast.showToast(
             msg: "Complete los campos faltantes",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.grey[800],
-          );
+          );*/
+          
+          Alert(
+            context: context,
+            desc: 'Complete los campos faltantes',
+            buttons: [
+              DialogButton(
+                radius: BorderRadius.all(Radius.circular(25)),
+                color: usuarioBloc.miFraccionamiento.getColor(),
+                child: Text(
+                  "Aceptar",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                width: 120,
+              )
+            ],
+          ).show();
           return;
         }
 
         if (int.tryParse(_acompanantes.text) == null) {
           Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-          Fluttertoast.showToast(
+          /*Fluttertoast.showToast(
             msg: "El campo acompañantes debe ser un número",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.grey[800],
-          );
+          );*/
+
+          Alert(
+            context: context,
+            desc: 'El campo acompañantes debe ser un número',
+            buttons: [
+              DialogButton(
+                radius: BorderRadius.all(Radius.circular(25)),
+                color: usuarioBloc.miFraccionamiento.getColor(),
+                child: Text(
+                  "Aceptar",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                width: 120,
+              )
+            ],
+          ).show();
           return;
         }
         if ((_invitado.fotoId ?? null) == null) {
           Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-          Fluttertoast.showToast(
+          /*Fluttertoast.showToast(
             msg: "Agrega uan foto de identificación",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.grey[800],
-          );
+          );*/
+
+          Alert(
+            context: context,
+            desc: 'Agrega una foto de identificación',
+            buttons: [
+              DialogButton(
+                radius: BorderRadius.all(Radius.circular(25)),
+                color: usuarioBloc.miFraccionamiento.getColor(),
+                child: Text(
+                  "Aceptar",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                width: 120,
+              )
+            ],
+          ).show();
           return;
         }
         setState(() {
@@ -446,7 +504,7 @@ class _RentaVacacionalViewState extends State<RentaVacacionalView> {
     if (picked != null) {
       int days = picked.end.difference(picked.start).inDays;
       print(days.toString());
-      if (days >= 0 && days <= 31) {
+      if (days >= 0 && days <= usuarioBloc.miFraccionamiento.rangoDiasVisitasReg!.toInt()) {
         print(picked);
         setState(() {
           fechaLlegada = picked.start;
@@ -454,13 +512,25 @@ class _RentaVacacionalViewState extends State<RentaVacacionalView> {
           fechaSalida = picked.end;
           _fechaSalida.text = DateFormat('dd-MM-yyyy').format(fechaSalida);
         });
-      } else if (days < 0) {
-        Fluttertoast.showToast(
-          msg: "Minimo de días: 1",
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.BOTTOM,
-          backgroundColor: Colors.grey[800],
-        );
+      } else {
+        Alert(
+          context: context,
+          desc: "Máximo "+usuarioBloc.miFraccionamiento.rangoDiasVisitasReg.toString() +" días",
+          buttons: [
+            DialogButton(
+              radius: BorderRadius.all(Radius.circular(25)),
+              color: usuarioBloc.miFraccionamiento.getColor(),
+              child: Text(
+                "Aceptar",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              width: 120,
+            )
+          ],
+        ).show();
       }
     }
   }
@@ -724,7 +794,7 @@ class _RentaVacacionalViewState extends State<RentaVacacionalView> {
   Future getImage() async {
     if (typePhoto) {
       final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.gallery).then((value) {
+          await picker.getImage(source: ImageSource.gallery, imageQuality: 10).then((value) {
         setState(() {
           _invitado.fotoId = File(value!.path);
           _fotoIdUrl.text = value.path;
@@ -732,7 +802,7 @@ class _RentaVacacionalViewState extends State<RentaVacacionalView> {
       });
     } else {
       final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.camera).then((value) {
+          await picker.getImage(source: ImageSource.camera, imageQuality: 10).then((value) {
         setState(() {
           _invitado.fotoId = File(value!.path);
           _fotoIdUrl.text = value.path;
@@ -848,7 +918,7 @@ class _RentaVacacionalViewState extends State<RentaVacacionalView> {
   Future getImagePlaca() async {
     if (typePhotoPlaca) {
       final dynamic pickedFile =
-          await picker.pickImage(source: ImageSource.gallery).then((value) {
+          await picker.pickImage(source: ImageSource.gallery, imageQuality: 10).then((value) {
         setState(() {
           _invitado.fotoPlaca = File(value!.path);
           //_fotoPlacaUrl.text = value.path;
@@ -858,7 +928,7 @@ class _RentaVacacionalViewState extends State<RentaVacacionalView> {
       _placas.text = plate;
     } else {
       final dynamic pickedFile =
-          await picker.pickImage(source: ImageSource.camera).then((value) {
+          await picker.pickImage(source: ImageSource.camera, imageQuality: 10).then((value) {
         setState(() {
           _invitado.fotoPlaca = File(value!.path);
           //_fotoPlacaUrl.text = value.path;

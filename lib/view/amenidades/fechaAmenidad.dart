@@ -8,6 +8,7 @@ import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class FechaAmenidad extends StatefulWidget {
   AllAmenidades? idAmenidad;
@@ -433,12 +434,30 @@ class _FechaAmenidadState extends State<FechaAmenidad> {
                                           idAmenidad: _idAmenidad)),
                                 );
 
-                                Fluttertoast.showToast(
+                                /*Fluttertoast.showToast(
                                   msg: 'Se ha reservado con éxito',
                                   toastLength: Toast.LENGTH_LONG,
                                   gravity: ToastGravity.BOTTOM,
                                   backgroundColor: Colors.grey[800],
-                                );
+                                );*/
+                                Alert(
+                                  context: context,
+                                  desc: 'Se ha reservado con éxito ',
+                                  buttons: [
+                                    DialogButton(
+                                      radius: BorderRadius.all(Radius.circular(25)),
+                                      color: _usuarioBloc.miFraccionamiento.getColor(),
+                                      child: Text(
+                                        "Aceptar",
+                                        style: TextStyle(color: Colors.white, fontSize: 20),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      width: 120,
+                                    )
+                                  ],
+                                ).show();
                               },
                               child: Container(
                                 child: Text(
