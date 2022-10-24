@@ -964,7 +964,7 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
   }
 
   Future getImagePlaca() async {
-    Provider.of<LoadingProvider>(context, listen: false).setLoad(true);
+    //Provider.of<LoadingProvider>(context, listen: false).setLoad(true);
     if (typePhotoPlaca) {
       final dynamic pickedFile =
           await picker.pickImage(source: ImageSource.gallery);
@@ -986,7 +986,7 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
       /*String plate = await lprExtract(_invitado!.fotoPlaca as File);
       _placas.text = plate;*/
     }
-    Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
+    //Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
   }
 
   Future<String> lprExtract(File file) async {
