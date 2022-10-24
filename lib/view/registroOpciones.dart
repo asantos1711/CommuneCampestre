@@ -9,6 +9,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../provider/splashProvider.dart';
 import '../services/apiResidencial/registroUsuarios.dart';
@@ -106,12 +107,31 @@ class _RegistroOpcionesState extends State<RegistroOpciones> {
         print("Is Al readyExist");
         print(isALreadyExist);
         if (isALreadyExist) {
-          Fluttertoast.showToast(
+          /*Fluttertoast.showToast(
             msg: 'Este código de resgistro ya ha sido utilizado',
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.grey[800],
-          );
+          );*/
+
+          Alert(
+            context: context,
+            desc: 'Este código de resgistro ya ha sido utilizado ',
+            buttons: [
+              DialogButton(
+                radius: BorderRadius.all(Radius.circular(25)),
+                color: usuarioBloc.miFraccionamiento.getColor(),
+                child: Text(
+                  "Aceptar",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                width: 120,
+              )
+            ],
+          ).show();
           Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
           return;
         }

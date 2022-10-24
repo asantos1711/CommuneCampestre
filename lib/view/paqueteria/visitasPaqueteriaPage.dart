@@ -16,6 +16,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:time_range/time_range.dart';
 
 class VisitasPaquteriaPage extends StatefulWidget {
@@ -382,12 +383,31 @@ class _VisitasPaquteriaPageState extends State<VisitasPaquteriaPage> {
 
         if (!_formKey.currentState!.validate()) {
           Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-          Fluttertoast.showToast(
+          /*Fluttertoast.showToast(
             msg: "Complete los campos faltantes",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.grey[800],
-          );
+          );*/
+
+          Alert(
+            context: context,
+            desc: 'Complete los campos faltantes',
+            buttons: [
+              DialogButton(
+                radius: BorderRadius.all(Radius.circular(25)),
+                color: usuarioBloc.miFraccionamiento.getColor(),
+                child: Text(
+                  "Aceptar",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                width: 120,
+              )
+            ],
+          ).show();
           return;
         }
         if (range == null) {

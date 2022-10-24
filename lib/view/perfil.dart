@@ -60,6 +60,28 @@ class _PerfilState extends State<Perfil> {
                   ? _content("Télefono", _tel.text)
                   : _datos("Teléfono", _tel, _edit, wi: w),
 
+              Container(
+                margin: EdgeInsets.only(top: 30),
+                child: Row(children: [
+                  Icon(
+                    Icons.warning_amber_rounded,
+                    color: _usuarioBloc.miFraccionamiento.getColor(),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    width: w! - w! / 4,
+                    child: Text(
+                      "Favor de verificar su información, sino es correcta debe acercarse a administración para actualizarla",
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(
+                          color: _usuarioBloc.miFraccionamiento.getColor()),
+                    ),
+                  )
+                ]),
+              )
+
               //!_edit ? _botonEditar() : _botonGuardar()
             ],
           ),

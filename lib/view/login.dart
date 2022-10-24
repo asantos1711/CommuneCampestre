@@ -252,7 +252,7 @@ class _LoginPageState extends State<LoginPage> {
               usuario.setemail(_email.text);
               usuario.setpsw(_password.text);
             });
-            Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
+            //Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
             /*Navigator.pushReplacement(
               context,
               PageRouteBuilder(
@@ -356,6 +356,7 @@ class _LoginPageState extends State<LoginPage> {
               usuario.setpsw(_password.text);
             });
             //print(usuario.isLoggedIn);
+             Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
             Navigator.pushReplacement(
               context,
               PageRouteBuilder(

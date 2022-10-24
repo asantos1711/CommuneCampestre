@@ -293,33 +293,90 @@ class _RentaVacacionalViewState extends State<RentaVacacionalView> {
         Provider.of<LoadingProvider>(context, listen: false).setLoad(true);
         if (!_formKey.currentState!.validate()) {
           Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-          Fluttertoast.showToast(
+          /*Fluttertoast.showToast(
             msg: "Complete los campos faltantes",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.grey[800],
-          );
+          );*/
+          
+          Alert(
+            context: context,
+            desc: 'Complete los campos faltantes',
+            buttons: [
+              DialogButton(
+                radius: BorderRadius.all(Radius.circular(25)),
+                color: usuarioBloc.miFraccionamiento.getColor(),
+                child: Text(
+                  "Aceptar",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                width: 120,
+              )
+            ],
+          ).show();
           return;
         }
 
         if (int.tryParse(_acompanantes.text) == null) {
           Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-          Fluttertoast.showToast(
+          /*Fluttertoast.showToast(
             msg: "El campo acompañantes debe ser un número",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.grey[800],
-          );
+          );*/
+
+          Alert(
+            context: context,
+            desc: 'El campo acompañantes debe ser un número',
+            buttons: [
+              DialogButton(
+                radius: BorderRadius.all(Radius.circular(25)),
+                color: usuarioBloc.miFraccionamiento.getColor(),
+                child: Text(
+                  "Aceptar",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                width: 120,
+              )
+            ],
+          ).show();
           return;
         }
         if ((_invitado.fotoId ?? null) == null) {
           Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-          Fluttertoast.showToast(
+          /*Fluttertoast.showToast(
             msg: "Agrega uan foto de identificación",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.grey[800],
-          );
+          );*/
+
+          Alert(
+            context: context,
+            desc: 'Agrega una foto de identificación',
+            buttons: [
+              DialogButton(
+                radius: BorderRadius.all(Radius.circular(25)),
+                color: usuarioBloc.miFraccionamiento.getColor(),
+                child: Text(
+                  "Aceptar",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                width: 120,
+              )
+            ],
+          ).show();
           return;
         }
         setState(() {

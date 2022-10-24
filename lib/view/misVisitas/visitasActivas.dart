@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:share_plus/share_plus.dart';
 
 class VisitasActivas extends StatefulWidget {
@@ -242,15 +243,35 @@ class _VisitasActivasState extends State<VisitasActivas> {
                                   gravity: ToastGravity.BOTTOM,
                                   backgroundColor: Colors.grey[800],
                                 );
-                                Navigator.pushReplacement(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder:
-                                        (context, animation1, animation2) =>
-                                            VisitasActivas(),
-                                    transitionDuration: Duration(seconds: 0),
-                                  ),
-                                );
+                                
+                                Alert(
+                                  context: context,
+                                  desc: 'Este código de resgistro ya ha sido utilizado ',
+                                  buttons: [
+                                    DialogButton(
+                                      radius: BorderRadius.all(Radius.circular(25)),
+                                      color: _usuarioBloc.miFraccionamiento.getColor(),
+                                      child: Text(
+                                        "Aceptar",
+                                        style: TextStyle(color: Colors.white, fontSize: 20),
+                                      ),
+                                      onPressed: () {
+                                        //Navigator.pop(context);
+                                        Navigator.pushReplacement(
+                                          context,
+                                          PageRouteBuilder(
+                                            pageBuilder:
+                                                (context, animation1, animation2) =>
+                                                    VisitasActivas(),
+                                            transitionDuration: Duration(seconds: 0),
+                                          ),
+                                        );
+                                      },
+                                      width: 120,
+                                    )
+                                  ],
+                                ).show();
+                                
                               },
                               child: Container(
                                 child: Text(

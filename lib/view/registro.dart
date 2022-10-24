@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../bloc/usuario_bloc.dart';
 import '../models/modeloRegistro.dart';
@@ -320,12 +321,31 @@ class _RegistroViewState extends State<RegistroView> {
 
         if (!_aceptar) {
           Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-          Fluttertoast.showToast(
+          /*Fluttertoast.showToast(
             msg: 'Debes de aceptar términos y condiciones',
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.grey[800],
-          );
+          );*/
+
+          Alert(
+              context: context,
+              desc:  "Debes de aceptar términos y condiciones",
+              buttons: [
+                DialogButton(
+                  radius: BorderRadius.all(Radius.circular(25)),
+                  color: _usuarioBloc.miFraccionamiento.getColor(),
+                  child: Text(
+                    "Aceptar",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  width: 120,
+                )
+              ],
+            ).show();
           return;
         }
         if (!_formKey.currentState!.validate()) {
@@ -358,13 +378,32 @@ class _RegistroViewState extends State<RegistroView> {
 
           db.guardarDatosRegistro(_usuario).whenComplete(() async {
             if (!hayLote) {
-              Fluttertoast.showToast(
+              /*Fluttertoast.showToast(
                 msg:
                     'Tus datos serán enviados a la administración para ser aprobada',
                 toastLength: Toast.LENGTH_LONG,
                 gravity: ToastGravity.BOTTOM,
                 backgroundColor: Colors.grey[800],
-              );
+              );*/
+
+              Alert(
+                context: context,
+                desc: 'Tus datos serán enviados a la administración para ser aprobada',
+                buttons: [
+                  DialogButton(
+                    radius: BorderRadius.all(Radius.circular(25)),
+                    color: _usuarioBloc.miFraccionamiento.getColor(),
+                    child: Text(
+                      "Aceptar",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    width: 120,
+                  )
+                ],
+              ).show();
             }
 
             RegistroUsuarioConnect connect = RegistroUsuarioConnect();
@@ -379,12 +418,31 @@ class _RegistroViewState extends State<RegistroView> {
                 MaterialPageRoute(builder: (context) => LoginPage()),
               );
             } else {
-              Fluttertoast.showToast(
+              /*Fluttertoast.showToast(
                 msg: 'Ocurrio un error al mandar tus datos',
                 toastLength: Toast.LENGTH_LONG,
                 gravity: ToastGravity.BOTTOM,
                 backgroundColor: Colors.grey[800],
-              );
+              );*/
+
+              Alert(
+                context: context,
+                desc: 'Ocurrio un error al mandar tus datos',
+                buttons: [
+                  DialogButton(
+                    radius: BorderRadius.all(Radius.circular(25)),
+                    color: _usuarioBloc.miFraccionamiento.getColor(),
+                    child: Text(
+                      "Aceptar",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    width: 120,
+                  )
+                ],
+              ).show();
             }
 
             Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
@@ -398,20 +456,56 @@ class _RegistroViewState extends State<RegistroView> {
           Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
         } on FirebaseAuthException catch (ef) {
           Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-          Fluttertoast.showToast(
+          /*Fluttertoast.showToast(
             msg: 'Error en el registro ' + ef.message.toString(),
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.grey[800],
-          );
+          );*/
+          Alert(
+            context: context,
+            desc: 'Error en el registro ' + ef.message.toString(),
+            buttons: [
+              DialogButton(
+                radius: BorderRadius.all(Radius.circular(25)),
+                color: _usuarioBloc.miFraccionamiento.getColor(),
+                child: Text(
+                  "Aceptar",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                width: 120,
+              )
+            ],
+          ).show();
         } catch (e) {
           Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-          Fluttertoast.showToast(
+          /*Fluttertoast.showToast(
             msg: 'Error en el registro',
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.grey[800],
-          );
+          );*/
+          Alert(
+            context: context,
+            desc: 'Error en el registro ',
+            buttons: [
+              DialogButton(
+                radius: BorderRadius.all(Radius.circular(25)),
+                color: _usuarioBloc.miFraccionamiento.getColor(),
+                child: Text(
+                  "Aceptar",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                width: 120,
+              )
+            ],
+          ).show();
           print("Error en registro: " + e.toString());
         }
       },

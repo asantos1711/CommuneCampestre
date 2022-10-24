@@ -18,6 +18,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
+import '../../widgets/idOverlay.dart';
+
 class VisitasMudanzaPage extends StatefulWidget {
   const VisitasMudanzaPage({Key? key}) : super(key: key);
 
@@ -437,7 +439,7 @@ class _VisitasMudanzaPageState extends State<VisitasMudanzaPage> {
                       child: Container(
                           //width: 50,
                           child: InkWell(
-                        onTap: () => getImage(),
+                        onTap: () => _alert(),
                         child: CircleAvatar(
                             radius: 25,
                             backgroundColor: Colors.white.withOpacity(0.5),
@@ -509,9 +511,20 @@ class _VisitasMudanzaPageState extends State<VisitasMudanzaPage> {
                   children: <Widget>[
                     InkWell(
                         onTap: () {
-                          typePhoto = false;
+                          /*typePhoto = false;
                           getImage();
-                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();*/
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  CameraOverlayCustom(func: (value) {
+                                setState(() {
+                                  _invitado.fotoId = value;
+                                  _fotoIdUrl.text = value.path;
+                                });
+                              }),
+                            ),
+                          );
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -662,7 +675,7 @@ class _VisitasMudanzaPageState extends State<VisitasMudanzaPage> {
                       child: Container(
                           //width: 50,
                           child: InkWell(
-                        onTap: () => getImagePlaca(),
+                        onTap: () => _alertPlaca(),
                         child: CircleAvatar(
                             radius: 25,
                             backgroundColor: Colors.white.withOpacity(0.5),

@@ -21,6 +21,8 @@ import '../../provider/splashProvider.dart';
 import '../../widgets/textfielborder.dart';
 import '../../widgets/ui_helper.dart';
 import '../confirmacionVisita.dart';
+import '../../widgets/idOverlay.dart';
+
 
 class VisitasRegularPage extends StatefulWidget {
   const VisitasRegularPage({Key? key}) : super(key: key);
@@ -559,7 +561,7 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
                       child: Container(
                           //width: 50,
                           child: InkWell(
-                        onTap: () => getImage(),
+                        onTap: () => _alert(),
                         child: CircleAvatar(
                             radius: 25,
                             backgroundColor: Colors.white.withOpacity(0.5),
@@ -624,9 +626,21 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
                   children: <Widget>[
                     InkWell(
                         onTap: () {
-                          typePhoto = false;
+                          /*typePhoto = false;
                           getImage();
-                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();*/
+
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  CameraOverlayCustom(func: (value) {
+                                setState(() {
+                                  _invitado!.fotoId = value;
+                                  _fotoIdUrl.text = value.path;
+                                });
+                              }),
+                            ),
+                          );
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -751,7 +765,7 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
                       child: Container(
                           //width: 50,
                           child: InkWell(
-                        onTap: () => getImagePlaca(),
+                        onTap: () => _alertPlaca(),
                         child: CircleAvatar(
                             radius: 25,
                             backgroundColor: Colors.white.withOpacity(0.5),
