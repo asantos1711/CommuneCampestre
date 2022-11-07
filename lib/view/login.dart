@@ -234,7 +234,7 @@ class _LoginPageState extends State<LoginPage> {
           PushNotificationsService a = new PushNotificationsService();
           //a.getToken();
           //print(_usuario.tokenNoti);
-          //print(a.getToken());
+          print(a.getToken());
           String tokenNew = a.getToken();
           RegistroUsuarioConnect connect = RegistroUsuarioConnect();
 
@@ -273,7 +273,8 @@ class _LoginPageState extends State<LoginPage> {
 
             Alert(
               context: context,
-              desc:  'Tu acceso ha sido bloqueado, favor de comunicarse con el titular de la cuenta',
+              desc:
+                  'Tu acceso ha sido bloqueado, favor de comunicarse con el titular de la cuenta',
               buttons: [
                 DialogButton(
                   radius: BorderRadius.all(Radius.circular(25)),
@@ -328,7 +329,8 @@ class _LoginPageState extends State<LoginPage> {
 
             Alert(
               context: context,
-              desc:  'El acceso a su aplicación ha sido restringido por falta de pago. Regularice sus pagos en la administración',
+              desc:
+                  'El acceso a su aplicación ha sido restringido por falta de pago. Regularice sus pagos en la administración',
               buttons: [
                 DialogButton(
                   radius: BorderRadius.all(Radius.circular(25)),

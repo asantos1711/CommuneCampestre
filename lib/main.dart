@@ -34,14 +34,15 @@ void main() async {
     print('connected');
   }
 
-
   await Firebase.initializeApp(
     name: "CommuneCampestre",
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  
+  await PushNotificationsService.initializeApp();
+
   await FirebaseAppCheck.instance.activate(
-    webRecaptchaSiteKey: '6LdW-uYhAAAAAEvh7VhTyHD0A2CG_eZ05LIsPdJi',  // If you're building a web app.
+    webRecaptchaSiteKey:
+        '6LdW-uYhAAAAAEvh7VhTyHD0A2CG_eZ05LIsPdJi', // If you're building a web app.
   );
 
   SharedPreferences usuario = await PreferenciasUsuario().initPref();

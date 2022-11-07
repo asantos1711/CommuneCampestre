@@ -128,7 +128,7 @@ class RegistroUsuarioConnect {
     String url = urlApi + "api/v1/userapp/save";
     String tk = await jwtProvider.getJWT();
 
-    String token = "Bearer $tk"; //await _jwt.getJWT();
+    String token = "Bearer$tk"; //await _jwt.getJWT();
 
     final headers = {
       "Content-type": "application/json",
@@ -144,7 +144,7 @@ class RegistroUsuarioConnect {
       "name": usuario.nombre,
       "phone": usuario.telefono,
       "status": status,
-      "token": service.getToken()
+      "token": service.getToken().toString()
     };
 
     //print(body);
