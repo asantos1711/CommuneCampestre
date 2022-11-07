@@ -24,6 +24,9 @@ import 'package:weekday_selector/weekday_selector.dart';
 import '../../bloc/usuario_bloc.dart';
 import '../../models/invitadoModel.dart';
 import '../../provider/splashProvider.dart';
+import '../../widgets/idOverlay.dart';
+import 'package:day_night_time_picker/day_night_time_picker.dart';
+import 'package:day_night_time_picker/lib/constants.dart';
 
 class VisitasTrabajadoresPage extends StatefulWidget {
   const VisitasTrabajadoresPage({Key? key}) : super(key: key);
@@ -55,13 +58,34 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
     false,
     false,
   ];
+
+  void onTimeChanged(TimeOfDay newTime) {
+    setState(() {
+      _fromTime = newTime;
+      String minute = _fromTime.minute < 10
+            ? "0${_fromTime.minute}"
+            : _fromTime.minute.toString();
+        _hora.text = _fromTime.hour.toString() + ":" + minute;
+    });
+  }
+
+  void onTimeChanged2(TimeOfDay newTime) {
+    setState(() {
+      _fromTime2 = newTime;
+      print(_fromTime2);
+      String minute = _fromTime2.minute < 10
+            ? "0${_fromTime2.minute}"
+            : _fromTime2.minute.toString();
+        _hora2.text = _fromTime2.hour.toString() + ":" + minute;
+    });
+  }
   bool daySalected = false;
 
   DateTime fechaLlegada = DateTime.now();
   DateTime fechaSalida = DateTime.now().add(Duration(days: 3));
 
-  TimeOfDay _fromTime = new TimeOfDay.now();
-  TimeOfDay _fromTime2 = new TimeOfDay.now();
+  TimeOfDay _fromTime = new TimeOfDay(hour: 7, minute: 0);
+  TimeOfDay _fromTime2 = new TimeOfDay(hour: 15, minute: 0);
   Invitado _invitado = new Invitado();
   double? w, h;
   final picker = ImagePicker();
@@ -227,7 +251,7 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
                       child: Container(
                           //width: 50,
                           child: InkWell(
-                        onTap: () => getImage(),
+                        onTap: () => _alert(),
                         child: CircleAvatar(
                             radius: 25,
                             backgroundColor: Colors.white.withOpacity(0.5),
@@ -306,7 +330,7 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
                       child: Container(
                           //width: 50,
                           child: InkWell(
-                        onTap: () => getImagePlaca(),
+                        onTap: () => _alertPlaca(),
                         child: CircleAvatar(
                             radius: 25,
                             backgroundColor: Colors.white.withOpacity(0.5),
@@ -889,7 +913,7 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
     }
   }
 
-  Future<void> _showTimePicker() async {
+  /*Future<void> _showTimePicker() async {
     final picked = await showTimePicker(
       context: context,
       initialTime: _fromTime,
@@ -903,9 +927,31 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
         _hora.text = _fromTime.hour.toString() + ":" + minute;
       });
     }
+  }*/
+
+  Future<void> _showTimePicker() async {
+    Navigator.of(context).push(
+      showPicker(
+        context: context,
+        value: _fromTime,
+        onChange: onTimeChanged,
+        minuteInterval: MinuteInterval.THIRTY,        
+      ),
+  );   
+  }
+  Future<void> _showTimePicker2() async {
+    Navigator.of(context).push(
+        showPicker(
+          context: context,
+          value: _fromTime2,
+          onChange: onTimeChanged2,
+          minuteInterval: MinuteInterval.THIRTY,          
+        ),
+    );
   }
 
-  Future<void> _showTimePicker2() async {
+
+  /*Future<void> _showTimePicker2() async {
     final picked = await showTimePicker(
       context: context,
       initialTime: _fromTime2,
@@ -919,7 +965,7 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
         _hora2.text = _fromTime2.hour.toString() + ":" + minute;
       });
     }
-  }
+  }*/
 
   _getImageProfile() {
     return InkWell(
@@ -1010,9 +1056,20 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
                   children: <Widget>[
                     InkWell(
                         onTap: () {
-                          typePhoto = false;
+                          /*typePhoto = false;
                           getImage();
-                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();*/
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  CameraOverlayCustom(func: (value) {
+                                setState(() {
+                                  _invitado.fotoId = value;
+                                  _fotoIdUrl.text = value.path;
+                                });
+                              }),
+                            ),
+                          );
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,

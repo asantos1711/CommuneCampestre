@@ -18,6 +18,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
+import '../../widgets/idOverlay.dart';
+
 class VisitasMudanzaPage extends StatefulWidget {
   const VisitasMudanzaPage({Key? key}) : super(key: key);
 
@@ -31,7 +33,7 @@ class _VisitasMudanzaPageState extends State<VisitasMudanzaPage> {
   TextEditingController _nombre = new TextEditingController();
   TextEditingController _placas = new TextEditingController();
   TextEditingController _fecha = new TextEditingController();
-  TextEditingController _hora = new TextEditingController();  
+  TextEditingController _hora = new TextEditingController();
   TextEditingController _fotoIdUrl = new TextEditingController();
   DatabaseServices db = new DatabaseServices();
   DateTime selectedDate = new DateTime.now();
@@ -437,7 +439,7 @@ class _VisitasMudanzaPageState extends State<VisitasMudanzaPage> {
                       child: Container(
                           //width: 50,
                           child: InkWell(
-                        onTap: () => getImage(),
+                        onTap: () => _alert(),
                         child: CircleAvatar(
                             radius: 25,
                             backgroundColor: Colors.white.withOpacity(0.5),
@@ -512,6 +514,17 @@ class _VisitasMudanzaPageState extends State<VisitasMudanzaPage> {
                           typePhoto = false;
                           getImage();
                           Navigator.of(context).pop();
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //     builder: (BuildContext context) =>
+                          //         CameraOverlayCustom(func: (value) {
+                          //       setState(() {
+                          //         _invitado.fotoId = value;
+                          //         _fotoIdUrl.text = value.path;
+                          //       });
+                          //     }),
+                          //   ),
+                          // );
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -620,16 +633,18 @@ class _VisitasMudanzaPageState extends State<VisitasMudanzaPage> {
 
   Future getImage() async {
     if (typePhoto) {
-      final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.gallery, imageQuality: 10).then((value) {
+      final dynamic pickedFile = await picker
+          .getImage(source: ImageSource.gallery, imageQuality: 10)
+          .then((value) {
         setState(() {
           _invitado.fotoId = File(value!.path);
           _fotoIdUrl.text = value.path;
         });
       });
     } else {
-      final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.camera, imageQuality: 10).then((value) {
+      final dynamic pickedFile = await picker
+          .getImage(source: ImageSource.camera, imageQuality: 10)
+          .then((value) {
         setState(() {
           _invitado.fotoId = File(value!.path);
           _fotoIdUrl.text = value.path;
@@ -662,7 +677,7 @@ class _VisitasMudanzaPageState extends State<VisitasMudanzaPage> {
                       child: Container(
                           //width: 50,
                           child: InkWell(
-                        onTap: () => getImagePlaca(),
+                        onTap: () => _alertPlaca(),
                         child: CircleAvatar(
                             radius: 25,
                             backgroundColor: Colors.white.withOpacity(0.5),
@@ -744,8 +759,9 @@ class _VisitasMudanzaPageState extends State<VisitasMudanzaPage> {
 
   Future getImagePlaca() async {
     if (typePhotoPlaca) {
-      final dynamic pickedFile =
-          await picker.pickImage(source: ImageSource.gallery, imageQuality: 10).then((value) {
+      final dynamic pickedFile = await picker
+          .pickImage(source: ImageSource.gallery, imageQuality: 10)
+          .then((value) {
         setState(() {
           _invitado.fotoPlaca = File(value!.path);
           //_fotoPlacaUrl.text = value.path;
@@ -754,8 +770,9 @@ class _VisitasMudanzaPageState extends State<VisitasMudanzaPage> {
       String plate = await lprExtract(_invitado.fotoPlaca as File);
       _placas.text = plate;
     } else {
-      final dynamic pickedFile =
-          await picker.pickImage(source: ImageSource.camera, imageQuality: 10).then((value) {
+      final dynamic pickedFile = await picker
+          .pickImage(source: ImageSource.camera, imageQuality: 10)
+          .then((value) {
         setState(() {
           _invitado.fotoPlaca = File(value!.path);
           //_fotoPlacaUrl.text = value.path;

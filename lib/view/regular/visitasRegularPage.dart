@@ -21,6 +21,7 @@ import '../../provider/splashProvider.dart';
 import '../../widgets/textfielborder.dart';
 import '../../widgets/ui_helper.dart';
 import '../confirmacionVisita.dart';
+import '../../widgets/idOverlay.dart';
 
 class VisitasRegularPage extends StatefulWidget {
   const VisitasRegularPage({Key? key}) : super(key: key);
@@ -46,7 +47,7 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
   bool typePhotoPlaca = false;
   UIHelper u = new UIHelper();
   UsuarioBloc usuarioBloc = new UsuarioBloc();
-  TextEditingController _fecha = new TextEditingController();  
+  TextEditingController _fecha = new TextEditingController();
   TextEditingController _fechaLlegada = new TextEditingController();
   TextEditingController _placas = new TextEditingController();
   TextEditingController _fechaSalida = new TextEditingController();
@@ -559,7 +560,7 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
                       child: Container(
                           //width: 50,
                           child: InkWell(
-                        onTap: () => getImage(),
+                        onTap: () => _alert(),
                         child: CircleAvatar(
                             radius: 25,
                             backgroundColor: Colors.white.withOpacity(0.5),
@@ -627,6 +628,18 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
                           typePhoto = false;
                           getImage();
                           Navigator.of(context).pop();
+
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //     builder: (BuildContext context) =>
+                          //         CameraOverlayCustom(func: (value) {
+                          //       setState(() {
+                          //         _invitado!.fotoId = value;
+                          //         _fotoIdUrl.text = value.path;
+                          //       });
+                          //     }),
+                          //   ),
+                          // );
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -751,7 +764,7 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
                       child: Container(
                           //width: 50,
                           child: InkWell(
-                        onTap: () => getImagePlaca(),
+                        onTap: () => _alertPlaca(),
                         child: CircleAvatar(
                             radius: 25,
                             backgroundColor: Colors.white.withOpacity(0.5),
@@ -839,7 +852,10 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
           DateTime.now().year, DateTime.now().month, DateTime.now().day),
       //lastDate: DateTime(2101),
       lastDate: DateTime(
-          DateTime.now().year, DateTime.now().month + usuarioBloc.miFraccionamiento.rangoMesesReg!.toInt(), DateTime.now().day),
+          DateTime.now().year,
+          DateTime.now().month +
+              usuarioBloc.miFraccionamiento.rangoMesesReg!.toInt(),
+          DateTime.now().day),
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.from(
@@ -854,7 +870,8 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
     if (picked != null) {
       int days = picked.end.difference(picked.start).inDays;
       print(days.toString());
-      if (days >= 0 && days <= usuarioBloc.miFraccionamiento.rangoDiasVisitasReg!.toInt()) {
+      if (days >= 0 &&
+          days <= usuarioBloc.miFraccionamiento.rangoDiasVisitasReg!.toInt()) {
         print(picked);
         setState(() {
           fechaLlegada = picked.start;
@@ -862,11 +879,12 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
           fechaSalida = picked.end;
           _fechaSalida.text = DateFormat('dd-MM-yyyy').format(fechaSalida);
         });
-      } else{
-
+      } else {
         Alert(
           context: context,
-          desc: "Máximo "+usuarioBloc.miFraccionamiento.rangoDiasVisitasReg.toString() +" días",
+          desc: "Máximo " +
+              usuarioBloc.miFraccionamiento.rangoDiasVisitasReg.toString() +
+              " días",
           buttons: [
             DialogButton(
               radius: BorderRadius.all(Radius.circular(25)),
@@ -945,16 +963,18 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
 
   Future getImage() async {
     if (typePhoto) {
-      final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.gallery, imageQuality: 10).then((value) {
+      final dynamic pickedFile = await picker
+          .getImage(source: ImageSource.gallery, imageQuality: 10)
+          .then((value) {
         setState(() {
           _invitado!.fotoId = File(value!.path);
           _fotoIdUrl.text = value.path;
         });
       });
     } else {
-      final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.camera, imageQuality: 10).then((value) {
+      final dynamic pickedFile = await picker
+          .getImage(source: ImageSource.camera, imageQuality: 10)
+          .then((value) {
         setState(() {
           _invitado!.fotoId = File(value!.path);
           _fotoIdUrl.text = value.path;
@@ -964,7 +984,7 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
   }
 
   Future getImagePlaca() async {
-    Provider.of<LoadingProvider>(context, listen: false).setLoad(true);
+    //Provider.of<LoadingProvider>(context, listen: false).setLoad(true);
     if (typePhotoPlaca) {
       final dynamic pickedFile =
           await picker.pickImage(source: ImageSource.gallery);
@@ -986,7 +1006,7 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
       /*String plate = await lprExtract(_invitado!.fotoPlaca as File);
       _placas.text = plate;*/
     }
-    Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
+    //Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
   }
 
   Future<String> lprExtract(File file) async {
@@ -1018,10 +1038,11 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
       Map responseBody = response.data;
       List results = responseBody['results'];
       print("Hay resultados ?? " + results.length.toString()); //Hay que validar
-      
-      if(results.length == 0){
-         Fluttertoast.showToast(
-          msg: 'La foto de la placa no puede ser procesada, favor de elegir otra más clara y cercana',
+
+      if (results.length == 0) {
+        Fluttertoast.showToast(
+          msg:
+              'La foto de la placa no puede ser procesada, favor de elegir otra más clara y cercana',
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           backgroundColor: Colors.grey[800],
