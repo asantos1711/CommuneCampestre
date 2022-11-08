@@ -110,7 +110,9 @@ class _InvitadosViewState extends State<InvitadosView> {
             Container(
               padding: EdgeInsets.only(left: 25, right: 20),
               child: TextFormFieldBorder("Nombre", _nombre,
-                  TextInputType.emailAddress, false, Colors.white),
+                  type: TextInputType.emailAddress,
+                  obscure: false,
+                  color: Colors.white),
             ),
             _subtitle(),
             Container(
@@ -600,16 +602,18 @@ class _InvitadosViewState extends State<InvitadosView> {
 
   Future getImage() async {
     if (typePhoto) {
-      final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.gallery, imageQuality: 10).then((value) {
+      final dynamic pickedFile = await picker
+          .getImage(source: ImageSource.gallery, imageQuality: 10)
+          .then((value) {
         setState(() {
           _invitado!.fotoId = File(value!.path);
           _fotoIdUrl.text = value.path;
         });
       });
     } else {
-      final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.camera, imageQuality: 10).then((value) {
+      final dynamic pickedFile = await picker
+          .getImage(source: ImageSource.camera, imageQuality: 10)
+          .then((value) {
         setState(() {
           _invitado!.fotoId = File(value!.path);
           _fotoIdUrl.text = value.path;
@@ -721,16 +725,18 @@ class _InvitadosViewState extends State<InvitadosView> {
 
   Future getImagePlaca() async {
     if (typePhotoPlaca) {
-      final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.gallery, imageQuality: 10).then((value) {
+      final dynamic pickedFile = await picker
+          .getImage(source: ImageSource.gallery, imageQuality: 10)
+          .then((value) {
         setState(() {
           _invitado!.fotoPlaca = File(value!.path);
           //_fotoPlacaUrl.text = value.path;
         });
       });
     } else {
-      final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.camera, imageQuality: 10).then((value) {
+      final dynamic pickedFile = await picker
+          .getImage(source: ImageSource.camera, imageQuality: 10)
+          .then((value) {
         setState(() {
           _invitado!.fotoPlaca = File(value!.path);
           //_fotoPlacaUrl.text = value.path;

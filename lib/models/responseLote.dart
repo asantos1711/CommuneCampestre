@@ -2,7 +2,6 @@
 //
 //     final responseGetLote = responseGetLoteFromJson(jsonString);
 
-
 //ResponseGetLote responseGetLoteFromJson(String str) => ResponseGetLote.fromJson(json.decode(str));
 
 //String responseGetLoteToJson(ResponseGetLote data) => json.encode(data.toJson());
@@ -57,7 +56,7 @@ class Data {
     //this.mantenimiento,
     this.plusPercentMtto,
     this.parentLote,
-    //this.residenteLotes,
+    this.residenteLotes,
     this.deuda,
     this.categoryHab,
     this.subCategoryHab,
@@ -81,8 +80,8 @@ class Data {
   double? superficie;
   String? tipo;
   String? status;
-  dynamic category;
-  dynamic subestado;
+  String? category;
+  String? subestado;
   DateTime? fechaEntrega;
   String? latitud;
   String? longitud;
@@ -90,7 +89,7 @@ class Data {
   //Mantenimiento? mantenimiento;
   dynamic plusPercentMtto;
   Data? parentLote;
-  //List<ResidenteLote>? residenteLotes;
+  List<ResidenteLote>? residenteLotes;
   dynamic deuda;
   String? categoryHab;
   String? subCategoryHab;
@@ -105,6 +104,10 @@ class Data {
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"] == null ? 0 : json["id"],
+        tipo: json["tipo"] == null ? null : json["tipo"],
+        status: json["status"] == null ? null : json["status"],
+        category: json["category"],
+        subestado: json["subestado"],
         /*referencia: json["referencia"] == null ? null : json["referencia"],
         numeroViviendas:
             json["numeroViviendas"] == null ? null : json["numeroViviendas"],
@@ -128,7 +131,10 @@ class Data {
         parentLote: json["parentLote"] == null
             ? null
             : Data.fromJson(json["parentLote"]),
-        //residenteLotes: json["residenteLotes"] == null ? null : List<ResidenteLote>.from(json["residenteLotes"].map((x) => ResidenteLote.fromJson(x))),
+        residenteLotes: json["residenteLotes"] == null
+            ? null
+            : List<ResidenteLote>.from(
+                json["residenteLotes"].map((x) => ResidenteLote.fromJson(x))),
         /*deuda: json["deuda"],
         categoryHab: json["categoryHab"] == null ? null : json["categoryHab"],
         subCategoryHab:
@@ -569,73 +575,84 @@ class ReglasList {
     };
 }
 
-
+*/
 class ResidenteLoteList {
-    ResidenteLoteList({
-        this.id,
-        this.resident,
-        this.active,
-        this.asociado,
-        this.createdAt,
-        this.updatedAt,
-    });
+  ResidenteLoteList({
+    this.id,
+    this.resident,
+    this.active,
+    this.asociado,
+    this.createdAt,
+    this.updatedAt,
+  });
 
-    int? id;
-    dynamic resident;
-    bool? active;
-    bool? asociado;
-    DateTime? createdAt;
-    DateTime? updatedAt;
+  int? id;
+  dynamic resident;
+  bool? active;
+  bool? asociado;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
-    factory ResidenteLoteList.fromJson(Map<String, dynamic> json) => ResidenteLoteList(
+  factory ResidenteLoteList.fromJson(Map<String, dynamic> json) =>
+      ResidenteLoteList(
         id: json["id"] == null ? null : json["id"],
         resident: json["resident"],
         active: json["active"] == null ? null : json["active"],
         asociado: json["asociado"] == null ? null : json["asociado"],
-        createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-    );
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
         "resident": resident,
         "active": active == null ? null : active,
         "asociado": asociado == null ? null : asociado,
         "createdAt": createdAt == null ? null : createdAt!.toIso8601String(),
         "updatedAt": updatedAt == null ? null : updatedAt!.toIso8601String(),
-    };
+      };
 }
 
 class ResidenteLote {
-    ResidenteLote({
-        this.id,
-        this.active,
-        this.asociado,
-        this.createdAt,
-        this.updatedAt,
-        this.residente,
-        this.lote,
-    });
+  ResidenteLote({
+    this.id,
+    this.active,
+    this.asociado,
+    this.createdAt,
+    this.updatedAt,
+    this.residente,
+    this.lote,
+  });
 
-    int? id;
-    bool? active;
-    bool? asociado;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-    Residente? residente;
-    dynamic lote;
+  int? id;
+  bool? active;
+  bool? asociado;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  Residente? residente;
+  dynamic lote;
 
-    factory ResidenteLote.fromJson(Map<String, dynamic> json) => ResidenteLote(
+  factory ResidenteLote.fromJson(Map<String, dynamic> json) => ResidenteLote(
         id: json["id"] == null ? null : json["id"],
         active: json["active"] == null ? null : json["active"],
         asociado: json["asociado"] == null ? null : json["asociado"],
-        createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-        residente: json["residente"] == null ? null : Residente.fromJson(json["residente"]),
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
+        residente: json["residente"] == null
+            ? null
+            : Residente.fromJson(json["residente"]),
         lote: json["lote"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
         "active": active == null ? null : active,
         "asociado": asociado == null ? null : asociado,
@@ -643,122 +660,140 @@ class ResidenteLote {
         "updatedAt": updatedAt == null ? null : updatedAt!.toIso8601String(),
         "residente": residente == null ? null : residente!.toJson(),
         "lote": lote,
-    };
+      };
 }
 
 class Residente {
-    Residente({
-        this.id,
-        this.name,
-        this.telefonoList,
-        this.correoElectronicoList,
-        this.tarjetaList,
-        this.deuda,
-        this.tipo,
-    });
+  Residente({
+    this.id,
+    this.name,
+    this.telefonoList,
+    this.correoElectronicoList,
+    this.tarjetaList,
+    this.deuda,
+    this.tipo,
+  });
 
-    int? id;
-    String? name;
-    List<TelefonoList>? telefonoList;
-    List<CorreoElectronicoList>? correoElectronicoList;
-    List<dynamic>? tarjetaList;
-    dynamic deuda;
-    String? tipo;
+  int? id;
+  String? name;
+  List<TelefonoList>? telefonoList;
+  List<CorreoElectronicoList>? correoElectronicoList;
+  List<dynamic>? tarjetaList;
+  dynamic deuda;
+  String? tipo;
 
-    factory Residente.fromJson(Map<String, dynamic> json) => Residente(
+  factory Residente.fromJson(Map<String, dynamic> json) => Residente(
         id: json["id"] == null ? null : json["id"],
         name: json["name"] == null ? null : json["name"],
-        telefonoList: json["telefonoList"] == null ? null : List<TelefonoList>.from(json["telefonoList"].map((x) => TelefonoList.fromJson(x))),
-        correoElectronicoList: json["correoElectronicoList"] == null ? null : List<CorreoElectronicoList>.from(json["correoElectronicoList"].map((x) => CorreoElectronicoList.fromJson(x))),
-        tarjetaList: json["tarjetaList"] == null ? null : List<dynamic>.from(json["tarjetaList"].map((x) => x)),
+        telefonoList: json["telefonoList"] == null
+            ? null
+            : List<TelefonoList>.from(
+                json["telefonoList"].map((x) => TelefonoList.fromJson(x))),
+        correoElectronicoList: json["correoElectronicoList"] == null
+            ? null
+            : List<CorreoElectronicoList>.from(json["correoElectronicoList"]
+                .map((x) => CorreoElectronicoList.fromJson(x))),
+        tarjetaList: json["tarjetaList"] == null
+            ? null
+            : List<dynamic>.from(json["tarjetaList"].map((x) => x)),
         deuda: json["deuda"],
         tipo: json["tipo"] == null ? null : json["tipo"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
         "name": name == null ? null : name,
-        "telefonoList": telefonoList == null ? null : List<dynamic>.from(telefonoList!.map((x) => x.toJson())),
-        "correoElectronicoList": correoElectronicoList == null ? null : List<dynamic>.from(correoElectronicoList!.map((x) => x.toJson())),
-        "tarjetaList": tarjetaList == null ? null : List<dynamic>.from(tarjetaList!.map((x) => x)),
+        "telefonoList": telefonoList == null
+            ? null
+            : List<dynamic>.from(telefonoList!.map((x) => x.toJson())),
+        "correoElectronicoList": correoElectronicoList == null
+            ? null
+            : List<dynamic>.from(correoElectronicoList!.map((x) => x.toJson())),
+        "tarjetaList": tarjetaList == null
+            ? null
+            : List<dynamic>.from(tarjetaList!.map((x) => x)),
         "deuda": deuda,
         "tipo": tipo == null ? null : tipo,
-    };
+      };
 }
 
 class CorreoElectronicoList {
-    CorreoElectronicoList({
-        this.id,
-        this.correo,
-        this.referencia,
-        this.facturar,
-    });
+  CorreoElectronicoList({
+    this.id,
+    this.correo,
+    this.referencia,
+    this.facturar,
+  });
 
-    int? id;
-    String? correo;
-    String? referencia;
-    bool? facturar;
+  int? id;
+  String? correo;
+  String? referencia;
+  bool? facturar;
 
-    factory CorreoElectronicoList.fromJson(Map<String, dynamic> json) => CorreoElectronicoList(
+  factory CorreoElectronicoList.fromJson(Map<String, dynamic> json) =>
+      CorreoElectronicoList(
         id: json["id"] == null ? null : json["id"],
         correo: json["correo"] == null ? null : json["correo"],
         referencia: json["referencia"] == null ? null : json["referencia"],
         facturar: json["facturar"] == null ? null : json["facturar"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
         "correo": correo == null ? null : correo,
         "referencia": referencia == null ? null : referencia,
         "facturar": facturar == null ? null : facturar,
-    };
+      };
 }
 
 class TelefonoList {
-    TelefonoList({
-        this.id,
-        this.numero,
-        this.referencia,
-        this.tipoNumeroTelefono,
-    });
+  TelefonoList({
+    this.id,
+    this.numero,
+    this.referencia,
+    this.tipoNumeroTelefono,
+  });
 
-    int? id;
-    String? numero;
-    String? referencia;
-    TipoNumeroTelefono? tipoNumeroTelefono;
+  int? id;
+  String? numero;
+  String? referencia;
+  TipoNumeroTelefono? tipoNumeroTelefono;
 
-    factory TelefonoList.fromJson(Map<String, dynamic> json) => TelefonoList(
+  factory TelefonoList.fromJson(Map<String, dynamic> json) => TelefonoList(
         id: json["id"] == null ? null : json["id"],
         numero: json["numero"] == null ? null : json["numero"],
         referencia: json["referencia"] == null ? null : json["referencia"],
-        tipoNumeroTelefono: json["tipoNumeroTelefono"] == null ? null : TipoNumeroTelefono.fromJson(json["tipoNumeroTelefono"]),
-    );
+        tipoNumeroTelefono: json["tipoNumeroTelefono"] == null
+            ? null
+            : TipoNumeroTelefono.fromJson(json["tipoNumeroTelefono"]),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
         "numero": numero == null ? null : numero,
         "referencia": referencia == null ? null : referencia,
-        "tipoNumeroTelefono": tipoNumeroTelefono == null ? null : tipoNumeroTelefono!.toJson(),
-    };
+        "tipoNumeroTelefono":
+            tipoNumeroTelefono == null ? null : tipoNumeroTelefono!.toJson(),
+      };
 }
 
 class TipoNumeroTelefono {
-    TipoNumeroTelefono({
-        this.id,
-        this.name,
-    });
+  TipoNumeroTelefono({
+    this.id,
+    this.name,
+  });
 
-    int? id;
-    String? name;
+  int? id;
+  String? name;
 
-    factory TipoNumeroTelefono.fromJson(Map<String, dynamic> json) => TipoNumeroTelefono(
+  factory TipoNumeroTelefono.fromJson(Map<String, dynamic> json) =>
+      TipoNumeroTelefono(
         id: json["id"] == null ? null : json["id"],
         name: json["name"] == null ? null : json["name"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
         "name": name == null ? null : name,
-    };
+      };
 }
-*/

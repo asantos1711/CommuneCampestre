@@ -167,7 +167,9 @@ class _LoginPageState extends State<LoginPage> {
                 Padding(
                   padding: EdgeInsets.only(left: 20, right: 20),
                   child: TextFormFieldBorder("CORREO", _email,
-                      TextInputType.emailAddress, false, Colors.white),
+                      type: TextInputType.emailAddress,
+                      obscure: false,
+                      color: Colors.white),
                 ),
                 SizedBox(
                   height: 30,
@@ -177,9 +179,9 @@ class _LoginPageState extends State<LoginPage> {
                     child: TextFormFieldBorder(
                         "CONTRASEÑA", //Translations.of(context).text("password"),
                         _password,
-                        TextInputType.visiblePassword,
-                        true,
-                        Colors.white)),
+                        type: TextInputType.visiblePassword,
+                        obscure: true,
+                        color: Colors.white)),
                 InkWell(
                   onTap: () {
                     Navigator.push(
@@ -358,7 +360,7 @@ class _LoginPageState extends State<LoginPage> {
               usuario.setpsw(_password.text);
             });
             //print(usuario.isLoggedIn);
-             Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
+            Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
             Navigator.pushReplacement(
               context,
               PageRouteBuilder(

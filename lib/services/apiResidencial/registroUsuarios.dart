@@ -1,10 +1,9 @@
 import 'dart:convert';
 
-import 'package:campestre/bloc/usuario_bloc.dart';
-import 'package:campestre/models/NoticiasModel.dart';
-import 'package:campestre/models/responseLote.dart';
-
+import '../../bloc/usuario_bloc.dart';
+import '../../models/NoticiasModel.dart';
 import '../../models/modeloRegistro.dart';
+import '../../models/responseLote.dart';
 import '../../models/usuarioModel.dart';
 import '../jwt.dart';
 
@@ -17,7 +16,7 @@ class RegistroUsuarioConnect {
 
   Future<ResponseRegistro> mandarRegistro(Usuario usuario) async {
     String urlApi = _usuarioBloc.miFraccionamiento.urlApi.toString();
-    //print("Pagados*****");
+    print("Pagados*****");
     JWTProvider jwtProvider = JWTProvider();
     ResponseRegistro model = new ResponseRegistro();
 
@@ -30,7 +29,7 @@ class RegistroUsuarioConnect {
       "Content-type": "application/json",
       "Authorization": token
     };
-    //print(url);
+    print(url);
     PushNotificationsService service = PushNotificationsService();
     print(service.getToken());
     final body = {
@@ -50,7 +49,7 @@ class RegistroUsuarioConnect {
     try {
       if (response.statusCode == 200) {
         final decodeData = json.decode(utf8.decode(response.bodyBytes));
-        //print(decodeData);
+        print(decodeData);
         model = ResponseRegistro.fromJson(decodeData);
       } else {
         print("mandarRegistro service status code: ${response.body}");
@@ -62,9 +61,59 @@ class RegistroUsuarioConnect {
     return model;
   }
 
+  Future<void> actualizarToken(Usuario usuario, String status) async {
+    String urlApi = _usuarioBloc.miFraccionamiento.urlApi.toString();
+    print("Pagados*****");
+    JWTProvider jwtProvider = JWTProvider();
+    ResponseRegistro model = new ResponseRegistro();
+
+    String url = urlApi + "api/v1/userapp/save";
+    String tk = await jwtProvider.getJWT();
+
+    String token = "Bearer $tk"; //await _jwt.getJWT();
+
+    final headers = {
+      "Content-type": "application/json",
+      "Authorization": token
+    };
+    print(url);
+    PushNotificationsService service = PushNotificationsService();
+    print(service.getToken());
+    final body = {
+      "email": usuario.email,
+      "id": usuario.idRegistro,
+      "lote": {"id": usuario.lote},
+      "name": usuario.nombre,
+      "phone": usuario.telefono,
+      "status": status,
+      "token": service.getToken()
+    };
+
+    print(body);
+
+    print(json.encode(body));
+    final response = await http.post(Uri.parse(url),
+        headers: headers, body: json.encode(body));
+
+    try {
+      if (response.statusCode == 200) {
+        final decodeData = json.decode(utf8.decode(response.bodyBytes));
+        print(decodeData);
+        model = ResponseRegistro.fromJson(decodeData);
+        print(model.toJson());
+      } else {
+        print("actualizar token service status code: ${response.body}");
+      }
+    } catch (e) {
+      print("Error en actualizar token $e");
+    }
+
+    return;
+  }
+
   Future<bool> isAlreadyLoteUsed(String lote) async {
     String urlApi = _usuarioBloc.miFraccionamiento.urlApi.toString();
-    print("Lote*****  $lote");
+    //print("Lote*****  $lote");
     JWTProvider jwtProvider = JWTProvider();
     ResponseRegistro model = new ResponseRegistro();
     bool alreadyExist = false;
@@ -104,7 +153,7 @@ class RegistroUsuarioConnect {
           //print(dd["lote"]["id"]);
 
           String loteNow = dd["lote"]?["id"]?.toString() ?? "";
-          print(loteNow);
+          //print(loteNow);
           alreadyExist = lote == loteNow ? true : alreadyExist;
         }
 
@@ -119,54 +168,50 @@ class RegistroUsuarioConnect {
     return alreadyExist;
   }
 
-  Future<void> actualizarToken(Usuario usuario, String status) async {
+  Future<bool> isCorrectRes(String lote) async {
     String urlApi = _usuarioBloc.miFraccionamiento.urlApi.toString();
-    //print("Pagados*****");
+    print("Lote*****  $lote");
     JWTProvider jwtProvider = JWTProvider();
     ResponseRegistro model = new ResponseRegistro();
-
-    String url = urlApi + "api/v1/userapp/save";
+    bool alreadyExist = false;
+    //https://apipalmaris.commune.com.mx/api/v1/lote/get/515
+    String url = urlApi + "api/v1/lote/get/" + lote;
     String tk = await jwtProvider.getJWT();
 
-    String token = "Bearer$tk"; //await _jwt.getJWT();
+    String token = "Bearer $tk"; //await _jwt.getJWT();
 
     final headers = {
       "Content-type": "application/json",
       "Authorization": token
     };
-    //print(url);
-    PushNotificationsService service = PushNotificationsService();
-    print(service.getToken());
-    final body = {
-      "email": usuario.email,
-      "id": usuario.idRegistro,
-      "lote": {"id": usuario.lote},
-      "name": usuario.nombre,
-      "phone": usuario.telefono,
-      "status": status,
-      "token": service.getToken().toString()
-    };
 
-    //print(body);
-
-    //print(json.encode(body));
-    final response = await http.post(Uri.parse(url),
-        headers: headers, body: json.encode(body));
+    final response = await http.get(Uri.parse(url), headers: headers);
 
     try {
       if (response.statusCode == 200) {
-        final decodeData = json.decode(utf8.decode(response.bodyBytes));
-        //print(decodeData);
-        model = ResponseRegistro.fromJson(decodeData);
-        //print(model.toJson());
+        /*final decodeData =
+            json.decode(utf8.decode(response.bodyBytes));
+        print("LOTE del LISTa" +decodeData);*/
+        alreadyExist = true;
+
+        /*for (var val in decodeData) {
+          final dd = ((val) as Map);
+          //print(dd["lote"]["id"]);
+
+          String loteNow = dd["lote"]?["id"]?.toString() ?? "";
+          //print(loteNow);
+          alreadyExist = lote == loteNow ? true : alreadyExist;
+        }*/
+
+        // model = ResponseRegistro.fromJson(decodeData);
       } else {
-        print("actualizar token service status code: ${response.body}");
+        print("residencial incorrecto service status code: ${response.body}");
       }
     } catch (e) {
-      print("Error en actualizar token $e");
+      print("Error en isCorrectRes $e");
     }
 
-    return;
+    return alreadyExist;
   }
 
   Future<ResponseRegistro> getRegistro(int id) async {
@@ -193,7 +238,7 @@ class RegistroUsuarioConnect {
         model = ResponseRegistro.fromJson(decodeData);
         //print("Datos cargados");
       } else {
-        print("availabilityHotels service status code: ${response.body}");
+        print("getRegistro service status code: ${response.body}");
       }
     } catch (e) {
       print("Error getRegistro :\n$e");
@@ -211,7 +256,7 @@ class RegistroUsuarioConnect {
     String url = urlApi + "api/v1/lote/get/$id";
     String tk = await jwtProvider.getJWT();
 
-    print(url);
+    //print(url);
 
     String token = "Bearer $tk"; //await _jwt.getJWT();
     final headers = {
@@ -231,7 +276,7 @@ class RegistroUsuarioConnect {
         //print("Datos cargados");
         //print(decodeData);
       } else {
-        print("availabilityHotels service status code: ${response.body}");
+        print("getLotePadre service status code: ${response.body}");
       }
     } catch (e) {
       print("Error getRegistro :\n$e");
@@ -256,10 +301,6 @@ class RegistroUsuarioConnect {
     };
 
     final response = await http.get(Uri.parse(url), headers: headers);
-    /*print("el response****");
-
-    print(response.request);
-    print(response);*/
 
     try {
       if (response.statusCode == 200) {
@@ -268,7 +309,7 @@ class RegistroUsuarioConnect {
         model = ResponseRegistro.fromJson(decodeData).data!.status!;
         //print("Estatus del usuario : $model");
       } else {
-        print("availabilityHotels service status code: ${response.body}");
+        print("getRegistroStatus service status code: ${response.body}");
       }
     } catch (e) {
       print("Error getRegistro Status :\n$e");
@@ -302,7 +343,7 @@ class RegistroUsuarioConnect {
         model = NewsletterModel.fromJson(decodeData).newsLetterList!;
         //print("Estatus del usuario : $model");
       } else {
-        print("availabilityHotels service status code: ${response.body}");
+        print("getNewsLetter service status code: ${response.body}");
       }
     } catch (e) {
       print("Error getRegistro Status :\n$e");

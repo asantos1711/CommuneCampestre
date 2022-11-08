@@ -49,6 +49,28 @@ class DatabaseServices {
     return usuario;
   }
 
+  Future<List<Usuario>> getUsuarios(String email) async {
+    List<Usuario> users = [];
+    List<Usuario> lista = [];
+
+    QuerySnapshot<Map<String, dynamic>> snap =
+        await db.collection('usuarios').get();
+
+    snap.docs.forEach((element) {
+      print(element["lote"]);
+      lista.add(Usuario.fromFirestore(element));
+    });
+
+    //print(lista);
+
+    users = lista
+        .where((element) => email.contains(element.email.toString()))
+        .toList();
+    //print(user);
+
+    return users;
+  }
+
   Future<Usuario> getUsuario(String email) async {
     Usuario user = new Usuario();
     List<Usuario> lista = [];
@@ -368,15 +390,6 @@ class DatabaseServices {
   }
 
   Future guardarDatosRegistro(Usuario usuario) async {
-    print(usuario.toJson());
-    var bytes = utf8.encode(usuario.nombre!); // data being hashed
-
-    var digest = sha1.convert(bytes);
-    //usuario.idResidente = digest.toString();
-    final FirebaseFirestore db = FirebaseFirestore.instance;
-    //print("Digest as bytes: ${digest.bytes}");
-    //print("Digest as hex string: $digest");
-    //usuarioBloc.qrInvitado = digest.toString();
     try {
       await db
           .collection('usuarios')

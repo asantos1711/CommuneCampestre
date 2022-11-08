@@ -4,10 +4,10 @@
 
 import 'dart:convert';
 
-import 'package:campestre/bloc/usuario_bloc.dart';
-
 import 'package:http/http.dart' as http;
+import '../bloc/usuario_bloc.dart';
 import '../services/jwt.dart';
+import 'responseLote.dart';
 
 EstadoCuentaDireccion estadoCuentaDireccionFromJson(String str) =>
     EstadoCuentaDireccion.fromJson(json.decode(str));
@@ -58,25 +58,54 @@ class EstadoCuentaDireccion {
       "Authorization": token
     };
 
-    //print(body);
-    /*print("--------avilabilityHotelsAPI----------");
+    /*print(body);
     print(url);
     print(token);*/
 
     final response = await http.get(Uri.parse(url), headers: headers);
     //print(response.body);
+    //print(response.request);
 
     try {
       if (response.statusCode == 200) {
         final decodeData = json.decode(utf8.decode(response.bodyBytes));
-        /*if (decodeData["count"] == 0) {
-          print("No hay hoteles disponibles");
-          return model;
-        }*/
-
-        //print(decodeData);
 
         model = EstadoCuentaDireccion.fromJson(decodeData);
+        //print("Datos cargados");
+      } else {
+        print("getEstadoDireccion service status code: ${response.body}");
+      }
+    } catch (e) {
+      print(
+          "Is not possible get getEstadoDireccion at this time. Unexpected error:\n$e");
+    }
+
+    return model;
+  }
+
+  static Future<ResponseGetLote> getLote(String loteid) async {
+    UsuarioBloc _usuarioBloc = UsuarioBloc();
+    ResponseGetLote model = ResponseGetLote();
+    String urlApi = _usuarioBloc.miFraccionamiento.urlApi.toString();
+
+    JWTProvider jwtProvider = JWTProvider();
+    String url = urlApi + "api/v1/lote/get/$loteid";
+    String tk = await jwtProvider.getJWT();
+
+    String token = "Bearer $tk"; //await _jwt.getJWT();
+    final headers = {
+      "Content-type": "application/json",
+      "Authorization": token
+    };
+
+    final response = await http.get(Uri.parse(url), headers: headers);
+    //print(response.body);
+    //print(response.request);
+
+    try {
+      if (response.statusCode == 200) {
+        final decodeData = json.decode(utf8.decode(response.bodyBytes));
+        model = ResponseGetLote.fromJson(decodeData);
         //print("Datos cargados");
       } else {
         print("getEstadoDireccion service status code: ${response.body}");

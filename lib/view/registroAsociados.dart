@@ -63,7 +63,9 @@ class _RegistroAsociadosState extends State<RegistroAsociados> {
                   Padding(
                     padding: EdgeInsets.only(left: 20, right: 20),
                     child: TextFormFieldBorder("Nombre completo", _nombre,
-                        TextInputType.text, false, Colors.white),
+                        type: TextInputType.text,
+                        obscure: false,
+                        color: Colors.white),
                   ),
                   SizedBox(
                     height: 30,
@@ -71,7 +73,9 @@ class _RegistroAsociadosState extends State<RegistroAsociados> {
                   Padding(
                     padding: EdgeInsets.only(left: 20, right: 20),
                     child: TextFormFieldBorder("Email", _email,
-                        TextInputType.emailAddress, false, Colors.white),
+                        type: TextInputType.emailAddress,
+                        obscure: false,
+                        color: Colors.white),
                   ),
                   SizedBox(
                     height: 30,
@@ -81,14 +85,16 @@ class _RegistroAsociadosState extends State<RegistroAsociados> {
                       child: TextFormFieldBorder(
                           "Password", //Translations.of(context).text("password"),
                           _password,
-                          TextInputType.visiblePassword,
-                          true,
-                          Colors.white)),
+                          type: TextInputType.visiblePassword,
+                          obscure: true,
+                          color: Colors.white)),
                   SizedBox(height: 30),
                   Padding(
                     padding: EdgeInsets.only(left: 20, right: 20),
                     child: TextFormFieldBorder("Telefono celular", _telefono,
-                        TextInputType.phone, false, Colors.white),
+                        type: TextInputType.phone,
+                        obscure: false,
+                        color: Colors.white),
                   ),
                 ],
               ),
@@ -166,7 +172,7 @@ class _RegistroAsociadosState extends State<RegistroAsociados> {
                       gravity: ToastGravity.BOTTOM,
                       backgroundColor: Colors.grey[800],
                     );*/
-                     Provider.of<LoadingProvider>(context, listen: false)
+                    Provider.of<LoadingProvider>(context, listen: false)
                         .setLoad(false);
                     Alert(
                       context: context,
@@ -182,14 +188,14 @@ class _RegistroAsociadosState extends State<RegistroAsociados> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => RegistroSucess()),
+                              MaterialPageRoute(
+                                  builder: (context) => RegistroSucess()),
                             );
                           },
                           width: 120,
                         )
                       ],
-                    ).show();                    
-                   
+                    ).show();
 
                     /*Navigator.push(
                 context,
@@ -208,7 +214,6 @@ class _RegistroAsociadosState extends State<RegistroAsociados> {
                     gravity: ToastGravity.BOTTOM,
                     backgroundColor: Colors.grey[800],
                   );
-                  
                 } catch (e) {
                   Provider.of<LoadingProvider>(context, listen: false)
                       .setLoad(false);

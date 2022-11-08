@@ -19,14 +19,16 @@ class TextFormFieldBorder extends StatefulWidget {
   String? errorText;
   bool? space;
   double? paddingBoth;
+  bool? readOnly;
 
   TextFormFieldBorder(this.hint, this.controller,
-      [this.type,
+      {this.type,
       this.obscure,
       this.color,
       this.space,
       this.validation,
-      this.paddingBoth]);
+      this.paddingBoth,
+      this.readOnly});
   TextFormFieldBorder.withCustomCapitalization(
       {this.errorText,
       this.change,
@@ -101,9 +103,14 @@ class _TextFormFieldBorderState extends State<TextFormFieldBorder> {
                     : widget.capitalization!,
                 obscureText:
                     widget.obscure == null ? false : (widget.obscure! && !show),
+                readOnly:
+                    widget.readOnly != null ? (widget.readOnly as bool) : false,
                 decoration: InputDecoration(
                   //prefixIcon: prefixIcon,
                   filled: true,
+                  enabled: widget.readOnly != null
+                      ? !(widget.readOnly as bool)
+                      : true,
                   labelText: this.widget.hint,
                   fillColor: widget.color,
                   hintText: this.widget.hint,

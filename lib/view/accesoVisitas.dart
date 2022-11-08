@@ -49,7 +49,9 @@ class _AccesoVisitasState extends State<AccesoVisitas> {
           Container(
             padding: EdgeInsets.only(left: 25, right: 60),
             child: TextFormFieldBorder("Nombre", _nombre,
-                TextInputType.emailAddress, false, Colors.white),
+                type: TextInputType.emailAddress,
+                obscure: false,
+                color: Colors.white),
           ),
           _subtitle(),
           Container(
