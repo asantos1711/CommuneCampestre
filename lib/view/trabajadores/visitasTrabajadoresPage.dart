@@ -63,9 +63,9 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
     setState(() {
       _fromTime = newTime;
       String minute = _fromTime.minute < 10
-            ? "0${_fromTime.minute}"
-            : _fromTime.minute.toString();
-        _hora.text = _fromTime.hour.toString() + ":" + minute;
+          ? "0${_fromTime.minute}"
+          : _fromTime.minute.toString();
+      _hora.text = _fromTime.hour.toString() + ":" + minute;
     });
   }
 
@@ -74,11 +74,12 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
       _fromTime2 = newTime;
       print(_fromTime2);
       String minute = _fromTime2.minute < 10
-            ? "0${_fromTime2.minute}"
-            : _fromTime2.minute.toString();
-        _hora2.text = _fromTime2.hour.toString() + ":" + minute;
+          ? "0${_fromTime2.minute}"
+          : _fromTime2.minute.toString();
+      _hora2.text = _fromTime2.hour.toString() + ":" + minute;
     });
   }
+
   bool daySalected = false;
 
   DateTime fechaLlegada = DateTime.now();
@@ -935,21 +936,21 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
         context: context,
         value: _fromTime,
         onChange: onTimeChanged,
-        minuteInterval: MinuteInterval.THIRTY,        
+        minuteInterval: MinuteInterval.THIRTY,
       ),
-  );   
-  }
-  Future<void> _showTimePicker2() async {
-    Navigator.of(context).push(
-        showPicker(
-          context: context,
-          value: _fromTime2,
-          onChange: onTimeChanged2,
-          minuteInterval: MinuteInterval.THIRTY,          
-        ),
     );
   }
 
+  Future<void> _showTimePicker2() async {
+    Navigator.of(context).push(
+      showPicker(
+        context: context,
+        value: _fromTime2,
+        onChange: onTimeChanged2,
+        minuteInterval: MinuteInterval.THIRTY,
+      ),
+    );
+  }
 
   /*Future<void> _showTimePicker2() async {
     final picked = await showTimePicker(
@@ -1056,20 +1057,20 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
                   children: <Widget>[
                     InkWell(
                         onTap: () {
-                          /*typePhoto = false;
+                          typePhoto = false;
                           getImage();
-                          Navigator.of(context).pop();*/
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  CameraOverlayCustom(func: (value) {
-                                setState(() {
-                                  _invitado.fotoId = value;
-                                  _fotoIdUrl.text = value.path;
-                                });
-                              }),
-                            ),
-                          );
+                          Navigator.of(context).pop();
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //     builder: (BuildContext context) =>
+                          //         CameraOverlayCustom(func: (value) {
+                          //       setState(() {
+                          //         _invitado.fotoId = value;
+                          //         _fotoIdUrl.text = value.path;
+                          //       });
+                          //     }),
+                          //   ),
+                          // );
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -1164,16 +1165,18 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
 
   Future getImage() async {
     if (typePhoto) {
-      final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.gallery, imageQuality: 10).then((value) {
+      final dynamic pickedFile = await picker
+          .getImage(source: ImageSource.gallery, imageQuality: 10)
+          .then((value) {
         setState(() {
           _invitado.fotoId = File(value!.path);
           _fotoIdUrl.text = value.path;
         });
       });
     } else {
-      final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.camera, imageQuality: 10).then((value) {
+      final dynamic pickedFile = await picker
+          .getImage(source: ImageSource.camera, imageQuality: 10)
+          .then((value) {
         setState(() {
           _invitado.fotoId = File(value!.path);
           _fotoIdUrl.text = value.path;
@@ -1285,8 +1288,9 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
 
   Future getImagePlaca() async {
     if (typePhotoPlaca) {
-      final dynamic pickedFile =
-          await picker.getImage(source: ImageSource.gallery, imageQuality: 10).then((value) {
+      final dynamic pickedFile = await picker
+          .getImage(source: ImageSource.gallery, imageQuality: 10)
+          .then((value) {
         setState(() {
           _invitado.fotoPlaca = File(value!.path);
           //_fotoPlacaUrl.text = value.path;
@@ -1335,7 +1339,8 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
     if (picked != null) {
       int days = picked.end.difference(picked.start).inDays;
       print(days.toString());
-      if (days >= 1 && days <= usuarioBloc.miFraccionamiento.rangoDiasTrabReg!.toInt()) {
+      if (days >= 1 &&
+          days <= usuarioBloc.miFraccionamiento.rangoDiasTrabReg!.toInt()) {
         print(picked);
         setState(() {
           fechaLlegada = picked.start;
@@ -1352,7 +1357,9 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
         );*/
         Alert(
           context: context,
-          desc: "Máximo "+usuarioBloc.miFraccionamiento.rangoDiasTrabReg!.toString() + " días",
+          desc: "Máximo " +
+              usuarioBloc.miFraccionamiento.rangoDiasTrabReg!.toString() +
+              " días",
           buttons: [
             DialogButton(
               radius: BorderRadius.all(Radius.circular(25)),
