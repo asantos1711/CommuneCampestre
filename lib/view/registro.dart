@@ -505,11 +505,7 @@ class _RegistroViewState extends State<RegistroView> {
             //que sea el primer lote para el email
             UserCredential val =
                 await db.registerUser(_email.text, _password.text);
-            _usuario.idResidente = val.user!.uid +
-                "_" +
-                _usuarioBloc.miFraccionamiento.id! +
-                "_" +
-                "1";
+            _usuario.idResidente = val.user!.uid + "_" + "1";
           } else {
             //En caso de haber más de un lote encntrado
 
@@ -521,20 +517,13 @@ class _RegistroViewState extends State<RegistroView> {
             //Si decide usar el mismo email para el nuevo lote
             if (containsMail) {
               String id = usuarios[0].idResidente!.split("_")[0];
-              _usuario.idResidente = id +
-                  "_" +
-                  _usuarioBloc.miFraccionamiento.id! +
-                  "_" +
-                  (usuarios.length + 1).toString();
+              _usuario.idResidente =
+                  id + "_" + (usuarios.length + 1).toString();
             } else {
               //Si decide usar otro mail para el nuevo lote
               UserCredential val =
                   await db.registerUser(_email.text, _password.text);
-              _usuario.idResidente = val.user!.uid +
-                  "_" +
-                  _usuarioBloc.miFraccionamiento.id! +
-                  "_" +
-                  "1";
+              _usuario.idResidente = val.user!.uid + "_" + "1";
             }
           }
 
