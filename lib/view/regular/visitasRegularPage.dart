@@ -406,7 +406,7 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
           _invitado!.tiempos = tiempos;
         } else if (tiempoDefinido!) {
           Tiempos tiempos = new Tiempos();
-          _invitado!.tipoVisita = TipoVisita.regularDefinido;
+          _invitado!.tipoVisita = TipoVisita.regularIndefinido;
           tiempos.fechaEntrada = fechaLlegada;
           tiempos.fechaSalida = fechaSalida;
 
