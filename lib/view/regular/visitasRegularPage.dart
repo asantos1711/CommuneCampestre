@@ -395,7 +395,7 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
 
         if (unicoDia!) {
           Tiempos tiempos = new Tiempos();
-          _invitado!.tipoVisita = TipoVisita.regularDefinido;
+          _invitado!.tipoVisita = "unicoDia";//TipoVisita.regularDefinido;
 
           DateTime seleccion =
               DateTime(selectedDate.year, selectedDate.month, selectedDate.day);
@@ -406,7 +406,7 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
           _invitado!.tiempos = tiempos;
         } else if (tiempoDefinido!) {
           Tiempos tiempos = new Tiempos();
-          _invitado!.tipoVisita = TipoVisita.regularDefinido;
+          _invitado!.tipoVisita = TipoVisita.regularIndefinido;
           tiempos.fechaEntrada = fechaLlegada;
           tiempos.fechaSalida = fechaSalida;
 
