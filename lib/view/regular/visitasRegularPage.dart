@@ -395,7 +395,7 @@ class _VisitasRegularPageState extends State<VisitasRegularPage> {
 
         if (unicoDia!) {
           Tiempos tiempos = new Tiempos();
-          _invitado!.tipoVisita = TipoVisita.regularDefinido;
+          _invitado!.tipoVisita = "unicoDia";//TipoVisita.regularDefinido;
 
           DateTime seleccion =
               DateTime(selectedDate.year, selectedDate.month, selectedDate.day);

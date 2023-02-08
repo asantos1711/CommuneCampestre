@@ -74,10 +74,11 @@ class DatabaseServices {
   Future<Usuario> getUsuario(String email) async {
     Usuario user = new Usuario();
     List<Usuario> lista = [];
-    print(_auth.currentUser!.uid);
-    //print(db.);
-    QuerySnapshot<Map<String, dynamic>> snap =
-        await db.collection('usuarios').get();
+
+    QuerySnapshot<Map<String, dynamic>> snap = await db
+        .collection('usuarios')
+        .where("email", isEqualTo: email.toString())
+        .get();
 
     snap.docs.forEach((element) {
       lista.add(Usuario.fromFirestore(element));
@@ -97,17 +98,18 @@ class DatabaseServices {
     Usuario user = new Usuario();
     List<Usuario> lista = [];
 
-    QuerySnapshot<Map<String, dynamic>> snap =
-        await db.collection('usuarios').get();
+    QuerySnapshot<Map<String, dynamic>> snap = await db
+        .collection('usuarios')
+        .where("idTitular",
+            isEqualTo: usuarioBloc.perfil.idResidente.toString())
+        .get();
 
     snap.docs.forEach((element) {
       user = Usuario.fromFirestore(element);
 
-      if (user.idTitular == usuarioBloc.perfil.idResidente) {
-        print(user.idTitular);
-        print(usuarioBloc.perfil.idResidente);
-        lista.add(user);
-      }
+      print(user.idTitular);
+      print(usuarioBloc.perfil.idResidente);
+      lista.add(user);
     });
 
     return lista;
@@ -256,18 +258,19 @@ class DatabaseServices {
   Future<List<Invitado>?> getVisitasActivas() async {
     List<Invitado> lista = [];
 
-    QuerySnapshot<Map<String, dynamic>> snaps =
-        await db.collection('invitados').get();
+    QuerySnapshot<Map<String, dynamic>> snaps = await db
+        .collection('invitados')
+        .where("idResidente",
+            isEqualTo: usuarioBloc.perfil.idResidente.toString())
+        .get();
 
     //snaps.where((user) => user.activo== true).toList();
 
     if (snaps.size != null) {
       snaps.docs.forEach((element) {
         Invitado _invitado = Invitado.fromMap(element);
-        if (_invitado.idResidente!
-            .contains(usuarioBloc.perfil.idResidente.toString())) {
-          lista.add(_invitado);
-        }
+
+        lista.add(_invitado);
       });
     }
 
@@ -405,15 +408,10 @@ class DatabaseServices {
   }
 
   Future updateUsuario(Usuario usuario) async {
-    print(usuario.toJson());
+    //print(usuario.toJson());
     var bytes = utf8.encode(usuario.nombre!); // data being hashed
 
-    //var digest = sha1.convert(bytes);
-    //usuario.idResidente = digest.toString();
     final FirebaseFirestore db = FirebaseFirestore.instance;
-    //print("Digest as bytes: ${digest.bytes}");
-    //print("Digest as hex string: $digest");
-    //usuarioBloc.qrInvitado = digest.toString();
     try {
       await db
           .collection('usuarios')
