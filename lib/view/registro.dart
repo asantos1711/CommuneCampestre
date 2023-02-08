@@ -496,7 +496,7 @@ class _RegistroViewState extends State<RegistroView> {
           _usuario.direccion = _reflote.text;
           _usuario.tokenNoti = PushNotificationsService.token;
           _usuario.tipo = "Titular";
-          _usuario.estatus = "0";
+          _usuario.estatus = "1";
           _usuario.idFraccionamiento = _usuarioBloc.miFraccionamiento.id;
           _usuario.lote = hayLote ? int.parse(this.widget.lote) : null;
 
