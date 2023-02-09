@@ -95,6 +95,15 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       _form(),
                       Positioned(
+                        bottom: 10,
+                        right: 10,
+                        child: Text(
+                          "Version  1.1.11",
+                          style: TextStyle(color: Colors.grey),
+                        ), //se modifica el ultimo con respecto a
+                        //android/app/build.raddle versioncode
+                      ),
+                      Positioned(
                         top: 40,
                         left: 5,
                         right: 0,
