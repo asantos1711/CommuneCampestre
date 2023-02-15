@@ -244,7 +244,7 @@ class _FechaAmenidadState extends State<FechaAmenidad> {
               // title: Container(child: Text("")), //Row(children: <Widget>[Icon(FontAwesomeIcons.checkCircle, color: Colors.green),Text("Envio éxitoso"),],),
               content: Container(
                   width: w - 170,
-                  height: 140,
+                  height: h * 0.2,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -342,7 +342,7 @@ class _FechaAmenidadState extends State<FechaAmenidad> {
               // title: Container(child: Text("")), //Row(children: <Widget>[Icon(FontAwesomeIcons.checkCircle, color: Colors.green),Text("Envio éxitoso"),],),
               content: Container(
                   width: w - 150,
-                  height: 180,
+                  height: h * 0.35,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -445,11 +445,14 @@ class _FechaAmenidadState extends State<FechaAmenidad> {
                                   desc: 'Se ha reservado con éxito ',
                                   buttons: [
                                     DialogButton(
-                                      radius: BorderRadius.all(Radius.circular(25)),
-                                      color: _usuarioBloc.miFraccionamiento.getColor(),
+                                      radius:
+                                          BorderRadius.all(Radius.circular(25)),
+                                      color: _usuarioBloc.miFraccionamiento
+                                          .getColor(),
                                       child: Text(
                                         "Aceptar",
-                                        style: TextStyle(color: Colors.white, fontSize: 20),
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
                                       ),
                                       onPressed: () {
                                         Navigator.pop(context);

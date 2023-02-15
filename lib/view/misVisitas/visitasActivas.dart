@@ -99,17 +99,14 @@ class _VisitasActivasState extends State<VisitasActivas> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ExpansionTile(
-                        title: _list[index].activo as bool ==
-                                false
+                        title: _list[index].activo as bool == false
                             ? Text(
                                 _list[index].nombre.toString(),
-                                style: TextStyle(
-                                    color: Color(0xFFA09FA1)),
+                                style: TextStyle(color: Color(0xFFA09FA1)),
                               )
                             : Text(
                                 _list[index].nombre.toString(),
-                                style: TextStyle(
-                                    color: Colors.black),
+                                style: TextStyle(color: Colors.black),
                               ),
                         subtitle: textTipoVisita(
                             _list[index].tipoVisita.toString(),
@@ -118,71 +115,59 @@ class _VisitasActivasState extends State<VisitasActivas> {
                                 : Colors.black), //fefeff
                         children: <Widget>[
                           Container(
-                              margin: EdgeInsets.only(
-                                  left: 15, right: 10, top: 0),
+                              margin:
+                                  EdgeInsets.only(left: 15, right: 10, top: 0),
                               alignment: Alignment.bottomLeft,
                               child: Text("Válido del: " +
-                                  DateFormat('dd/MM/yyyy')
-                                      .format(_list[index]
-                                              .tiempos
-                                              ?.fechaEntrada
-                                          as DateTime))),
+                                  DateFormat('dd/MM/yyyy').format(_list[index]
+                                      .tiempos
+                                      ?.fechaEntrada as DateTime))),
                           Container(
-                              margin: EdgeInsets.only(
-                                  left: 15, right: 10, top: 0),
+                              margin:
+                                  EdgeInsets.only(left: 15, right: 10, top: 0),
                               alignment: Alignment.bottomLeft,
                               child: Text("Hasta el : " +
-                                  DateFormat('dd/MM/yyyy')
-                                      .format(_list[index]
-                                              .tiempos
-                                              ?.fechaSalida
-                                          as DateTime))),
+                                  DateFormat('dd/MM/yyyy').format(_list[index]
+                                      .tiempos
+                                      ?.fechaSalida as DateTime))),
                           Container(
-                              margin: EdgeInsets.only(
-                                  left: 15, right: 10, top: 0),
+                              margin:
+                                  EdgeInsets.only(left: 15, right: 10, top: 0),
                               alignment: Alignment.bottomLeft,
-                              child: Text(_list[index]
-                                          .tiempos
-                                          ?.horaEntrada !=
-                                      ""
-                                  ? "Desde las: " +
-                                      _list[index]
-                                          .tiempos!
-                                          .horaEntrada
-                                          .toString() +
-                                      " horas"
-                                  : "")),
+                              child: Text(
+                                  _list[index].tiempos?.horaEntrada != ""
+                                      ? "Desde las: " +
+                                          _list[index]
+                                              .tiempos!
+                                              .horaEntrada
+                                              .toString() +
+                                          " horas"
+                                      : "")),
                           Container(
-                              margin: EdgeInsets.only(
-                                  left: 15, right: 10, top: 0),
+                              margin:
+                                  EdgeInsets.only(left: 15, right: 10, top: 0),
                               alignment: Alignment.bottomLeft,
-                              child: Text(_list[index]
-                                          .tiempos
-                                          ?.horaEntrada !=
-                                      ""
-                                  ? "Hasta las: " +
-                                      _list[index]
-                                          .tiempos!
-                                          .horaSalida
-                                          .toString() +
-                                      " horas"
-                                  : "")),
+                              child: Text(
+                                  _list[index].tiempos?.horaEntrada != ""
+                                      ? "Hasta las: " +
+                                          _list[index]
+                                              .tiempos!
+                                              .horaSalida
+                                              .toString() +
+                                          " horas"
+                                      : "")),
                           //_list[index].tiempos?.fechaEntrada != null ? ListTile(title: Text("Fecha de entrada permitada: "+formatter.format(_list[index].tiempos?.fechaEntrada as DateTime))) : SizedBox(),
                           //_list[index].tiempos?.fechaSalida != null ? ListTile(title: Text("Fecha de salida permitada: "+formatter.format(_list[index].tiempos?.fechaSalida as DateTime))) : SizedBox(),
                           _list[index].activo as bool
                               ? Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     _compartir(_list[index]),
                                     InkWell(
                                       onTap: () {
-                                        _alertConfirmacion(
-                                            _list[index]);
+                                        _alertConfirmacion(_list[index]);
                                       },
-                                      child: Icon(
-                                          FontAwesomeIcons
-                                              .trash,
+                                      child: Icon(FontAwesomeIcons.trash,
                                           color: Colors.red),
                                     )
                                   ],
@@ -196,59 +181,49 @@ class _VisitasActivasState extends State<VisitasActivas> {
                                     fontWeight: FontWeight.w600,
                                     color: Color.fromARGB(
                                         255,
+                                        _usuarioBloc.miFraccionamiento.color!.r,
+                                        _usuarioBloc.miFraccionamiento.color!.g,
                                         _usuarioBloc
-                                            .miFraccionamiento
-                                            .color!
-                                            .r,
-                                        _usuarioBloc
-                                            .miFraccionamiento
-                                            .color!
-                                            .g,
-                                        _usuarioBloc
-                                            .miFraccionamiento
-                                            .color!
-                                            .b)),
+                                            .miFraccionamiento.color!.b)),
                               )
                             : Container(
                                 width: 100,
-                                child: esReactivable(
-                                        _list[index]
-                                            .tipoVisita!)
+                                child: esReactivable(_list[index].tipoVisita!)
                                     ? Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment
-                                                .end,
+                                            MainAxisAlignment.end,
                                         children: [
                                             TextButton(
                                                 onPressed: () {
-                                                  switch (_list[
-                                                          index]
-                                                      .tipoVisita) {
+                                                  switch (
+                                                      _list[index].tipoVisita) {
                                                     case "Trabajador":
-                                                      Navigator
-                                                          .push(
+                                                      Navigator.push(
                                                         context,
                                                         PageRouteBuilder(
-                                                          pageBuilder: (context, animation1, animation2) =>
-                                                              ReactivaTrabajador(invitado: _list[index]),
+                                                          pageBuilder: (context,
+                                                                  animation1,
+                                                                  animation2) =>
+                                                              ReactivaTrabajador(
+                                                                  invitado: _list[
+                                                                      index]),
                                                           transitionDuration:
-                                                              Duration(seconds: 0),
+                                                              Duration(
+                                                                  seconds: 0),
                                                         ),
                                                       );
-                                                      break;                                                    
+                                                      break;
                                                     default:
                                                       _modal(index);
                                                       break;
                                                   }
                                                 },
-                                                child: Text(
-                                                    "Reactivar"))
+                                                child: Text("Reactivar"))
                                           ])
                                     : Text(
                                         "Desactivado",
-                                        style: TextStyle(
-                                            color: Color(
-                                                0xFFA09FA1)),
+                                        style:
+                                            TextStyle(color: Color(0xFFA09FA1)),
                                       ),
                               ),
                       ),
@@ -263,7 +238,6 @@ class _VisitasActivasState extends State<VisitasActivas> {
           },
         ));
   }
-
 
   esReactivable(String tipo) {
     switch (tipo) {
@@ -286,7 +260,6 @@ class _VisitasActivasState extends State<VisitasActivas> {
         return false;
     }
   }
-
 
   _modal(int index) {
     Widget _widgetHorario() {
@@ -584,7 +557,6 @@ class _VisitasActivasState extends State<VisitasActivas> {
     );
   }
 
-
   _fechaUnDia() {
     return Container(
         //width: 270,
@@ -692,7 +664,6 @@ class _VisitasActivasState extends State<VisitasActivas> {
         ));
   }
 
-
   Future<void> _selectDateM() async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -760,7 +731,7 @@ class _VisitasActivasState extends State<VisitasActivas> {
       });
     }
   }
-  
+
   _fechaw(TextEditingController fecha, String text) {
     return Container(
         //width: 150,
@@ -794,7 +765,6 @@ class _VisitasActivasState extends State<VisitasActivas> {
           },
         ));
   }
-
 
   Future<Null> _showRangoFechas(BuildContext context) async {
     DateTimeRange initialRange =
@@ -904,8 +874,9 @@ class _VisitasActivasState extends State<VisitasActivas> {
               // title: Container(child: Text("")), //Row(children: <Widget>[Icon(FontAwesomeIcons.checkCircle, color: Colors.green),Text("Envio éxitoso"),],),
               content: Container(
                   width: w - 170,
-                  height: 150,
+                  height: h * 0.3,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
                         child: Text(
@@ -963,27 +934,31 @@ class _VisitasActivasState extends State<VisitasActivas> {
                                   gravity: ToastGravity.BOTTOM,
                                   backgroundColor: Colors.grey[800],
                                 );*/
-                                
+
                                 Alert(
                                   context: context,
                                   desc: 'Tu visita ha sido eliminada ',
                                   buttons: [
                                     DialogButton(
-                                      radius: BorderRadius.all(Radius.circular(25)),
-                                      color: _usuarioBloc.miFraccionamiento.getColor(),
+                                      radius:
+                                          BorderRadius.all(Radius.circular(25)),
+                                      color: _usuarioBloc.miFraccionamiento
+                                          .getColor(),
                                       child: Text(
                                         "Aceptar",
-                                        style: TextStyle(color: Colors.white, fontSize: 20),
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
                                       ),
                                       onPressed: () {
                                         //Navigator.pop(context);
                                         Navigator.pushReplacement(
                                           context,
                                           PageRouteBuilder(
-                                            pageBuilder:
-                                                (context, animation1, animation2) =>
-                                                    VisitasActivas(),
-                                            transitionDuration: Duration(seconds: 0),
+                                            pageBuilder: (context, animation1,
+                                                    animation2) =>
+                                                VisitasActivas(),
+                                            transitionDuration:
+                                                Duration(seconds: 0),
                                           ),
                                         );
                                       },
@@ -991,7 +966,6 @@ class _VisitasActivasState extends State<VisitasActivas> {
                                     )
                                   ],
                                 ).show();
-                                
                               },
                               child: Container(
                                 child: Text(
