@@ -11,6 +11,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+import '../models/EstadoCuentaDireccion.dart';
+import '../models/responseLote.dart';
 import '../provider/splashProvider.dart';
 import '../services/apiResidencial/registroUsuarios.dart';
 
@@ -137,6 +139,40 @@ class _RegistroOpcionesState extends State<RegistroOpciones> {
         }
 
         if (str2 != null && str2.isNotEmpty) {
+          EstadoCuentaDireccion datos =
+              await EstadoCuentaDireccion.getEstadoDireccion(str2);
+
+          ResponseGetLote? _loteServices =
+              await EstadoCuentaDireccion.getLote(str2);
+
+          if (_loteServices.data!.residenteLotes![0].residente!
+                  .correoElectronicoList!.isEmpty ||
+              _loteServices.data!.residenteLotes![0].residente!
+                      .correoElectronicoList![0] ==
+                  null) {
+            Alert(
+              context: context,
+              desc:
+                  "Comunicarse con Administración.\nDebe tener asignado un correo electrónico",
+              buttons: [
+                DialogButton(
+                  radius: BorderRadius.all(Radius.circular(25)),
+                  color: usuarioBloc.miFraccionamiento.getColor(),
+                  child: Text(
+                    "Aceptar",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  width: 120,
+                )
+              ],
+            ).show();
+            Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
+            return;
+          }
+
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => RegistroView(str2)),

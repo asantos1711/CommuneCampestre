@@ -278,14 +278,17 @@ class _CuentasAsociadasState extends State<CuentasAsociadas> {
                                 );*/
                                 Alert(
                                   context: context,
-                                  desc:  'El usuario ha sido ' + textToast,
+                                  desc: 'El usuario ha sido ' + textToast,
                                   buttons: [
                                     DialogButton(
-                                      radius: BorderRadius.all(Radius.circular(25)),
-                                      color: _usuarioBloc.miFraccionamiento.getColor(),
+                                      radius:
+                                          BorderRadius.all(Radius.circular(25)),
+                                      color: _usuarioBloc.miFraccionamiento
+                                          .getColor(),
                                       child: Text(
                                         "Aceptar",
-                                        style: TextStyle(color: Colors.white, fontSize: 20),
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
                                       ),
                                       onPressed: () {
                                         Navigator.pop(context);

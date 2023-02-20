@@ -7,13 +7,11 @@ import 'package:campestre/models/responseLote.dart';
 import 'package:campestre/models/usuarioModel.dart';
 import 'package:campestre/provider/splashProvider.dart';
 import 'package:campestre/services/apiResidencial/registroUsuarios.dart';
-import 'package:campestre/services/jwt.dart';
 import 'package:campestre/services/push_notifications_services.dart';
 import 'package:campestre/view/recuperarContra.dart';
 import 'package:campestre/view/registroOpciones.dart';
 import 'package:campestre/widgets/textfielborder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -24,7 +22,6 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../controls/notificaciones.dart';
-import '../firebase_options.dart';
 import '../models/modeloRegistro.dart';
 import '../widgets/cuadroLoginShape.dart';
 import 'menuInicio.dart';
@@ -95,13 +92,22 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       _form(),
                       Positioned(
-                        top: 40,
-                        left: 5,
+                        bottom: 10,
+                        right: 10,
+                        child: Text(
+                          "Version  1.1.11",
+                          style: TextStyle(color: Colors.grey),
+                        ), //se modifica el ultimo con respecto a
+                        //android/app/build.raddle versioncode
+                      ),
+                      Positioned(
+                        top: 70,
+                        left: 20,
                         right: 0,
                         child: Image.network(
                           usuarioBloc.miFraccionamiento.urlLogopngBlanco
                               .toString(),
-                          height: h * 0.1,
+                          height: h * 0.07,
                           alignment: Alignment.topLeft,
                         ),
                       ),

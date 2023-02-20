@@ -496,7 +496,7 @@ class _RegistroViewState extends State<RegistroView> {
           _usuario.direccion = _reflote.text;
           _usuario.tokenNoti = PushNotificationsService.token;
           _usuario.tipo = "Titular";
-          _usuario.estatus = "0";
+          _usuario.estatus = "1";
           _usuario.idFraccionamiento = _usuarioBloc.miFraccionamiento.id;
           _usuario.lote = hayLote ? int.parse(this.widget.lote) : null;
 
@@ -543,7 +543,8 @@ class _RegistroViewState extends State<RegistroView> {
 
             if (response.success ?? false) {
               /** Guardado del id en sharedPrefrence*/ //TODO
-              _usuario.lote = null;
+              _usuario.lote = response.data!.lote!.id;
+              _usuario.estatus = "1";
               _usuario.idRegistro = response.data!.id;
               await db.guardarDatosRegistro(_usuario);
               Navigator.push(

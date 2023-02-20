@@ -199,7 +199,7 @@ class NotificationManger {
             // title: Container(child: Text("")), //Row(children: <Widget>[Icon(FontAwesomeIcons.checkCircle, color: Colors.green),Text("Envio éxitoso"),],),
             content: Container(
                 width: w - 170,
-                height: 150,
+                height: h * 0.35,
                 child: Column(
                   children: [
                     Container(
