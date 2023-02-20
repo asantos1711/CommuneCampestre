@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>92424595254-i3eqadu5hu1duluooadu57qrmncle6rm.apps.googleusercontent.com</string>
+	<string>803493939434-4nn3dgo87b4ndi76l6fqabr22lgujq76.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.92424595254-i3eqadu5hu1duluooadu57qrmncle6rm</string>
+	<string>com.googleusercontent.apps.803493939434-4nn3dgo87b4ndi76l6fqabr22lgujq76</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCjf0zodLrk3eJySLWsOX30gTNaUK8y4gg</string>
+	<string>AIzaSyC73g-HpjebP08q0ZG-T5CxwYPXC9qu6OA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>92424595254</string>
+	<string>803493939434</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.commune.campestre</string>
 	<key>PROJECT_ID</key>
-	<string>commune-cf48f</string>
+	<string>communecampestre</string>
 	<key>STORAGE_BUCKET</key>
-	<string>commune-cf48f.appspot.com</string>
+	<string>communecampestre.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:92424595254:ios:461167094b7682ea1f7597</string>
+	<string>1:803493939434:ios:85a27c4bfffc6f29c26f93</string>
 	<key>DATABASE_URL</key>
-	<string>https://commune-cf48f-default-rtdb.firebaseio.com</string>
+	<string>https://communecampestre-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>
