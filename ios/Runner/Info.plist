@@ -38,9 +38,9 @@
 		<string>_dartobservatory._tcp.</string>
 	</array>
 	<key>NSCameraUsageDescription</key>
-	<string>La aplicación requiere permisos para usar la camara</string>
+	<string>La aplicación requiere permisos para usar la camara para capturar las identificaciones de sus visitantes.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>La aplicación requiere permisos para usar su galeria</string>
+	<string>La aplicación requiere permisos para leer su galeria de fotos si tiene almacenada sus identificaciones.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
