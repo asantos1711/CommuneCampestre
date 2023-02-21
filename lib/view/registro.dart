@@ -541,7 +541,7 @@ class _RegistroViewState extends State<RegistroView> {
             RegistroUsuarioConnect connect = RegistroUsuarioConnect();
             ResponseRegistro response = await connect.mandarRegistro(_usuario);
 
-            if (response.success ?? false) {
+           if (response.data != null && response.data?.id != null) {
               /** Guardado del id en sharedPrefrence*/ //TODO
               _usuario.lote = response.data!.lote!.id;
               _usuario.estatus = "1";

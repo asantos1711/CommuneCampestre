@@ -95,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                         bottom: 10,
                         right: 10,
                         child: Text(
-                          "Version  1.1.11",
+                          "Version  1.1.12",
                           style: TextStyle(color: Colors.grey),
                         ), //se modifica el ultimo con respecto a
                         //android/app/build.raddle versioncode
@@ -309,8 +309,9 @@ class _LoginPageState extends State<LoginPage> {
               _usuario.tokenNoti = tokenNew;
             });
             await db.updateUsuario(_usuario);
-
-            await connect.actualizarToken(_usuario, response);
+            if ("Titular".contains(_usuario.tipo.toString())) {
+              await connect.actualizarToken(_usuario, response);
+            }
           }
           // await connect.actualizarToken(_usuario, response);
 
