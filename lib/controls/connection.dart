@@ -454,8 +454,10 @@ class DatabaseServices {
   Future<List<Invitado>> getRegistroInvitadoByNombre(String nombre) async {
     List<Invitado> lista = [];
 
-    QuerySnapshot<Map<String, dynamic>> snaps =
-        await db.collection('invitados').get();
+    QuerySnapshot<Map<String, dynamic>> snaps = await db
+        .collection('invitados')
+        .where("nombre", isEqualTo: nombre)
+        .get();
 
     //snaps.where((user) => user.activo== true).toList();
 
