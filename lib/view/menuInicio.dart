@@ -232,7 +232,8 @@ class _MenuInicioState extends State<MenuInicio> {
         );*/
         Alert(
           context: context,
-          desc:  'Tu acceso ha sido bloqueado, favor de comunicarse con el titular de la cuenta',
+          desc:
+              'Tu acceso ha sido bloqueado, favor de comunicarse con el titular de la cuenta',
           buttons: [
             DialogButton(
               radius: BorderRadius.all(Radius.circular(25)),
@@ -285,7 +286,8 @@ class _MenuInicioState extends State<MenuInicio> {
         );*/
         Alert(
           context: context,
-          desc:  'Tu acceso ha sido bloqueado, favor de comunicarse con administración',
+          desc:
+              'Tu acceso ha sido bloqueado, favor de comunicarse con administración',
           buttons: [
             DialogButton(
               radius: BorderRadius.all(Radius.circular(25)),
@@ -742,7 +744,7 @@ class _MenuInicioState extends State<MenuInicio> {
                 );*/
                 Alert(
                   context: context,
-                  desc:  "La alerta ha sido enviada ",
+                  desc: "La alerta ha sido enviada ",
                   buttons: [
                     DialogButton(
                       radius: BorderRadius.all(Radius.circular(25)),
@@ -768,7 +770,7 @@ class _MenuInicioState extends State<MenuInicio> {
                 );*/
                 Alert(
                   context: context,
-                  desc:  "No se pudo enviar la alerta ",
+                  desc: "No se pudo enviar la alerta ",
                   buttons: [
                     DialogButton(
                       radius: BorderRadius.all(Radius.circular(25)),

@@ -48,8 +48,8 @@ android {
         applicationId "com.commune.campestre"
         minSdkVersion 29
         targetSdkVersion 31
-        versionCode 12
-        versionName flutterVersionName
+        versionCode 13
+        versionName "1.13"
         multiDexEnabled true
     }
     

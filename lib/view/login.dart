@@ -95,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                         bottom: 10,
                         right: 10,
                         child: Text(
-                          "Version  1.1.12",
+                          "Version  1.1.13",
                           style: TextStyle(color: Colors.grey),
                         ), //se modifica el ultimo con respecto a
                         //android/app/build.raddle versioncode
