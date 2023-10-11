@@ -21,6 +21,7 @@ class Invitado {
   String? placas;
   String? idEvento;
   bool? activo;
+  bool? borrado;
   String? idFraccionamiento;
   int? idLote;
   int? idRegistro;
@@ -44,6 +45,7 @@ class Invitado {
       this.idEvento,
       this.placas,
       this.activo,
+      this.borrado,
       this.idLote,
       this.idRegistro,
       this.idFraccionamiento});
@@ -67,6 +69,7 @@ class Invitado {
         'fechaHoraAcceso': fechaHoraAcceso,
         'placas': placas,
         'activo': activo,
+        'borrado': borrado,
         'idLote': idLote,
         'idRegistro': idRegistro,
         'idFraccionamiento': idFraccionamiento
@@ -142,6 +145,7 @@ class Invitado {
         idLote: data['idLote'] ?? 0,
         idRegistro: data['idRegistro'] ?? 0,
         activo: data['activo'] ?? false,
+        borrado: data['borrado'] ?? false,
         idEvento: data['idEvento']);
   }
 }

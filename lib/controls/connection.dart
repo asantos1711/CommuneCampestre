@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:campestre/config/logs.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:campestre/models/eventoModel.dart';
 import 'package:campestre/models/fraccionamientos.dart';
@@ -17,6 +18,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:async';
 import 'package:path/path.dart' as Path;
 import 'package:campestre/bloc/usuario_bloc.dart';
+
+import '../models/entradasSalidas.dart';
 
 class DatabaseServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -286,8 +289,11 @@ class DatabaseServices {
     List<Invitado> listanueva = [];
     Iterable<Invitado> listaInactivo = [];
 
-    listanueva = lista.where((user) => user.activo == true).toList();
-    listaInactivo = lista.where((user) => user.activo == false);
+    listanueva = lista
+        .where((user) => user.activo == true && user.borrado != true)
+        .toList();
+    listaInactivo =
+        lista.where((user) => user.activo == false && user.borrado != true);
     lista = [];
     listanueva.addAll(listaInactivo);
 
@@ -603,5 +609,33 @@ class DatabaseServices {
       print("Error uploadFilee " + e.toString());
     }
     return response;
+  }
+
+  Future<List<EntradasSalidas>> getListEntradas(
+      DateTime fechaEntrada, DateTime fechaSalida) async {
+    Usuario user = new Usuario();
+    List<EntradasSalidas> lista = [];
+
+    try {
+      QuerySnapshot<Map<String, dynamic>> snap = await db
+          .collection('entradas')
+          .where("fechaHoraAcceso",
+              isGreaterThanOrEqualTo: fechaEntrada,
+              isLessThanOrEqualTo: fechaSalida)
+          .where("idLote", isEqualTo: usuarioBloc.perfil.lote)
+          .where("idFraccionamiento",
+              isEqualTo: usuarioBloc.miFraccionamiento.id)
+          .get();
+
+      snap.docs.forEach((element) {
+        print(element);
+        Map data = element.data() as Map<dynamic, dynamic>;
+        lista.add(EntradasSalidas.fromMap(data));
+      });
+    } catch (e) {
+      logError(e);
+    }
+
+    return lista;
   }
 }

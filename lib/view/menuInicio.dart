@@ -28,6 +28,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import '../controls/notificaciones.dart';
 import '../models/estadoCuenta/detailEstadoCuenta.dart';
 import '../services/apiResidencial/estadoCuentaProvider.dart';
+import 'misAccesos/misAccesos.dart';
 
 class MenuInicio extends StatefulWidget {
   @override
@@ -432,6 +433,14 @@ class _MenuInicioState extends State<MenuInicio> {
                 child: _opcion(Icons.flag, "Generar reportes a administración"),
               )
             : SizedBox(),
+        // InkWell(
+        //     onTap: () {
+        //       Navigator.push(
+        //         context,
+        //         MaterialPageRoute(builder: (context) => MisAccesosView()),
+        //       );
+        //     },
+        //     child: _opcion(Icons.car_rental, "Mis accesos")),
         InkWell(
             onTap: () {
               Navigator.push(
