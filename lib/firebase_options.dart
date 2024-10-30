@@ -17,13 +17,19 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -46,34 +52,12 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyA6FDrFIT_pe4tBvw0twGfGmhVA8fkAtsw',
-    appId: '1:803493939434:web:5e655f02046cb96ec26f93',
-    messagingSenderId: '803493939434',
-    projectId: 'communecampestre',
-    authDomain: 'communecampestre.firebaseapp.com',
-    databaseURL: 'https://communecampestre-default-rtdb.firebaseio.com',
-    storageBucket: 'communecampestre.appspot.com',
-    measurementId: 'G-62E5YSYJL9',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCiHgkewwoFe0LQXigKWj3tkfqMxPk4wjI',
-    appId: '1:803493939434:android:b1995b1a96eb4117c26f93',
+    appId: '1:803493939434:android:430dda569a8d8b7dc26f93',
     messagingSenderId: '803493939434',
     projectId: 'communecampestre',
     databaseURL: 'https://communecampestre-default-rtdb.firebaseio.com',
     storageBucket: 'communecampestre.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC73g-HpjebP08q0ZG-T5CxwYPXC9qu6OA',
-    appId: '1:803493939434:ios:85a27c4bfffc6f29c26f93',
-    messagingSenderId: '803493939434',
-    projectId: 'communecampestre',
-    databaseURL: 'https://communecampestre-default-rtdb.firebaseio.com',
-    storageBucket: 'communecampestre.appspot.com',
-    iosClientId: '803493939434-4nn3dgo87b4ndi76l6fqabr22lgujq76.apps.googleusercontent.com',
-    iosBundleId: 'com.commune.campestre',
   );
 }

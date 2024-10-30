@@ -1,4 +1,4 @@
-package com.commune.campestre
+package com.communesoftware.campestre
 
 import io.flutter.embedding.android.FlutterActivity
 
