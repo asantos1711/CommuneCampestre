@@ -6,8 +6,6 @@ import 'package:campestre/view/amenidades/menuAmenidades.dart';
 import 'package:campestre/widgets/columnBuilder.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class FechaAmenidad extends StatefulWidget {
@@ -86,8 +84,8 @@ class _FechaAmenidadState extends State<FechaAmenidad> {
     return Container(
       alignment: Alignment.center,
       margin: EdgeInsets.only(top: 10, left: 10),
-      child: FlatButton(
-        onPressed: () {
+      child: InkWell(
+        onTap: () {
           _calend();
         },
         child: Row(
@@ -107,30 +105,19 @@ class _FechaAmenidadState extends State<FechaAmenidad> {
   }
 
   _calend() async {
-    DatePicker.showDatePicker(context,
-        showTitleActions: true,
-        minTime: DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day + 1),
-        maxTime: DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day + 8),
-        theme: DatePickerTheme(
-            //headerColor: Colors.orange,
-            backgroundColor: Colors.white,
-            itemStyle: TextStyle(
-                color: Colors.black, fontWeight: FontWeight.w400, fontSize: 18),
-            doneStyle: TextStyle(color: Colors.black, fontSize: 16)),
-        /*onChanged: (date) {
-        dt = date;
-      print('change $date in time zone ' +
-          date.timeZoneOffset.inHours.toString());
-      }, */
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: dt,
+        firstDate: DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day),
+        lastDate: DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day + 8));
 
-        onConfirm: (date) {
+    if (picked != null && picked != dt) {
       setState(() {
-        dt = date;
+        dt = picked;
       });
-      print('confirm $date');
-    }, currentTime: DateTime.now(), locale: LocaleType.en);
+    }
   }
 
   _lista() {

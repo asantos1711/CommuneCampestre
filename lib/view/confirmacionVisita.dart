@@ -103,7 +103,7 @@ class _ConfirmacionVistitasState extends State<ConfirmacionVistitas> {
           _qr(),
           Container(
             margin: EdgeInsets.only(bottom: 10, top: 20, right: 40, left: 40),
-            child: FlatButton(
+            child: TextButton(
               //minWidth: 100,
               onPressed: () async {
                 //_getWidgetImage();
@@ -113,14 +113,11 @@ class _ConfirmacionVistitasState extends State<ConfirmacionVistitas> {
                 await Share.share(
                     "¡Hola!,este es el link para tu acceso ${url}");
               },
-              color: Color.fromARGB(
-                  255,
-                  _usuarioBloc.miFraccionamiento.color!.r,
-                  _usuarioBloc.miFraccionamiento.color!.g,
-                  _usuarioBloc.miFraccionamiento.color!.b),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              child: Text(
+              style: TextButton.styleFrom(
+                backgroundColor: _usuarioBloc.miFraccionamiento.getColor(),
+                padding: const EdgeInsets.all(0),
+              ),
+              child: const Text(
                 "Compartir url de acceso",
                 style: TextStyle(fontSize: 15, color: Colors.white),
               ),
@@ -130,7 +127,7 @@ class _ConfirmacionVistitasState extends State<ConfirmacionVistitas> {
           Container(
             margin: EdgeInsets.only(bottom: 20, top: 0, right: 30, left: 30),
             padding: EdgeInsets.all(10),
-            child: FlatButton(
+            child: TextButton(
               //minWidth: 100,
               onPressed: () {
                 Navigator.push(
@@ -138,23 +135,15 @@ class _ConfirmacionVistitasState extends State<ConfirmacionVistitas> {
                   MaterialPageRoute(builder: (context) => MenuInicio()),
                 );
               },
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                  /*side: BorderSide(
-                  color: Color(0xff5E1281),
-                  width: 1,
-                  style: BorderStyle.solid
-                ),*/
-                  borderRadius: BorderRadius.all(Radius.circular(15))),
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.white,
+                padding:const EdgeInsets.all(0),
+              ),
               child: Text(
-                "Mi cuenta",
+                "Atrás",
                 style: TextStyle(
                     fontSize: 15,
-                    color: Color.fromARGB(
-                        255,
-                        _usuarioBloc.miFraccionamiento.color!.r,
-                        _usuarioBloc.miFraccionamiento.color!.g,
-                        _usuarioBloc.miFraccionamiento.color!.b)),
+                    color: _usuarioBloc.miFraccionamiento.getColor())              
               ),
             ),
           )
@@ -166,21 +155,18 @@ class _ConfirmacionVistitasState extends State<ConfirmacionVistitas> {
   urlShortener() {
     return Container(
       margin: EdgeInsets.only(bottom: 10, top: 20, right: 40, left: 40),
-      child: FlatButton(
+      child: TextButton(
         //minWidth: 100,
         onPressed: () {
           Provider.of<LoadingProvider>(context, listen: false).setLoad(true);
           _guardarQR();
           Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
         },
-        color: Color.fromARGB(
-            255,
-            _usuarioBloc.miFraccionamiento.color!.r,
-            _usuarioBloc.miFraccionamiento.color!.g,
-            _usuarioBloc.miFraccionamiento.color!.b),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10))),
-        child: Row(
+        style: TextButton.styleFrom(
+          backgroundColor: _usuarioBloc.miFraccionamiento.getColor(),
+          padding: const EdgeInsets.all(0),
+        ),
+        child: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(

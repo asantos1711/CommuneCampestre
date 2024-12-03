@@ -261,8 +261,8 @@ class _MisAccesosViewState extends State<MisAccesosView> {
               height: 20,
             ),
             url.isNotEmpty
-                ? OutlineButton(
-                    onPressed: () {
+                ? InkWell(
+                    onTap: () {
                       Alert(
                         context: context,
                         desc: txt,
@@ -293,14 +293,22 @@ class _MisAccesosViewState extends State<MisAccesosView> {
                         ],
                       ).show();
                     },
-                    borderSide: BorderSide(
-                        color: usuarioBloc.miFraccionamiento.getColor()),
-                    highlightedBorderColor:
-                        usuarioBloc.miFraccionamiento.getColor(),
-                    child: Text(
-                      "Ver foto",
-                      style: TextStyle(
-                          color: usuarioBloc.miFraccionamiento.getColor()),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1.0,
+                          color: usuarioBloc.miFraccionamiento.getColor()                          
+                        ),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(5.0) //                 <--- border radius here
+                        ),
+                      ),
+                      
+                      child: Text(
+                        "Ver Foto",
+                        style: TextStyle(
+                            color: usuarioBloc.miFraccionamiento.getColor()),
+                      ),
                     ),
                   )
                 : SizedBox(),

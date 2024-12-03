@@ -535,41 +535,6 @@ class _RentaVacacionalViewState extends State<RentaVacacionalView> {
     }
   }
 
-  Future<void> _selectDate() async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2101),
-      builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
-              primary: usuarioBloc.miFraccionamiento.getColor(), // <-- SEE HERE
-              onPrimary: Colors.white, // <-- SEE HERE
-              onSurface: Colors.black, // <-- SEE HERE
-            ),
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                primary: usuarioBloc.miFraccionamiento
-                    .getColor(), // button text color
-              ),
-            ),
-          ),
-          child: child!,
-        );
-      },
-    );
-    if (picked != null && picked != selectedDate)
-      setState(() {
-        selectedDate = picked;
-        _fecha.text = selectedDate.day.toString() +
-            "/" +
-            selectedDate.month.toString() +
-            "/" +
-            selectedDate.year.toString();
-      });
-  }
 
   Future<void> _showTimePicker() async {
     final picked = await showTimePicker(

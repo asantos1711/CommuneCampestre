@@ -62,21 +62,14 @@ class _RegistroSucessState extends State<RegistroSucess> {
           ),
           Container(
             margin: EdgeInsets.only(bottom: 10, top: 20, right: 40, left: 40),
-            child: FlatButton(
+            child: InkWell(
               //minWidth: 100,
-              onPressed: () {
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => RegistroAsociados()),
                 );
               },
-              color: Color.fromARGB(
-                  255,
-                  _usuarioBloc.miFraccionamiento.color!.r,
-                  _usuarioBloc.miFraccionamiento.color!.g,
-                  _usuarioBloc.miFraccionamiento.color!.b),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
               child: Text(
                 "Ingresar otro registro",
                 style: TextStyle(fontSize: 15, color: Colors.white),
@@ -86,22 +79,14 @@ class _RegistroSucessState extends State<RegistroSucess> {
           Container(
             margin: EdgeInsets.only(bottom: 20, top: 0, right: 30, left: 30),
             padding: EdgeInsets.all(10),
-            child: FlatButton(
+            child: InkWell(
               //minWidth: 100,
-              onPressed: () {
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => MenuInicio()),
                 );
-              },
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                  /*side: BorderSide(
-                  color: Color(0xff5E1281),
-                  width: 1,
-                  style: BorderStyle.solid
-                ),*/
-                  borderRadius: BorderRadius.all(Radius.circular(15))),
+              },             
               child: Text(
                 "Mi cuenta",
                 style: TextStyle(

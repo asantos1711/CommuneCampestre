@@ -5,11 +5,9 @@ import 'package:campestre/controls/payment.dart';
 import 'package:campestre/models/estadoCuenta/detailEstadoCuenta.dart';
 import 'package:campestre/services/apiResidencial/estadoCuentaProvider.dart';
 import 'package:campestre/view/login.dart';
-import 'package:campestre/view/pagos/strippe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 
 class PagosHome extends StatefulWidget {
   //const PagosHome({ Key? key }) : super(key: key);
@@ -23,7 +21,7 @@ class _PagosHomeState extends State<PagosHome> {
   DetailEstadoCuenta _detailEstadoCuenta = new DetailEstadoCuenta();
   DetailEstadoCuenta _detailEstadoCuentaPag = new DetailEstadoCuenta();
   DetailEstadoCuenta _detailEstadoCuentaPorPag = new DetailEstadoCuenta();
-  final PaymentController controller = Get.put(PaymentController());
+  //final PaymentController controller = Get.put(PaymentController());
   UsuarioBloc _usuarioBloc = new UsuarioBloc();
   int band = 0;
   double deudaTotal = 0;
@@ -187,79 +185,79 @@ class _PagosHomeState extends State<PagosHome> {
                           as DateTime);
                 },
               ),
-              FutureBuilder(
-                future:
-                    controller.getDeuda(_usuarioBloc.perfil.lote.toString()),
-                builder: (BuildContext context, AsyncSnapshot sn) {
-                  if (!sn.hasData)
-                    return Center(
-                        child: Image.asset(
-                      "assets/icon/casita.gif",
-                      width: 200,
-                      height: 200,
-                      fit: BoxFit.contain,
-                    ));
-                  deudaTotal = sn.data;
+              // FutureBuilder(
+              //   future:
+              //       controller.getDeuda(_usuarioBloc.perfil.lote.toString()),
+              //   builder: (BuildContext context, AsyncSnapshot sn) {
+              //     if (!sn.hasData)
+              //       return Center(
+              //           child: Image.asset(
+              //         "assets/icon/casita.gif",
+              //         width: 200,
+              //         height: 200,
+              //         fit: BoxFit.contain,
+              //       ));
+              //     deudaTotal = sn.data;
 
-                  if (deudaTotal > 0 &&
-                      _usuarioBloc.miFraccionamiento.pagar == true) {
-                    return SizedBox();
-                    return Positioned(
-                        bottom: 30,
-                        left: 100,
-                        child: InkWell(
-                            onTap: () async {
-                              Fluttertoast.showToast(
-                                  msg: "Realizar su pago en la Administración",
-                                  toastLength: Toast.LENGTH_LONG);
-                              /*Provider.of<LoadingProvider>(context, listen: false)
-                                .setLoad(true);
-                            deudaTotal = await controller
-                                .getDeuda(_usuarioBloc.perfil.lote.toString());
-                            print(deudaTotal.toInt());
-                            bool success = await controller.initPayment(
-                                currency: "MXN",
-                                amount: deudaTotal.toString(),
-                                context: context);
-                            if (success) {
-                              await controller
-                                  .saveMantto(
-                                      _usuarioBloc.perfil.lote.toString(),
-                                      deudaTotal)
-                                  .whenComplete(() => Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => PagosHome()),
-                                      ));
-                            }
-                            Provider.of<LoadingProvider>(context, listen: false)
-                                .setLoad(false);*/
-                            },
-                            child: Container(
-                              width: 200,
-                              height: 50,
-                              alignment: Alignment.center,
-                              child: Text(
-                                "Pagar mantenimientos",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
-                              ),
-                              decoration: BoxDecoration(
-                                color: Color.fromARGB(
-                                    255,
-                                    _usuarioBloc.miFraccionamiento.color!.r,
-                                    _usuarioBloc.miFraccionamiento.color!.g,
-                                    _usuarioBloc.miFraccionamiento.color!.b),
-                                borderRadius: BorderRadius.all(Radius.circular(
-                                        30) //                 <--- border radius here
-                                    ),
-                              ),
-                            )));
-                  } else {
-                    return SizedBox();
-                  }
-                },
-              ),
+              //     if (deudaTotal > 0 &&
+              //         _usuarioBloc.miFraccionamiento.pagar == true) {
+              //       return SizedBox();
+              //       return Positioned(
+              //           bottom: 30,
+              //           left: 100,
+              //           child: InkWell(
+              //               onTap: () async {
+              //                 Fluttertoast.showToast(
+              //                     msg: "Realizar su pago en la Administración",
+              //                     toastLength: Toast.LENGTH_LONG);
+              //                 /*Provider.of<LoadingProvider>(context, listen: false)
+              //                   .setLoad(true);
+              //               deudaTotal = await controller
+              //                   .getDeuda(_usuarioBloc.perfil.lote.toString());
+              //               print(deudaTotal.toInt());
+              //               bool success = await controller.initPayment(
+              //                   currency: "MXN",
+              //                   amount: deudaTotal.toString(),
+              //                   context: context);
+              //               if (success) {
+              //                 await controller
+              //                     .saveMantto(
+              //                         _usuarioBloc.perfil.lote.toString(),
+              //                         deudaTotal)
+              //                     .whenComplete(() => Navigator.pushReplacement(
+              //                           context,
+              //                           MaterialPageRoute(
+              //                               builder: (context) => PagosHome()),
+              //                         ));
+              //               }
+              //               Provider.of<LoadingProvider>(context, listen: false)
+              //                   .setLoad(false);*/
+              //               },
+              //               child: Container(
+              //                 width: 200,
+              //                 height: 50,
+              //                 alignment: Alignment.center,
+              //                 child: Text(
+              //                   "Pagar mantenimientos",
+              //                   style: TextStyle(
+              //                       color: Colors.white, fontSize: 18),
+              //                 ),
+              //                 decoration: BoxDecoration(
+              //                   color: Color.fromARGB(
+              //                       255,
+              //                       _usuarioBloc.miFraccionamiento.color!.r,
+              //                       _usuarioBloc.miFraccionamiento.color!.g,
+              //                       _usuarioBloc.miFraccionamiento.color!.b),
+              //                   borderRadius: BorderRadius.all(Radius.circular(
+              //                           30) //                 <--- border radius here
+              //                       ),
+              //                 ),
+              //               )));
+              //     } else {
+              //       return SizedBox();
+              //     }
+              //   },
+              // ),
             ],
           );
         }
@@ -648,15 +646,15 @@ class _PagosHomeState extends State<PagosHome> {
         ));
   }
 
-  _toPay() {
-    return TextButton(
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute<void>(
-            builder: (BuildContext context) => const StrippePage(),
-          ));
-        },
-        child: Text("Pagar"));
-  }
+  // _toPay() {
+  //   return TextButton(
+  //       onPressed: () {
+  //         Navigator.of(context).push(MaterialPageRoute<void>(
+  //           builder: (BuildContext context) => const StrippePage(),
+  //         ));
+  //       },
+  //       child: Text("Pagar"));
+  // }
 }
 
 extension StringCasingExtension on String {

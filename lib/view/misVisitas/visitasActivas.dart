@@ -1218,8 +1218,9 @@ class _VisitasActivasState extends State<VisitasActivas> {
             ),
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
-                primary: _usuarioBloc.miFraccionamiento
+                backgroundColor: _usuarioBloc.miFraccionamiento
                     .getColor(), // button text color
+                foregroundColor:Colors.white
               ),
             ),
           ),
@@ -1322,8 +1323,9 @@ class _VisitasActivasState extends State<VisitasActivas> {
             ),
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
-                primary: _usuarioBloc.miFraccionamiento
+                backgroundColor: _usuarioBloc.miFraccionamiento
                     .getColor(), // button text color
+                foregroundColor:Colors.white
               ),
             ),
           ),
@@ -1460,18 +1462,27 @@ class _VisitasActivasState extends State<VisitasActivas> {
               height: 20,
             ),
             url.isNotEmpty
-                ? OutlineButton(
-                    onPressed: () {
+                ? InkWell(
+                    onTap: () {
                       _alerta("Ver QR", url.isNotEmpty ? _qr(url) : SizedBox());
                     },
-                    borderSide: BorderSide(
-                        color: _usuarioBloc.miFraccionamiento.getColor()),
-                    highlightedBorderColor:
-                        _usuarioBloc.miFraccionamiento.getColor(),
-                    child: Text(
-                      "Ver QR",
-                      style: TextStyle(
-                          color: _usuarioBloc.miFraccionamiento.getColor()),
+                    
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1.0,
+                          color: _usuarioBloc.miFraccionamiento.getColor()                          
+                        ),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(5.0) //                 <--- border radius here
+                        ),
+                      ),
+                      
+                      child: Text(
+                        "Ver QR",
+                        style: TextStyle(
+                            color: _usuarioBloc.miFraccionamiento.getColor()),
+                      ),
                     ),
                   )
                 : SizedBox(),
@@ -1547,9 +1558,9 @@ class _VisitasActivasState extends State<VisitasActivas> {
               height: 20,
             ),
             url.isNotEmpty
-                ? OutlineButton(
-                    onPressed: () {
-                      _alerta(
+                ?  InkWell(
+                    onTap: () {
+                       _alerta(
                           txt,
                           url.isNotEmpty
                               ? Image.network(
@@ -1558,14 +1569,23 @@ class _VisitasActivasState extends State<VisitasActivas> {
                                 )
                               : SizedBox());
                     },
-                    borderSide: BorderSide(
-                        color: _usuarioBloc.miFraccionamiento.getColor()),
-                    highlightedBorderColor:
-                        _usuarioBloc.miFraccionamiento.getColor(),
-                    child: Text(
-                      "Ver foto",
-                      style: TextStyle(
-                          color: _usuarioBloc.miFraccionamiento.getColor()),
+                    
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1.0,
+                          color: _usuarioBloc.miFraccionamiento.getColor()                          
+                        ),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(5.0) //                 <--- border radius here
+                        ),
+                      ),
+                      
+                      child: Text(
+                        "Ver Foto",
+                        style: TextStyle(
+                            color: _usuarioBloc.miFraccionamiento.getColor()),
+                      ),
                     ),
                   )
                 : SizedBox(),

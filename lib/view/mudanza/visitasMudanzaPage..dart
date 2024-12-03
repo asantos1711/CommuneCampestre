@@ -380,8 +380,9 @@ class _VisitasMudanzaPageState extends State<VisitasMudanzaPage> {
             ),
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
-                primary: usuarioBloc.miFraccionamiento
+                backgroundColor: usuarioBloc.miFraccionamiento
                     .getColor(), // button text color
+                foregroundColor:Colors.white
               ),
             ),
           ),

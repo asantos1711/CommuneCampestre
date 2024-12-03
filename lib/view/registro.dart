@@ -384,10 +384,7 @@ class _RegistroViewState extends State<RegistroView> {
         ListTile(
           title: Text(
             'Titular',
-            style: Theme.of(context)
-                .textTheme
-                .subtitle1!
-                .copyWith(color: Colors.black),
+            style: TextStyle(color: Colors.black, fontSize: 16),
           ),
           leading: Radio(
             value: 0,
@@ -403,10 +400,7 @@ class _RegistroViewState extends State<RegistroView> {
         ListTile(
           title: Text(
             'Habitante',
-            style: Theme.of(context)
-                .textTheme
-                .subtitle1!
-                .copyWith(color: Colors.black),
+            style: TextStyle(color: Colors.black, fontSize: 16),
           ),
           leading: Radio(
             value: 1,

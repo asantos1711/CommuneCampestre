@@ -69,8 +69,8 @@ class _ReporteSucessState extends State<ReporteSucess> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(bottom: 10, top: 20, right: 80, left: 80),
-            child: FlatButton(
+            margin: const EdgeInsets.only(bottom: 10, top: 20, right: 80, left: 80),
+            child: TextButton(
               //minWidth: 100,
               onPressed: () {
                 Navigator.push(
@@ -78,10 +78,11 @@ class _ReporteSucessState extends State<ReporteSucess> {
                   MaterialPageRoute(builder: (context) => MenuInicio()),
                 );
               },
-              color: Color(0xff5E1281),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Text(
+              style: TextButton.styleFrom(
+                backgroundColor:const Color(0xff5E1281),
+                padding:const EdgeInsets.all(0),
+              ),
+              child:const Text(
                 "Inicio",
                 style: TextStyle(fontSize: 15, color: Colors.white),
               ),

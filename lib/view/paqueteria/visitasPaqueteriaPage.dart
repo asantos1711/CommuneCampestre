@@ -17,7 +17,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:time_range/time_range.dart';
 
 class VisitasPaquteriaPage extends StatefulWidget {
   const VisitasPaquteriaPage({Key? key}) : super(key: key);
@@ -46,7 +45,7 @@ class _VisitasPaquteriaPageState extends State<VisitasPaquteriaPage> {
   bool? onCharge;
   bool typePhoto = false;
   bool typePhotoPlaca = false;
-  TimeRangeResult? range;
+  
   _bloquearPantalla() {
     this.setState(() {
       isLoading = !isLoading!;
@@ -115,47 +114,47 @@ class _VisitasPaquteriaPageState extends State<VisitasPaquteriaPage> {
                   "Nombre", _nombre, TextInputType.name, false, Colors.white),
             ),*/
                 _subtitle("Hora acceso (del día de hoy)"),
-                TimeRange(
-                  fromTitle: Text(
-                    'Desde',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Color.fromARGB(
-                            255,
-                            usuarioBloc.miFraccionamiento.color!.r,
-                            usuarioBloc.miFraccionamiento.color!.g,
-                            usuarioBloc.miFraccionamiento.color!.b)),
-                  ),
-                  toTitle: Text(
-                    'Hasta',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Color.fromARGB(
-                            255,
-                            usuarioBloc.miFraccionamiento.color!.r,
-                            usuarioBloc.miFraccionamiento.color!.g,
-                            usuarioBloc.miFraccionamiento.color!.b)),
-                  ),
-                  titlePadding: 20,
-                  textStyle: TextStyle(
-                      fontWeight: FontWeight.normal, color: Colors.black87),
-                  activeTextStyle: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
-                  borderColor: Colors.black,
-                  backgroundColor: Colors.transparent,
-                  activeBackgroundColor: Color.fromARGB(
-                      255,
-                      usuarioBloc.miFraccionamiento.color!.r,
-                      usuarioBloc.miFraccionamiento.color!.g,
-                      usuarioBloc.miFraccionamiento.color!.b),
-                  firstTime: TimeOfDay(
-                      hour: TimeOfDay.now().hour,
-                      minute: 00), //TimeOfDay.now(),
-                  lastTime: TimeOfDay(hour: 22, minute: 00),
-                  timeStep: 30,
-                  timeBlock: 30,
-                  onRangeCompleted: (rang) => setState(() => range = rang),
-                ),
+                // TimeRange(
+                //   fromTitle: Text(
+                //     'Desde',
+                //     style: TextStyle(
+                //         fontSize: 18,
+                //         color: Color.fromARGB(
+                //             255,
+                //             usuarioBloc.miFraccionamiento.color!.r,
+                //             usuarioBloc.miFraccionamiento.color!.g,
+                //             usuarioBloc.miFraccionamiento.color!.b)),
+                //   ),
+                //   toTitle: Text(
+                //     'Hasta',
+                //     style: TextStyle(
+                //         fontSize: 18,
+                //         color: Color.fromARGB(
+                //             255,
+                //             usuarioBloc.miFraccionamiento.color!.r,
+                //             usuarioBloc.miFraccionamiento.color!.g,
+                //             usuarioBloc.miFraccionamiento.color!.b)),
+                //   ),
+                //   titlePadding: 20,
+                //   textStyle: TextStyle(
+                //       fontWeight: FontWeight.normal, color: Colors.black87),
+                //   activeTextStyle: TextStyle(
+                //       fontWeight: FontWeight.bold, color: Colors.white),
+                //   borderColor: Colors.black,
+                //   backgroundColor: Colors.transparent,
+                //   activeBackgroundColor: Color.fromARGB(
+                //       255,
+                //       usuarioBloc.miFraccionamiento.color!.r,
+                //       usuarioBloc.miFraccionamiento.color!.g,
+                //       usuarioBloc.miFraccionamiento.color!.b),
+                //   firstTime: TimeOfDay(
+                //       hour: TimeOfDay.now().hour,
+                //       minute: 00), //TimeOfDay.now(),
+                //   lastTime: TimeOfDay(hour: 22, minute: 00),
+                //   timeStep: 30,
+                //   timeBlock: 30,
+                //   onRangeCompleted: (rang) => setState(() => range = rang),
+                // ),
                 Container(
                   alignment: Alignment.centerLeft,
                   padding:
@@ -410,16 +409,16 @@ class _VisitasPaquteriaPageState extends State<VisitasPaquteriaPage> {
           ).show();
           return;
         }
-        if (range == null) {
-          Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
-          Fluttertoast.showToast(
-            msg: "Seleccione un rango de espera",
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.BOTTOM,
-            backgroundColor: Colors.grey[800],
-          );
-          return;
-        }
+        // if (range == null) {
+        //   Provider.of<LoadingProvider>(context, listen: false).setLoad(false);
+        //   Fluttertoast.showToast(
+        //     msg: "Seleccione un rango de espera",
+        //     toastLength: Toast.LENGTH_LONG,
+        //     gravity: ToastGravity.BOTTOM,
+        //     backgroundColor: Colors.grey[800],
+        //   );
+        //   return;
+        // }
 
         try {
           _invitado.nombre = _nombre.text;
@@ -438,8 +437,8 @@ class _VisitasPaquteriaPageState extends State<VisitasPaquteriaPage> {
           _invitado.tiempos?.fechaEntrada = hoy;
           _invitado.tiempos?.fechaSalida =
               hoy.add(Duration(hours: 23, minutes: 59));
-          _invitado.tiempos?.horaEntrada = timeOfDayToString(range!.start);
-          _invitado.tiempos?.horaSalida = timeOfDayToString(range!.end);
+          // _invitado.tiempos?.horaEntrada = timeOfDayToString(range!.start);
+          // _invitado.tiempos?.horaSalida = timeOfDayToString(range!.end);
           _invitado.domicilio = usuarioBloc.perfil.direccion;
           _invitado.idResidente = usuarioBloc.perfil.idResidente;
           _invitado.nombreResidente = usuarioBloc.perfil.nombre;

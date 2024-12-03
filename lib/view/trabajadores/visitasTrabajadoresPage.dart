@@ -18,7 +18,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:time_range/time_range.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 
 import '../../bloc/usuario_bloc.dart';
@@ -1394,32 +1393,6 @@ class _VisitasTrabajadoresPageState extends State<VisitasTrabajadoresPage> {
               fontSize: 20,
               fontWeight: FontWeight.w500),
         ));
-  }
-
-  _rangoHoras() {
-    return TimeRange(
-      fromTitle: Text(
-        'Desde',
-        style: TextStyle(fontSize: 18, color: Color(0xFF5E1281)),
-      ),
-      toTitle: Text(
-        'Hasta',
-        style: TextStyle(fontSize: 18, color: Color(0xFF5E1281)),
-      ),
-      titlePadding: 20,
-      textStyle:
-          TextStyle(fontWeight: FontWeight.normal, color: Colors.black87),
-      activeTextStyle:
-          TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-      borderColor: Colors.black,
-      backgroundColor: Colors.transparent,
-      activeBackgroundColor: Color(0xFF5E1281),
-      firstTime: TimeOfDay(hour: 8, minute: 00),
-      lastTime: TimeOfDay(hour: 22, minute: 00),
-      timeStep: 30,
-      timeBlock: 60,
-      onRangeCompleted: (range) => setState(() => print(range.toString())),
-    );
   }
 
   Future<String> lprExtract(File file) async {

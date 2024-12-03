@@ -321,8 +321,9 @@ class _VisitasEventosPageState extends State<VisitasEventosPage> {
             ),
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
-                primary: usuarioBloc.miFraccionamiento
+                backgroundColor: usuarioBloc.miFraccionamiento
                     .getColor(), // button text color
+                foregroundColor:Colors.white
               ),
             ),
           ),
@@ -356,8 +357,9 @@ class _VisitasEventosPageState extends State<VisitasEventosPage> {
             ),
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
-                primary: usuarioBloc.miFraccionamiento
+                backgroundColor: usuarioBloc.miFraccionamiento
                     .getColor(), // button text color
+                foregroundColor:Colors.white
               ),
             ),
           ),

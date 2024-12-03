@@ -13,7 +13,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:campestre/config/routes.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'controls/connection.dart';
@@ -33,16 +32,14 @@ void main() async {
   if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
     print('connected');
   }
-
+  
   await Firebase.initializeApp(
-    name: "CommuneCampestre",
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await PushNotificationsService.initializeApp();
 
-  await FirebaseAppCheck.instance.activate(
-    webRecaptchaSiteKey:
-        '6LdW-uYhAAAAAEvh7VhTyHD0A2CG_eZ05LIsPdJi', // If you're building a web app.
+  await FirebaseAppCheck.instance.activate(webProvider: ReCaptchaV3Provider('6LdW-uYhAAAAAEvh7VhTyHD0A2CG_eZ05LIsPdJi'),
+    // If you're building a web app.
   );
 
   SharedPreferences usuario = await PreferenciasUsuario().initPref();

@@ -147,48 +147,6 @@ class _PerfilState extends State<Perfil> {
         ]));
   }
 
-  _botonEditar() {
-    return Container(
-      margin: EdgeInsets.only(left: 40, right: 40, top: 40),
-      child: FlatButton(
-        minWidth: 240,
-        onPressed: () {
-          setState(() {
-            _edit = !_edit;
-          });
-        },
-        color: Color(0xff5E1281),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20))),
-        child: Text(
-          "EDITAR",
-          style: TextStyle(fontSize: 20, color: Colors.white),
-        ),
-      ),
-    );
-  }
-
-  _botonGuardar() {
-    return Container(
-      margin: EdgeInsets.only(left: 40, right: 40, top: 40),
-      child: FlatButton(
-        minWidth: 240,
-        onPressed: () {
-          setState(() {
-            _edit = !_edit;
-          });
-        },
-        color: Color(0xff5E1281),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20))),
-        child: Text(
-          "GUARDAR",
-          style: TextStyle(fontSize: 20, color: Colors.white),
-        ),
-      ),
-    );
-  }
-
   Widget _datos(String txt, TextEditingController controlador, bool habilitado,
       {TextInputType? entrada,
       bool? onlyDigits,

@@ -2,23 +2,19 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:campestre/controls/connection.dart';
-import 'package:campestre/view/confirmacionVisita.dart';
 import 'package:campestre/view/misVisitas/visitasActivas.dart';
-import 'package:campestre/view/tipoAcceso.dart';
 import 'package:campestre/widgets/textfielborder.dart';
 import 'package:campestre/widgets/ui_helper.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:time_range/time_range.dart';
 import 'package:weekday_selector/weekday_selector.dart';
 
 import '../../bloc/usuario_bloc.dart';
@@ -1370,31 +1366,6 @@ class _ReactivaTrabajadorState extends State<ReactivaTrabajador> {
         ));
   }
 
-  _rangoHoras() {
-    return TimeRange(
-      fromTitle: Text(
-        'Desde',
-        style: TextStyle(fontSize: 18, color: Color(0xFF5E1281)),
-      ),
-      toTitle: Text(
-        'Hasta',
-        style: TextStyle(fontSize: 18, color: Color(0xFF5E1281)),
-      ),
-      titlePadding: 20,
-      textStyle:
-          TextStyle(fontWeight: FontWeight.normal, color: Colors.black87),
-      activeTextStyle:
-          TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-      borderColor: Colors.black,
-      backgroundColor: Colors.transparent,
-      activeBackgroundColor: Color(0xFF5E1281),
-      firstTime: TimeOfDay(hour: 8, minute: 00),
-      lastTime: TimeOfDay(hour: 22, minute: 00),
-      timeStep: 30,
-      timeBlock: 60,
-      onRangeCompleted: (range) => setState(() => print(range.toString())),
-    );
-  }
 
   Future<String> lprExtract(File file) async {
     //var fileBytes = await file.readAsBytesSync();

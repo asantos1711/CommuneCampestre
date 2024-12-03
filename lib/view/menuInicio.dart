@@ -578,6 +578,8 @@ class _MenuInicioState extends State<MenuInicio> {
       margin: EdgeInsets.symmetric(horizontal: 31, vertical: 40),
       width: w,
       child: Card(
+        color: Colors.white,
+        surfaceTintColor: Colors.white,
         //margin: EdgeInsets.all(10),
         child: Container(
           //padding: EdgeInsets.all(5),
